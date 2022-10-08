@@ -1,6 +1,11 @@
+<pre>
 <?php
-
 include "libs/load.php";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "<br>";
 $conn = Database::getConnection();
 echo "<br>";
 $conn = Database::getConnection();
@@ -18,11 +23,6 @@ echo "<br>";
 $conn = Database::getConnection();
 echo "<br>";
 $conn = Database::getConnection();
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
 echo "<br>";
 echo "<br>";
 echo "<br>";
@@ -129,3 +129,5 @@ $mic_2 = new mic("boat");
 echo $mic_1->getlightconstructor();
 echo "<br>";
 echo $mic_2->getlightconstructor();
+?>
+</pre>
