@@ -1,5 +1,58 @@
 <pre>
 <?php
+$name = "praveen";
+$value = "Password";
+setcookie($name, $value, time() + (86400 * 30));
+
+
+$name_cookie = "userAgent";
+$value_cookie = "Praveen@2003";
+setcookie($name_cookie, $value_cookie, time() + (86400 * 30));
+
+
+if (count($_COOKIE) > 0) {
+    echo "Cookie is Enabled";
+    echo "<br>";
+    echo count($_COOKIE);
+} else {
+    echo "Cookie is Disabled";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 include "libs/load.php";
 echo "<br>";
 echo "<br>";
@@ -129,5 +182,7 @@ $mic_2 = new mic("boat");
 echo $mic_1->getlightconstructor();
 echo "<br>";
 echo $mic_2->getlightconstructor();
+?>
+</pre>
 ?>
 </pre>

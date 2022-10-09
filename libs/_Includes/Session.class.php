@@ -19,8 +19,8 @@ class Session{
     public static function isset($key){
         return isset($key);
     }
-    public static function get($key, $default=0){
-        if(Session::isset($key)){
+    public static function get($key, $default = 0){
+        if(Session::isset($_SESSION[$key])){
             return $_SESSION[$key];
         }else{
             return $default;

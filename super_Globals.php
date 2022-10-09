@@ -1,21 +1,25 @@
 <pre>
 <?php
 include "libs/load.php";
-print_r($_SESSION);
-if(isset($_GET['clear'])){
+if (isset($_GET['clear'])) {
     printf("Session clearing...\n");
     Session::unset();
 }
-if(Session::isset($a)){
-    printf("A is assigned, value of A : ".Session::get($a)."..");
+
+
+if(Session::isset($_SESSION[$a])){
+    echo "A is already exist, the value of a is : ".Session::get($a);
 }else{
-    Session::set($a, time());
-    printf("Value of a is assigning now, value is : $_SESSION[$a]");
+    Session::set($a, 200);
+    echo "Fixing now, A is not set, the value of a is ".Session::get($a);
 }
-if(isset($_GET['destroy'])){
-    printf("Session destroy...\n");
+
+
+if (isset($_GET['destroy'])) {
+    echo "Session destroy...\n";
     Session::destroy();
 }
+
 echo "<br>";
 echo "<br>";
 echo "<br>";
