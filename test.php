@@ -20,40 +20,6 @@ if (count($_COOKIE) > 0) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-include "libs/load.php";
 echo "<br>";
 echo "<br>";
 echo "<br>";

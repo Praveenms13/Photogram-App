@@ -1,5 +1,32 @@
 <?php
-$ans_result = check_old_user($username, $password);?>
+class login{
+	public static $status = 0;
+	public static function oldLogin($username, $password){
+		//$password = md5(strrev(sha1(md5(md5($password)))));
+        $conn = Database::getConnection();
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+		$dbTableName = "SELECT username, password FROM student";
+		$username = $_POST['username'];
+		$password = $_POST['password'];
+		$result = $conn->query($dbTableName);
+		if ($result->num_rows > 0) {
+			while ($row = $result->fetch_assoc()) {
+				if ($username == $row['username'] and $password == $row["password"]) {
+					login::$status = 1;
+				}else{
+					login::$status = 2;
+				}
+			}
+		}
+		return login::$status;
+	}
+}
+$ans_result = login::$status;?>
+<script>
+	console.log(<?php echo login::$status; ?>)
+</script>
 <?php
 if($ans_result){
 	loadAc("album");

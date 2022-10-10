@@ -5,7 +5,7 @@ class user
     private static $conn;
     public static function check_new_user($username, $phone, $email, $password)
     {
-        $password = md5(strrev(sha1(md5(md5($password)))));
+        //$password = md5(strrev(sha1(md5(md5($password)))));
         $conn = Database::getConnection();
         $sql = "INSERT INTO `auth` (`username`, `phone`, `email`, `password`)
                 VALUES ('$username', '$phone', '$email', '$password');";
