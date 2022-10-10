@@ -10,7 +10,7 @@ if (isset($_GET['clear'])) {
 if(Session::isset($_SESSION[$a])){
     echo "A is already exist, the value of a is : ".Session::get($a);
 }else{
-    Session::set($a, 200);
+    Session::set($a, time());
     echo "Fixing now, A is not set, the value of a is ".Session::get($a);
 }
 
@@ -26,5 +26,6 @@ echo "<br>";
 echo "<br>";
 echo "<br>";
 print_r($_SERVER);
+// $_SESSION['realAuth'] = $_SERVER['HTTP_USER_AGENT'];echo $_SESSION['realAuth'];
 ?>
 </pre>
