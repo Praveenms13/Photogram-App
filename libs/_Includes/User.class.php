@@ -21,6 +21,20 @@ class user
     }
     public static function login($username, $password)
     {
+        $password = md5(strrev(sha1(md5(md5($password)))));
+        $dbQuery = "SELECT * FROM `auth` WHERE `username` = '$username'";
+        $sqlConn = Database::getConnection();
+        $result = $sqlConn->query($dbQuery);
+        if ($result->num_rows == 1) {
+            $row_DB = $result->fetch_assoc();
+            if ($row_DB['password'] == $password) {
+                return $row_DB;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
     public function __construct($username)
     {
