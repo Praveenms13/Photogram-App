@@ -150,5 +150,3 @@ echo "<br>";
 echo $mic_2->getlightconstructor();
 ?>
 </pre>
-?>
-</pre>
