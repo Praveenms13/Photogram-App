@@ -1,11 +1,10 @@
 <?php
-
 include "libs/load.php";
 error_reporting(0);
 ini_set('display_errors', 0);
-
 $username = "Praveen102";
-$password = "Praveen102";
+//$password = "Praveen102";
+$password = isset($_GET['password']) ? $_GET['password'] : "";
 $isConnect = null;
 
 if(isset($_GET['logout'])){
@@ -18,7 +17,7 @@ if (Session::get('_is_Login')) {
     print("Welcome Back, $userdata[username]");
     $isConnect = $userdata;
 } else {
-    print("No Sessions Found, Please try to Login Now!");
+    print("No Sessions Found, Please try to Login Now!<br>");
     $isConnect = User::login($username, $password);
     if ($isConnect) {
         echo "Login Success";
