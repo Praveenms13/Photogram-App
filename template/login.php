@@ -1,6 +1,11 @@
 <?php
-$ans_result = user::login($username, $password);
-if ($ans_result) {
+if (isset($_POST['username']) and isset($_POST['password'])){
+    $username = $_POST['username'];
+	$password = $_POST['password'];
+    $error = User::login($username, $password);
+    $login = true;
+}	
+if ($login && $error) {
     loadAc("album");
 } else { ?>
 <style>
