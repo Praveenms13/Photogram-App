@@ -1,0 +1,1 @@
+ALTER TABLE `auth` ADD `sec_email` varchar(256) NOT NULL;

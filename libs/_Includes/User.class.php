@@ -2,7 +2,8 @@
 
 class user
 {
-    private static $conn;
+    private $conn;
+    private $username;
     public static function check_new_user($username, $phone, $email, $password)
     {
         //$password = md5(strrev(sha1(md5(md5($password)))));  //Security Obsecurity
@@ -45,5 +46,21 @@ class user
     {
         $this->conn = Database::getConnection();
         $this->conn->query();
+        $this->username = $username;
+    }
+    public function authenticate(){
+
+    }
+    public function getbio(){
+
+    }
+    public function setbio(){
+        
+    }
+    public function getavatar(){
+
+    }
+    public function setavatar(){
+        
     }
 }

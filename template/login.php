@@ -1,4 +1,5 @@
 <?php
+$ans_result = user::login($username, $password);
 if ($ans_result) {
     loadAc("album");
 } else { ?>
