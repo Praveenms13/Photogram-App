@@ -1,6 +1,8 @@
 <pre>
 <?php
-$name = "praveen";
+include "libs/load.php";
+try {
+    $name = "praveen";
 $value = "Password";
 setcookie($name, $value, time() + (86400 * 30));
 
@@ -17,16 +19,6 @@ if (count($_COOKIE) > 0) {
 } else {
     echo "Cookie is Disabled";
 }
-
-
-
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-echo "<br>";
-$conn = Database::getConnection();
-echo "<br>";
 $conn = Database::getConnection();
 echo "<br>";
 $conn = Database::getConnection();
@@ -82,13 +74,29 @@ class car
     {
         return $this->carname;
     }
+    public function __call($name, $arguments){
+        echo "This is printing from __call method\n";
+        print("\nCalling : ".$name);
+        print_r($arguments);
+        print("\n");
+        return "Hello from __call method";
+    }
 }
 //public keyword assigning values
+echo "Class Car Start";
+//__call method
+echo "\nThis represents __call method\n";
+$car10 = new car(); //echoing to print the return value from __call method
+echo $car10->getvoltage("hello", array(10, 20, 30), new car("Benz"));
+
+$car11 = new car();
+echo $car11->setvoltage("hello2", array(40, 50, 60), new car("Swift"));
+echo "<br><br>";
 $cardetails_1 = new car();
 $cardetails_2 = new car();
 $cardetails_3 = new car();
 $cardetails_4 = new car();
-$cardetails_1->carname = "honda";
+$cardetails_1->carname = "honda"; 
 $cardetails_1->modelname = "a3";
 //$cardetails_1->fueltype = "petrol";
 echo $cardetails_1->carname . "<br>";
@@ -118,9 +126,10 @@ echo "<br>";
 $cardetails_4->setfuelproxy("Electric");
 echo $cardetails_4->return_fueltype();
 //$cardetails_4->fueltype = "Petrol";
-
+echo "\nClass Car Ends";
 
 echo "<br>";
+echo "<br>";echo "<br>";
 class mic
 {
     private $light;
@@ -148,5 +157,8 @@ $mic_2 = new mic("boat");
 echo $mic_1->getlightconstructor();
 echo "<br>";
 echo $mic_2->getlightconstructor();
+} catch (Exception $e) {
+    echo 'Exception abgefangen: ',  $e->getMessage(), "\n";
+}
 ?>
 </pre>

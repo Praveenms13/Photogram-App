@@ -1,35 +1,40 @@
 <?php
-include "libs/load.php";    //git test
-error_reporting(0);
-ini_set('display_errors', 0);
-$username = "Praveen102";
-//$password = "Praveen102";
-$password = isset($_GET['password']) ? $_GET['password'] : "";
-$isConnect = null;
+include "libs/load.php";
+try {
+    $username = "kanav";
+    //$password = "Praveen102";
+    $password = isset($_GET['password']) ? $_GET['password'] : "";
+    $isConnect = null;
 
-if(isset($_GET['logout'])){
-    Session::destroy();
-    die("Session Destroyed, Login again <a href='testlogin.php'>Login</a>");
-}
-
-if (Session::get('_is_Login')) {
-    $userdata = Session::get('sessionDetails');
-    print("Welcome Back, $userdata[username]");
-    $isConnect = $userdata;
-} else {
-    print("No Sessions Found, Please try to Login Now!<br>");
-    $isConnect = User::login($username, $password);
-    if ($isConnect) {
-        echo "Login Success";
-        Session::set('_is_Login', true);
-        Session::set('sessionDetails', $isConnect);
-    } else {
-        echo "Login Failed!";
+    if (isset($_GET['logout'])) {
+        Session::destroy();
+        die("Session Destroyed, Login again <a href='testlogin.php'>Login</a>");
     }
-}
+
+    if (Session::get('_is_Login')) {
+        $username = Session::get('session_username');
+        $userobj = new user($username);
+        print("<br>Welcome Back, ".$userobj->getfirstname());
+        print("<br>" . $userobj->getbio());
+    } else {
+        print("No Sessions Found, Please try to Login Now!<br>");
+        $isConnect = User::login($username, $password);
+        if ($isConnect) {
+            $userobj = new user($username);
+            echo "Login Success ,$userobj->getbio()";
+            Session::set('_is_Login', true);
+            Session::set('session_username', $isConnect);
+        } else {
+            echo "Login Failed! ,$username";
+        }
+    }
 
 
-echo <<<EOL
+    echo <<<EOL
 <br><br><br>
 <a href = "testlogin.php?logout">Logout</a>
 EOL;
+} catch (Exception $e) {
+    echo "Message :" . $e->getMessage();
+}
+?>
