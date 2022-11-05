@@ -6,10 +6,10 @@ class Database
     public static function getConnection()
     {
         if (Database::$conn == null) {
-            $mysql_servername = "mysql.selfmade.ninja";
-            $mysql_username = "Praveen_mysql";
-            $mysql_password = "Welcome@2003";
-            $mysql_dbname = "Praveen_mysql_13";
+            $mysql_servername = get_config('DBservername');
+            $mysql_dbname = get_config('DBname');
+            $mysql_username = get_config('DBusername');
+            $mysql_password = get_config('DBpassword');
             $connection = new mysqli($mysql_servername, $mysql_username, $mysql_password, $mysql_dbname);
             if ($connection->connect_error) {
                 die("Connection failed: " . $connection->connect_error);
