@@ -4,7 +4,7 @@ include "_Includes/User.class.php";
 include "_Includes/Database.class.php";
 include "_Includes/Session.class.php";
 global $__DBconfig;
-$__DBconfig = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/../config_pass/photogram.json");
+$__DBconfig = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/../config_files/photogram.json");
 
 Session::start();
 
