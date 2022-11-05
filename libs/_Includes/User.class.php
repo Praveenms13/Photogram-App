@@ -11,7 +11,7 @@ try {
             if (substr($name, 0, 3) == "get") {
                 return $this->_get_data($securestring);
             } else if (substr($name, 0, 3) == "set") {
-                return $this->_set_data_($name, $arguments[0]);
+                return $this->_set_data_($securestring, $arguments[0]);
             }
         }
         public static function check_new_user($username, $phone, $email, $password)
@@ -76,7 +76,7 @@ try {
                 $this->conn = Database::getConnection();
             }
             $dataQuery = "SELECT `$var` FROM `user` WHERE `id` = $this->id";
-            //print($dataQuery);
+            //print("<br>" . $dataQuery . "<br");
             $result = $this->conn->query($dataQuery);
             if ($result and $result->num_rows) {
                 $value = $result->fetch_assoc()["$var"];
@@ -91,7 +91,8 @@ try {
             if (!$this->conn) {
                 $this->conn = Database::getConnection();
             }
-            $dataQuery = "UPDATE `user` SET `$var` = '$data' WHERE `id` = '$this->id'";
+            $dataQuery = "UPDATE `user` SET `$var` = '$data' WHERE `id` = $this->id";
+            //print($dataQuery);
             $result = $this->conn->query($dataQuery);
             if ($result) {
                 return true;

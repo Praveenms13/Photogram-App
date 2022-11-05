@@ -16,6 +16,8 @@ try {
         $userobj = new user($username);
         print("<br>Welcome Back, ".$userobj->getfirstname());
         print("<br>" . $userobj->getbio());
+        $userobj->setbio("I am a programmer");
+        print("<br>" . $userobj->getbio());
     } else {
         print("No Sessions Found, Please try to Login Now!<br>");
         $isConnect = User::login($username, $password);
