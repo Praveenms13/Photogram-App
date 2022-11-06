@@ -59,7 +59,7 @@ try {
         {
             $this->username = $username;
             $this->user_conn = Database::getConnection();
-            $userQuery = "SELECT `id` FROM `auth` WHERE `username` = '$username' or `id` = $username";
+            $userQuery = "SELECT `id` FROM `auth` WHERE `username` = '$username' OR `id` = '$username'";
             $result = $this->user_conn->query($userQuery);
             if ($result->num_rows) {
                 $row_DB = $result->fetch_assoc();
