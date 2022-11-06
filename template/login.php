@@ -2,7 +2,8 @@
 if (isset($_POST['username']) and isset($_POST['password'])){
     $username = $_POST['username'];
 	$password = $_POST['password'];
-    $error = User::login($username, $password);
+	$isConnect = null;
+	$error = usersession::authenticate($username, $password);
     $login = true;
 }	
 if ($login && $error) {

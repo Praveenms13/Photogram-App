@@ -2,6 +2,11 @@
 <?php
 include "libs/load.php";
 try {
+    
+    print_r(Session::get('session_data'));
+    print_r(Session::get('session_token'));
+
+
     $name = "praveen";
 $value = "Password";
 setcookie($name, $value, time() + (86400 * 30));

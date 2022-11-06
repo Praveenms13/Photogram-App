@@ -17,9 +17,11 @@ try {
     3.check if the user session is valid one (expiry, isValid())
     4.if valid, print session validated else print session invalid and ask user to login
     */
+    //returns $row_DB (whole coloumn of a particular user)
     if (Session::get('_is_Login')) {
-        $username = Session::get('session_username');
-        $userobj = new user($username['username']);
+        $userclass = Session::get('session_username');
+        //print_r($userclass['username']);//$row_DB['username']
+        $userobj = new user($userclass['username']);
         print("<br>Welcome Back, ".$userobj->getfirstname());
         print("<br>" . $userobj->getbio());
         $userobj->setbio("I am a programmer");
@@ -27,9 +29,10 @@ try {
     } else {
         print("No Sessions Found, Please try to Login Now!<br>");
         $isConnect = User::login($username, $password);
+        //print_r($isConnect['username']);
         if ($isConnect) {
             $userobj = new user($username);
-            echo "Login Success ,$userobj->getbio()";
+            echo "Login Success ," . $userobj->getfirstname();
             Session::set('_is_Login', true);
             Session::set('session_username', $isConnect);
         } else {
