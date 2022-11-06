@@ -12,6 +12,8 @@ try {
                 return $this->_get_data($securestring);
             } else if (substr($name, 0, 3) == "set") {
                 return $this->_set_data_($securestring, $arguments[0]);
+            } else{
+                throw new Exception("Method $name does not exist");
             }
         }
         public static function check_new_user($username, $phone, $email, $password)
@@ -52,11 +54,12 @@ try {
             }
         }
         //all users frameworks
+        //user object can be constructed with username or userid
         public function __construct($username)
         {
             $this->username = $username;
             $this->user_conn = Database::getConnection();
-            $userQuery = "SELECT `id` FROM `auth` WHERE `username` = '$username'";
+            $userQuery = "SELECT `id` FROM `auth` WHERE `username` = '$username' or `id` = $username";
             $result = $this->user_conn->query($userQuery);
             if ($result->num_rows) {
                 $row_DB = $result->fetch_assoc();

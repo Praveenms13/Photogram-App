@@ -3,6 +3,7 @@
 include "_Includes/User.class.php";
 include "_Includes/Database.class.php";
 include "_Includes/Session.class.php";
+include "_Includes/UserSession.class.php";
 global $__DBconfig;
 $__DBconfig = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/../config_files/photogram.json");
 

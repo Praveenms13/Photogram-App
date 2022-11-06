@@ -11,6 +11,12 @@ try {
         die("Session Destroyed, Login again <a href='testlogin.php'>Login</a>");
     }
 
+    /*
+    1.check if session token is available in php sessions (user logged in)
+    2.if yes, construct usersession and see if its successfull
+    3.check if the user session is valid one (expiry, isValid())
+    4.if valid, print session validated else print session invalid and ask user to login
+    */
     if (Session::get('_is_Login')) {
         $username = Session::get('session_username');
         $userobj = new user($username);
