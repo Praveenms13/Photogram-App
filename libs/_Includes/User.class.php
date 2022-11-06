@@ -45,7 +45,7 @@ try {
             if ($result->num_rows == 1) {
                 $row_DB = $result->fetch_assoc();
                 if (password_verify($password, $row_DB['password'])) {
-                    return $row_DB['username'];
+                    return $row_DB; //return $row_DB['username'];
                 } else {
                     return false;
                 }

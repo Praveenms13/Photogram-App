@@ -1,7 +1,7 @@
 <?php
 include "libs/load.php";
 try {
-    $username = "kanav";
+    $username = "mayo";
     //$password = "Praveen102";
     $password = isset($_GET['password']) ? $_GET['password'] : "";
     $isConnect = null;
@@ -19,7 +19,7 @@ try {
     */
     if (Session::get('_is_Login')) {
         $username = Session::get('session_username');
-        $userobj = new user($username);
+        $userobj = new user($username['username']);
         print("<br>Welcome Back, ".$userobj->getfirstname());
         print("<br>" . $userobj->getbio());
         $userobj->setbio("I am a programmer");
