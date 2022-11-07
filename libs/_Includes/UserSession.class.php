@@ -31,25 +31,23 @@ class usersession{
     {
         try
         {
-            /*SIBI METHOD
-            //$ans = usersession::authenticate($username, $password);
-            // $authSession = new usersession($token);
-            // if(isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER'])){
-            //     if($authSession->isValid() and $authSession->isActive()){
-            //         if($_SERVER['REMOTE_ADDR'] == $authSession->getIP() and $_SERVER['HTTP_USER'] == $authSession->getUserAgent()){
-            //             return true;
-            //         }else{
-            //             throw new Exception("User IP and Browser Doesn't Match");
-            //         }
-            //     }else{
-            //         Session::unset();
-            //         throw new Exception("Invalid Session");
-            //     }
-            // }else{
-            //     throw new Exception("IP and UserAgent is NULL");
-            //     return false;
-            // }
-            SIBI METHOD*/
+            $ans = usersession::authenticate($username, $password);
+            $authSession = new usersession($token);
+            if(isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER'])){
+                if($authSession->isValid() and $authSession->isActive()){
+                    if($_SERVER['REMOTE_ADDR'] == $authSession->getIP() and $_SERVER['HTTP_USER'] == $authSession->getUserAgent()){
+                        return true;
+                    }else{
+                        throw new Exception("User IP and Browser Doesn't Match");
+                    }
+                }else{
+                    Session::unset();
+                    throw new Exception("Invalid Session");
+                }
+            }else{
+                throw new Exception("IP and UserAgent is NULL");
+                return false;
+            }
         } 
         catch (Exception $e) 
         {
