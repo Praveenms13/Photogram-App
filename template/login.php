@@ -1,47 +1,32 @@
 <?php
-if (isset($_POST['username']) and isset($_POST['password'])){
+
+if (isset($_POST['username']) and isset($_POST['password'])) {
     $username = $_POST['username'];
-	$password = $_POST['password'];
-	$error = usersession::authenticate($username, $password);
-    $login = true;
-}	
-if ($login && $error) {
-    loadAc("album");
-} else { ?>
-<style>
-	.praveen {
-		position: relative;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
-</style>
-<div class="praveen">
-	<main class="form-signin">
-		<form method="POST" action="login.php">
-			<img class="mb-4" src="https://img.icons8.com/color/344/drone-with-camera.png" alt="" width="72"
-				height="57">
-			<h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-
-			<div class="form-floating">
-				<input name="username" type="text" class="form-control" id="floatingInput"
-					placeholder="name@example.com">
-				<label for="floatingInput">User Name</label>
-			</div>
-			<div class="form-floating">
-				<input name="password" type="password" class="form-control" id="floatingPassword"
-					placeholder="Password">
-				<label for="floatingPassword">Password</label>
-			</div>
-
-			<div class="checkbox mb-3">
-				<label>
-					<input type="checkbox" value="remember-me"> Remember me
-				</label>
-			</div>
-			<button class="w-100 btn btn-lg btn-primary hvr-wobble-vertical" type="submit">Sign in</button>
-			<p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-		</form>
-	</main>
-</div>
-<?php }
+    $password = $_POST['password'];
+    $auth = usersession::authenticate($username, $password);
+}
+if ($auth) {
+    $token = Session::get('session_token');
+    if ($token) {
+        $userclass = new user($username); //constructs id
+        if ($userclass) {
+            $usersession = new usersession($token);
+            $IsValid = $usersession->isValid($token);
+            if ($IsValid) {
+                ?><h4>Login Success....</h4><?php
+				loadAc("album");
+            } else {
+                ?><h4>Token Expired, Login Again</h4><?php
+                loadAccess("loginform");
+            }
+        } else {
+            ?><h4>ID Construction Failed, check usersession->constructor</h4><?php
+            loadAccess("loginform");
+        }
+    } else {
+        ?><h3>Token not in Session, login again</h3><?php
+        loadAccess("loginform");
+    }
+} else {
+    loadAccess("loginform");
+}

@@ -6,9 +6,8 @@ class usersession
     {
         $this->conn = Database::getConnection();
         $this->token = $token;
-        $this->data = null;
-        $userQuery = "SELECT * FROM `session` WHERE `token` = $token";
-        $result = $this->user_conn->query($userQuery);
+        $this->userQuery = "SELECT * FROM `session` WHERE `token` = '$this->token'";
+        $result = $this->conn->query($this->userQuery);
         if ($result->num_rows) {
             $row_DB = $result->fetch_assoc();
             $this->data = $row_DB;
@@ -33,7 +32,6 @@ class usersession
             $query = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `useragent`, `active`)
                      VALUES ('$userobj->id', '$token', now(), '$ip', '$userAgent', '1');";
             $queryresult = $connection->query($query);
-            $queryresult = 1;
             if ($queryresult) {
                 Session::set('session_token', $token);
                 return $token;
@@ -72,8 +70,18 @@ class usersession
     {
         return new user($this->uid);
     }
-    public function isValid() //check is the validity of the session is within 1 hour else set it inactive
+    public function isValid($token)
     {
+        $connection = Database::getConnection();
+        $connquery = "SELECT `login_time` FROM `session` WHERE `token` = '$token'";
+        $result = $connection->query($connquery);
+        if ($result) { //if (strtotime($given_time) >= time()+300) echo "You are online";
+            $sqldata = mysqli_fetch_row($connection->query($connquery));
+            $sqltime = strtotime($sqldata[0]);
+            //checking time is balance .....
+        } else {
+            return false;
+        }
     }
     public function isActive()
     {
