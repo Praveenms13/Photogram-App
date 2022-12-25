@@ -1,8 +1,27 @@
 <?php
+
 try {
     class user
     {
         private $conn;
+
+        //all users frameworks
+        //user object can be constructed with username or userid
+        public function __construct($username)
+        {
+            $this->username = $username;
+            $this->user_conn = Database::getConnection();
+            $userQuery = "SELECT `id` FROM `auth` WHERE `username` = '$username' OR `id` = '$username'";
+            $result = $this->user_conn->query($userQuery);
+            if ($result->num_rows) {
+                $row_DB = $result->fetch_assoc();
+                $this->id = $row_DB['id'];
+            } else {
+                throw new Exception("User not found");
+                $this->id = null;
+            }
+        }
+
         public function __call($name, $arguments)
         {
             //echo "This is printing from __call method\n";
@@ -10,9 +29,9 @@ try {
             $securestring = strtolower(preg_replace("/\B([A-Z])/", "_$1", preg_replace("/[^0-9a-zA-z]/", "", substr($name, 3))));
             if (substr($name, 0, 3) == "get") {
                 return $this->_get_data($securestring);
-            } else if (substr($name, 0, 3) == "set") {
+            } elseif (substr($name, 0, 3) == "set") {
                 return $this->_set_data_($securestring, $arguments[0]);
-            } else{
+            } else {
                 throw new Exception("Method $name does not exist");
             }
         }
@@ -53,25 +72,7 @@ try {
                 return false;
             }
         }
-        //all users frameworks
-        //user object can be constructed with username or userid
-        public function __construct($username)
-        {
-            $this->username = $username;
-            $this->user_conn = Database::getConnection();
-            $userQuery = "SELECT `id` FROM `auth` WHERE `username` = '$username' OR `id` = '$username'";
-            $result = $this->user_conn->query($userQuery);
-            if ($result->num_rows) {
-                $row_DB = $result->fetch_assoc();
-                $this->id = $row_DB['id'];
-            } else {
-                throw new Exception("User not found");
-                $this->id = null;
-            }
-        }
-        public function authenticate()
-        {
-        }
+
         private function _get_data($var)
         {
             //print("Hello, " . $var . "<br>");
@@ -113,7 +114,7 @@ try {
         {
             return $this->username;
         }
-        //alternative of __call function 
+        //alternative of __call function
         // public function getdob(){
         //     return $this->_get_data('dob');
         // }

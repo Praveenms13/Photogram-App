@@ -5,7 +5,7 @@
 <?php loadAccess("onlyhead");?>
 <body class="text-center" _c_t_common="1">
   <?php loadAccess("header"); ?>
-  <?php loadAccess("login1"); ?>
+  <?php loadAccess("login"); ?>
   <script src="./album/Album example for Bootstrap_files/jquery-3.3.1.slim.min.js.download" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script>
     window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')

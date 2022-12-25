@@ -1,59 +1,7 @@
 <?php
-class usersession{
-    /*this fun() will return a session id if username and password is correct  
-    */ 
-    public static function authenticate($username, $password)//I think returns error(return statement of login)
-    {
-        $userdata = user::login($username, $password);//passing whole user array
-        $username = user::login($username, $password)['username'];//passing user name only
-        if($username){
-            $connection = Database::getConnection();
-            $ip = $_SERVER['REMOTE_ADDR'];
-            $userAgent = $_SERVER['HTTP_USER_AGENT'];
-            $token = md5($username . $ip . $userAgent . time() . rand(0, 999));
-            $userobj = new user($username);
-            $query = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `useragent`, `active`)
-                     VALUES ('$userobj->id', '$token', now(), '$ip', '$userAgent', '1');";
-            $queryresult = $connection->query($query);
-            $queryresult = 1;
-            if($queryresult){
-                Session::set('session_token', $token);
-                Session::set('session_data', $userdata);
-                return $token;
-            } else{
-                return false;
-            }
-        }else{
-            return false;
-        }
-    }
-    public static function authorize($username, $password, $token)
-    {
-        try
-        {
-            $ans = usersession::authenticate($username, $password);
-            $authSession = new usersession($token);
-            if(isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER'])){
-                if($authSession->isValid() and $authSession->isActive()){
-                    if($_SERVER['REMOTE_ADDR'] == $authSession->getIP() and $_SERVER['HTTP_USER'] == $authSession->getUserAgent()){
-                        return true;
-                    }else{
-                        throw new Exception("User IP and Browser Doesn't Match");
-                    }
-                }else{
-                    Session::unset();
-                    throw new Exception("Invalid Session");
-                }
-            }else{
-                throw new Exception("IP and UserAgent is NULL");
-                return false;
-            }
-        } 
-        catch (Exception $e) 
-        {
-            echo "Message :" . $e->getMessage();
-        }
-    }
+
+class usersession
+{
     public function __construct($token)
     {
         $this->conn = Database::getConnection();
@@ -67,7 +15,58 @@ class usersession{
             $this->uid = $row_DB['uid'];
         } else {
             throw new Exception("Session is invalid");
-        }        
+        }
+    }
+
+
+    /*this fun() will return a session id if username and password is correct
+    */
+    public static function authenticate($username, $password)//I think returns error(return statement of login)
+    {
+        $username = user::login($username, $password)['username'];
+        $userobj = new user($username);
+        if ($username) {
+            $connection = Database::getConnection();
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $userAgent = $_SERVER['HTTP_USER_AGENT'];
+            $token = md5($username . $ip . $userAgent . time() . rand(0, 999));
+            $query = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `useragent`, `active`)
+                     VALUES ('$userobj->id', '$token', now(), '$ip', '$userAgent', '1');";
+            $queryresult = $connection->query($query);
+            $queryresult = 1;
+            if ($queryresult) {
+                Session::set('session_token', $token);
+                return $token;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+    public static function authorize($username, $password, $token)
+    {
+        try {
+            $ans = usersession::authenticate($username, $password);
+            $authSession = new usersession($token);
+            if (isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER'])) {
+                if ($authSession->isValid() and $authSession->isActive()) {
+                    if ($_SERVER['REMOTE_ADDR'] == $authSession->getIP() and $_SERVER['HTTP_USER'] == $authSession->getUserAgent()) {
+                        return true;
+                    } else {
+                        throw new Exception("User IP and Browser Doesn't Match");
+                    }
+                } else {
+                    Session::unset();
+                    throw new Exception("Invalid Session");
+                }
+            } else {
+                throw new Exception("IP and UserAgent is NULL");
+                return false;
+            }
+        } catch (Exception $e) {
+            echo "Message :" . $e->getMessage();
+        }
     }
     public function getuser()
     {
