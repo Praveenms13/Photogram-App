@@ -4,16 +4,18 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $auth = usersession::authenticate($username, $password);
+    Session::set('auth_session', $auth);
+    Session::set('session_username', $username);
 }
-if ($auth) {
+if (Session::get('auth_session')) {
     $token = Session::get('session_token');
-    if ($token) {
-        $userclass = new user($username); //constructs id
+    if ($token) { 
+        $username = Session::get('session_username'); 
+        $userclass = new user($username); //constructs id from username
         if ($userclass) {
             $usersession = new usersession($token);
             $IsValid = $usersession->isValid($token);
-            if ($IsValid) {
-                ?><h4>Login Success....</h4><?php
+            if ($IsValid) { 
 				loadAc("album");
             } else {
                 ?><h4>Token Expired, Login Again</h4><?php
@@ -28,5 +30,6 @@ if ($auth) {
         loadAccess("loginform");
     }
 } else {
+    echo "Login Now";
     loadAccess("loginform");
 }

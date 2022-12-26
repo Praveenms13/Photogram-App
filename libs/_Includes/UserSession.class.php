@@ -23,8 +23,8 @@ class usersession
     public static function authenticate($username, $password)//I think returns error(return statement of login)
     {
         $username = user::login($username, $password)['username'];
-        $userobj = new user($username);
         if ($username) {
+            $userobj = new user($username);
             $connection = Database::getConnection();
             $ip = $_SERVER['REMOTE_ADDR'];
             $userAgent = $_SERVER['HTTP_USER_AGENT'];
@@ -48,7 +48,7 @@ class usersession
             $ans = usersession::authenticate($username, $password);
             $authSession = new usersession($token);
             if (isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER'])) {
-                if ($authSession->isValid() and $authSession->isActive()) {
+                if ($authSession->isValid($token) and $authSession->isActive()) {
                     if ($_SERVER['REMOTE_ADDR'] == $authSession->getIP() and $_SERVER['HTTP_USER'] == $authSession->getUserAgent()) {
                         return true;
                     } else {
@@ -70,7 +70,7 @@ class usersession
     {
         return new user($this->uid);
     }
-    public function isValid($token)
+    public static function isValid($token)
     {
         $connection = Database::getConnection();
         $connquery = "SELECT `login_time` FROM `session` WHERE `token` = '$token'";
@@ -78,7 +78,13 @@ class usersession
         if ($result) { //if (strtotime($given_time) >= time()+300) echo "You are online";
             $sqldata = mysqli_fetch_row($connection->query($connquery));
             $sqltime = strtotime($sqldata[0]);
-            //checking time is balance .....
+            echo time() . " "  . "sqltime" . $sqltime + 60;
+            //page validity for 1 minute
+            if (($sqltime + 60) > time()) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
