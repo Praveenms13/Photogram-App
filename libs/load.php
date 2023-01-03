@@ -9,12 +9,13 @@ $__DBconfig = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/../config_files/ph
 
 Session::start();
 
-function get_config($key, $default_key = 0){
+function get_config($key, $default_key = 0)
+{
     global $__DBconfig;
     $config = json_decode($__DBconfig, true);
     if (isset($config[$key])) {
         return $config[$key];
-    }else{
+    } else {
         return $default_key;
     }
 }

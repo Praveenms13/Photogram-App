@@ -78,11 +78,13 @@ class usersession
         if ($result) { //if (strtotime($given_time) >= time()+300) echo "You are online";
             $sqldata = mysqli_fetch_row($connection->query($connquery));
             $sqltime = strtotime($sqldata[0]);
-            echo time() . " "  . "sqltime" . $sqltime + 60;
-            //page validity for 1 minute
-            if (($sqltime + 60) > time()) {
+            echo time() . " "  . "sqltime" . $sqltime + 10;
+            //page validity for 10 seconds
+            if (($sqltime + 10) > time()) {
                 return true;
             } else {
+                $sql = "UPDATE `session` SET `active` = '0' WHERE `token` = '$token'";
+                $connection->query($sql);   //due to this there is some glitch in login page.......
                 return false;
             }
         } else {
