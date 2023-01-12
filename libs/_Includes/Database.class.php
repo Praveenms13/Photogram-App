@@ -14,12 +14,10 @@ class Database
             if ($connection->connect_error) {
                 die("Connection failed: " . $connection->connect_error);
             } else {
-                //echo("New Connection...");
                 Database::$conn = $connection;
                 return  Database::$conn;
             }
         } else {
-            //echo("Existing Connection...");
             return Database::$conn;
         }
     }

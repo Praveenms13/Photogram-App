@@ -2,7 +2,6 @@
 error_reporting(0);
 ini_set('display_errors', 0);?>
 <!DOCTYPE html>
-<!-- saved from url=(0051)https://getbootstrap.com/docs/5.0/examples/sign-in/ -->
 <html lang="en">
 <?php loadAccess("onlyhead");?>
 
