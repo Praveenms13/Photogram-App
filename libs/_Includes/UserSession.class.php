@@ -78,7 +78,7 @@ class usersession
         if ($result) { //if (strtotime($given_time) >= time()+300) echo "You are online";
             $sqldata = mysqli_fetch_row($connection->query($connquery));
             $sqltime = strtotime($sqldata[0]);
-            echo time() . " "  . "sqltime" . $sqltime + 10;
+            // echo time() . " "  . "sqltime" . $sqltime + 10;
             //page validity for 10 seconds
             if (($sqltime + 10) > time()) {
                 return true;
