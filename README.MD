@@ -6,6 +6,13 @@ Photogram is the online Social Media Platform which is like Instagram. This Proj
 
 <hr>
 
+## Screenshots : 
+<img src="images/photogram_mobo.jpeg" alt="drawing" width="200"/>
+
+![App Screenshot](images/photogram_desk.png)
+
+<hr>
+
 ## Languages Used
 
 Languages used in this project are :
@@ -35,10 +42,7 @@ Services used in this project are :
 **Server:** Apache, Node
 <hr>
 
-## Screenshots : 
-<img src="images/photogram_mobo.jpeg" alt="drawing" width="200"/>
 
-![App Screenshot](images/photogram_desk.png)
 
 ## Deployed at
 
