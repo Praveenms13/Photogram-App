@@ -26,20 +26,20 @@ if (Session::get('auth_session')) {
                 Session::delete('auth_session');
                 ?>
 <!-- <h4>Token Expired, Login Again</h4>--><?php 
-                loadAccess("loginform");
+                loadAccess("userForm");
             }
         } else {
             ?>
 <h4>ID Construction Failed, check usersession->constructor</h4><?php
-            loadAccess("loginform");
+            loadAccess("userForm");
         }
     } else {
         ?>
 <h3>Token not in Session, login again</h3><?php
 
-        loadAccess("loginform");
+        loadAccess("userForm");
     }
 } else {
-    loadAccess("loginform");
+    loadAccess("userForm");
 }
 ?>

@@ -4,7 +4,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.84.0">
-  <title>Signin Template · Bootstrap v5.0</title>
+  <title>Photogram</title>
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
   <link href="./Signin Template · Bootstrap v5.0_files/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -13,7 +13,7 @@
   <link rel="manifest" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/manifest.json">
   <link rel="mask-icon" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/safari-pinned-tab.svg"
     color="#7952b3">
-  <link rel="icon" href="https://img.icons8.com/color/344/drone-with-camera.png">
+    <link rel="icon" href="https://img.icons8.com/color/48/null/pandora-app.png">
   <meta name="theme-color" content="#7952b3">
   <link href="./album/Album example for Bootstrap_files/bootstrap.min.css" rel="stylesheet">
   <link href="./album/Album example for Bootstrap_files/album.css" rel="stylesheet">
