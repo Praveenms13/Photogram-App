@@ -8,11 +8,10 @@
         if ($_SERVER['APPLICATION_ENV'] == "Production") {
             //echo "production";
             $__DBconfig = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/../../config_files/photogram_build.json");
-        } else {
+        } else if ($_SERVER['APPLICATION_ENV'] == "Development"){ 
             //echo "development";
-            $__DBconfig = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/../config_files/photogram_dev.json");
+            $__DBconfig = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/../../config_files/photogram_build.json");
         }
-
         Session::start();
 
         function get_config($key, $default_key = 0)
