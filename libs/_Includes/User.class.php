@@ -4,6 +4,9 @@ try {
     class user
     {
         private $conn;
+        public $id;
+        public $username;
+        public $user_conn;
 
         //all users frameworks
         //user object can be constructed with username or userid

@@ -4,6 +4,8 @@ class usersession
 {
     public function __construct($token)
     {
+        
+
         $this->conn = Database::getConnection();
         $this->token = $token;
         $this->userQuery = "SELECT * FROM `session` WHERE `token` = '$this->token'";
