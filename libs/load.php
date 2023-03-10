@@ -6,11 +6,9 @@
         include "_Includes/UserSession.class.php";
         global $__DBconfig;
         if ($_SERVER['APPLICATION_ENV'] == "Production") {
-            //echo "production";
-            $__DBconfig = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/../../config_files/photogram_build.json");
-        } else if ($_SERVER['APPLICATION_ENV'] == "Development"){ 
-            //echo "development";
-            $__DBconfig = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/../../config_files/photogram_build.json");
+            $__DBconfig = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/../../config_files/photogram.json");
+        } else { 
+            $__DBconfig = file_get_contents($_SERVER['DOCUMENT_ROOT'] . "/../photogramConfig.json");
         }
         Session::start();
 
