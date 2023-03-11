@@ -64,7 +64,6 @@
 			.then(fp => fp.get())
 			.then(result => {
 				const visitorId = result.visitorId
-				alert("I am from form " + visitorId)
 				document.getElementById("fingerprint").value = visitorId
 			})
 	</script>
