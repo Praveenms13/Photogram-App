@@ -4,8 +4,6 @@ class usersession
 {
     public function __construct($token)
     {
-        
-
         $this->conn = Database::getConnection();
         $this->token = $token;
         $this->userQuery = "SELECT * FROM `session` WHERE `token` = '$this->token'";
@@ -35,7 +33,7 @@ class usersession
                      VALUES ('$userobj->id', '$token', now(), '$ip', '$userAgent', '1');";
             $queryresult = $connection->query($query);
             if ($queryresult) {
-                Session::set('session_token', $token);
+                Session::set('sessionToken', $token);
                 return $token;
             } else {
                 return false;
@@ -47,11 +45,10 @@ class usersession
     public static function authorize($username, $password, $token)
     {
         try {
-            $ans = usersession::authenticate($username, $password);
             $authSession = new usersession($token);
-            if (isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER'])) {
+            if (isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER_AGENT'])) {
                 if ($authSession->isValid($token) and $authSession->isActive()) {
-                    if ($_SERVER['REMOTE_ADDR'] == $authSession->getIP() and $_SERVER['HTTP_USER'] == $authSession->getUserAgent()) {
+                    if ($_SERVER['REMOTE_ADDR'] == $authSession->getIP() and $_SERVER['HTTP_USER_AGENT'] == $authSession->getUserAgent()) {
                         return true;
                     } else {
                         throw new Exception("User IP and Browser Doesn't Match");
@@ -82,7 +79,7 @@ class usersession
             $sqltime = strtotime($sqldata[0]);
             // echo time() . " "  . "sqltime" . $sqltime + 10;
             //page validity for 10 seconds
-            if (($sqltime + 10) > time()) {
+            if (($sqltime + 60) > time()) {
                 return true;
             } else {
                 $sql = "UPDATE `session` SET `active` = '0' WHERE `token` = '$token'";
@@ -95,6 +92,7 @@ class usersession
     }
     public function isActive()
     {
+        return $this->data['active'];
     }
     public function getIP()
     {

@@ -2,41 +2,44 @@
 if (isset($_POST['username']) and isset($_POST['password'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $auth = usersession::authenticate($username, $password);
-    Session::set('auth_session', $auth);
-    Session::set('session_username', $username);
+    $sessionToken = usersession::authenticate($username, $password);
+    Session::set('sessionUsername', $username);
 }
-if (Session::get('auth_session')) {
-    $token = Session::get('session_token');
-    if ($token) {
-        $username = Session::get('session_username');
-        $userclass = new user($username); //constructs id from username
-        if ($userclass) {
-            $usersession = new usersession($token);
-            $IsValid = $usersession->isValid($token);
-            if ($IsValid) {
-                // echo "<br>Welcome " . $userclass->getUsername() . "<br>";
-                // echo "Your Token is " . $token. "<br>";
-                // echo "User ID is " . $userclass->id;
-                loadAc("album");
+if (Session::get('sessionToken')) {
+    $token = Session::get('sessionToken');
+    if (usersession::authorize($username, $password, $token)) {
+        if ($token) {
+            $username = Session::get('sessionUsername');
+            $userclass = new user($username); //constructs id from username
+            if ($userclass) {
+                $usersession = new usersession($token);
+                $IsValid = $usersession->isValid($token);
+                if ($IsValid) {
+                    // echo "<br>Welcome " . $userclass->getUsername() . "<br>";
+                    // echo "Your Token is " . $token. "<br>";
+                    // echo "User ID is " . $userclass->id;
+                    loadAc("album");
+                } else {
+                    $IsValid = null;
+                    Session::delete('sessionUsername');
+                    Session::delete('session_token');
+                    Session::delete('sessionToken');
+                    ?>
+    <!-- <h4>Token Expired, Login Again</h4>--><?php 
+                    loadAccess("userForm");
+                }
             } else {
-                $IsValid = null;
-                Session::delete('session_username');
-                Session::delete('session_token');
-                Session::delete('auth_session');
                 ?>
-<!-- <h4>Token Expired, Login Again</h4>--><?php 
+    <h4>ID Construction Failed, check usersession->constructor</h4><?php
                 loadAccess("userForm");
             }
         } else {
             ?>
-<h4>ID Construction Failed, check usersession->constructor</h4><?php
+    <h3>Token not in Session, login again</h3><?php
+    
             loadAccess("userForm");
         }
     } else {
-        ?>
-<h3>Token not in Session, login again</h3><?php
-
         loadAccess("userForm");
     }
 } else {
