@@ -98,13 +98,11 @@ class usersession
     }
     public function getIP()
     {
-        $myIP = $_SERVER['REMOTE_ADDR'];
-        return $myIP;
+        return $this->data['ip'];
     }
     public function getUserAgent() //can also do with IP address(getIP)
     {
-        $myBrowser = $_SERVER['HTTP_USER'];
-        return $myBrowser;
+        return $this->data['useragent'];
     }
     public function deactivate()
     {
