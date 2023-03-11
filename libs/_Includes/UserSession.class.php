@@ -20,7 +20,7 @@ class usersession
 
     /*this fun() will return a session id if username and password is correct
     */
-    public static function authenticate($username, $password)//I think returns error(return statement of login)
+    public static function authenticate($username, $password, $fingerprint)//I think returns error(return statement of login)
     {
         $username = user::login($username, $password)['username'];
         if ($username) {
@@ -28,6 +28,7 @@ class usersession
             $connection = Database::getConnection();
             $ip = $_SERVER['REMOTE_ADDR'];
             $userAgent = $_SERVER['HTTP_USER_AGENT'];
+            echo $fingerprint;
             $token = md5($username . $ip . $userAgent . time() . rand(0, 999));
             $query = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `useragent`, `active`)
                      VALUES ('$userobj->id', '$token', now(), '$ip', '$userAgent', '1');";

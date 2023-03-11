@@ -33,6 +33,7 @@
 						<i class='bx bxl-twitter twitter'></i>
 						<i class='bx bxl-linkedin-square linkdein'></i>
 					</div>
+					<input name="fingerprint" id="fingerprint" type="hidden">
 					<input type="submit" value="Sign In">
 					<a href="#" class="forgot">Forgot Password</a>
 				</form>
@@ -55,6 +56,18 @@
 	<!-- partial -->
 	<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 	<script src="../js/login|signup.js"></script>
+	<script>
+		const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
+			.then(FingerprintJS => FingerprintJS.load())
+
+		fpPromise
+			.then(fp => fp.get())
+			.then(result => {
+				const visitorId = result.visitorId
+				alert("I am from form " + visitorId)
+				document.getElementById("fingerprint").value = visitorId
+			})
+	</script>
 </body>
 
 </html>

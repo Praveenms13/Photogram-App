@@ -2,7 +2,8 @@
 if (isset($_POST['username']) and isset($_POST['password'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $sessionToken = usersession::authenticate($username, $password);
+    $fingerprint = $_POST['fingerprint'];
+    $sessionToken = usersession::authenticate($username, $password, $fingerprint);
     Session::set('sessionUsername', $username);
 }
 if (isset($_GET['logout'])) {
