@@ -90,9 +90,36 @@ class usersession
             return false;
         }
     }
+    public function logout()
+    {
+        if (!$this->conn) {
+            $this->conn = Database::getConnection();
+        }
+        if (isset($this->uid)) {
+            if ($this->isActive() == "1") {
+                $this->deactivate();
+                $sql = "DELETE FROM `session` WHERE `uid` = $this->uid";
+                return $this->conn->query($sql) ? true : false;
+            } else {
+                $sql = "DELETE FROM `session` WHERE `uid` = $this->uid";
+                return $this->conn->query($sql) ? true : false;
+            }
+        } else {
+            return false;
+        }
+    }
     public function isActive()
     {
         return $this->data['active'];
+    }
+    public function deactivate()
+    {
+        if (!$this->conn) {
+            $this->conn = Database::getConnection();
+        }
+        $sql = "UPDATE `session` SET `active` = 0 WHERE `uid`=$this->uid";
+
+        return $this->conn->query($sql) ? true : false;
     }
     public function getIP()
     {
@@ -101,8 +128,5 @@ class usersession
     public function getUserAgent() //can also do with IP address(getIP)
     {
         return $this->data['useragent'];
-    }
-    public function deactivate()
-    {
     }
 }

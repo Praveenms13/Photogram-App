@@ -5,6 +5,16 @@ if (isset($_POST['username']) and isset($_POST['password'])) {
     $sessionToken = usersession::authenticate($username, $password);
     Session::set('sessionUsername', $username);
 }
+if (isset($_GET['logout'])) {
+    if (Session::get('sessionToken')) {
+        $token = Session::get('sessionToken');
+        $usersession = new usersession($token);
+        $usersession->logout();
+        Session::delete('sessionUsername');
+        Session::delete('session_token');
+        Session::delete('sessionToken');
+    }
+}
 if (Session::get('sessionToken')) {
     $token = Session::get('sessionToken');
     if (usersession::authorize($username, $password, $token)) {
@@ -25,7 +35,7 @@ if (Session::get('sessionToken')) {
                     Session::delete('session_token');
                     Session::delete('sessionToken');
                     ?>
-    <!-- <h4>Token Expired, Login Again</h4>--><?php 
+    <!-- <h4>Token Expired, Login Again</h4>--><?php
                     loadAccess("userForm");
                 }
             } else {
@@ -36,7 +46,6 @@ if (Session::get('sessionToken')) {
         } else {
             ?>
     <h3>Token not in Session, login again</h3><?php
-    
             loadAccess("userForm");
         }
     } else {
@@ -45,4 +54,3 @@ if (Session::get('sessionToken')) {
 } else {
     loadAccess("userForm");
 }
-?>
