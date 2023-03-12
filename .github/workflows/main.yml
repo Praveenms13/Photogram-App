@@ -12,7 +12,7 @@ jobs:
       - run: pwd
       - run: echo "I am from Photogram App"
       - run: sudo rm -rf /home/mspraveenkumar77/htdocs/photogram
-      - run: sudo cp -r /home/mspraveenkumar77/htdocs/photogramapp /home/mspraveenkumar77/htdocs/photogram
+      - run: sudo cp -r /home/mspraveenkumar77/actions-runner/work1/Photogram-A-Social-Media-App/Photogram-A-Social-Media-App/ /home/mspraveenkumar77/htdocs/photogram
       - run: sudo rm -rf /home/mspraveenkumar77/htdocs/photogram/.git
       - run: sudo rm -rf /home/mspraveenkumar77/htdocs/photogram/.github/
       - run: pwd
