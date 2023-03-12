@@ -12,3 +12,4 @@ jobs:
       - run: whoami
       - run: pwd
       - run: ls /home/
+      - run: hostname -I
