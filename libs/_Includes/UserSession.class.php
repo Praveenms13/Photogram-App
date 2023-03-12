@@ -16,6 +16,7 @@ class usersession
             throw new Exception("Session is invalid");
         }
     }
+    public $fingerprint;
 
 
     /*this fun() will return a session id if username and password is correct
@@ -28,7 +29,7 @@ class usersession
             $connection = Database::getConnection();
             $ip = $_SERVER['REMOTE_ADDR'];
             $userAgent = $_SERVER['HTTP_USER_AGENT'];
-            echo $fingerprint;
+            //echo "JSFingerPrint : " . $fingerprint;
             $token = md5($username . $ip . $userAgent . time() . rand(0, 999));
             $query = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `useragent`, `active`)
                      VALUES ('$userobj->id', '$token', now(), '$ip', '$userAgent', '1');";
@@ -43,9 +44,10 @@ class usersession
             return false;
         }
     }
-    public static function authorize($username, $password, $token)
+    public static function authorize($username, $password, $token, $fingerprint)
     {
         try {
+            echo "JSFingerPrint Autho : " . $fingerprint;
             $authSession = new usersession($token);
             if (isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER_AGENT'])) {
                 if ($authSession->isValid($token) and $authSession->isActive()) {

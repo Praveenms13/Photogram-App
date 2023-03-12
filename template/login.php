@@ -18,7 +18,7 @@ if (isset($_GET['logout'])) {
 }
 if (Session::get('sessionToken')) {
     $token = Session::get('sessionToken');
-    if (usersession::authorize($username, $password, $token)) {
+    if (usersession::authorize($username, $password, $token, $fingerprint)) {
         if ($token) {
             $username = Session::get('sessionUsername');
             $userclass = new user($username); //constructs id from username

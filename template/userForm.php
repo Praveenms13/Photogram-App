@@ -53,20 +53,23 @@
 	</div>
 
 	</html>
-	<!-- partial -->
 	<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 	<script src="../js/login|signup.js"></script>
-	<script>
-		const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
-			.then(FingerprintJS => FingerprintJS.load())
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            // Initialize the agent at application startup.
+            const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
+                .then(FingerprintJS => FingerprintJS.load())
 
-		fpPromise
-			.then(fp => fp.get())
-			.then(result => {
-				const visitorId = result.visitorId
-				document.getElementById("fingerprint").value = visitorId
-			})
-	</script>
+            // Get the visitor identifier when you need it.
+            fpPromise
+                .then(fp => fp.get())
+                .then(result => {
+                    // This is the visitor identifier:
+                    const visitorId = result.visitorId
+                    document.getElementById("fingerprint").value = visitorId;
+                })
+        </script>
 </body>
 
 </html>
