@@ -9,5 +9,7 @@ jobs:
       - run: echo "I am from Photogram App"
       - run: sudo rm -rf /home/mspraveenkumar77/htdocs/photogram
       - run: sudo cp -r /home/mspraveenkumar77/htdocs/photogramapp /home/mspraveenkumar77/htdocs/photogram
+      - run: sudo rm -rf /home/mspraveenkumar77/htdocs/photogram/.git
+      - run: sudo rm -rf /home/mspraveenkumar77/htdocs/photogram/.github/
       - run: echo "Job Finished"
       - run: echo "Deployed!"
