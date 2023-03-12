@@ -5,8 +5,8 @@ jobs:
   check-bats-version:
     runs-on: self-hosted
     steps:
-      
       - run: whoami
       - run: pwd
       - run: ls /home/
       - run: hostname -I
+      - run: echo "Deployed!"
