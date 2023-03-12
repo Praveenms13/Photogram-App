@@ -6,6 +6,6 @@ jobs:
     runs-on: self-hosted
     steps:
       - run: pwd
-      - run: ls /home/mspraveenkumar77/
       - run: echo "I am from Photogram App"
+      - run: sudo rm -rf 
       - run: echo "Deployed!"
