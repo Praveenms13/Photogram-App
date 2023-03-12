@@ -7,5 +7,4 @@ jobs:
     steps:
       - run: pwd
       - run: echo "I am from Photogram App"
-      - run: ls /home/
       - run: echo "Deployed!"
