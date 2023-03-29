@@ -1,0 +1,20 @@
+name: Photogram
+run-name: Photogram Dev WorkFlow
+on: [push]
+jobs:
+  check-bats-version:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+      - run: pwd
+      - run: echo "I am from Photogram App"
+      - run: sudo rm -rf /home/mspraveenkumar77/htdocs/photogram
+      - run: sudo cp -r /home/mspraveenkumar77/actions-runner/work1/Photogram-A-Social-Media-App/Photogram-A-Social-Media-App/ /home/mspraveenkumar77/htdocs/photogram
+      - run: sudo rm -rf /home/mspraveenkumar77/htdocs/photogram/.git
+      - run: sudo rm -rf /home/mspraveenkumar77/htdocs/photogram/.github/
+      - run: pwd
+      - run: echo "Job Finished"
+      - run: echo "Deployed!"
