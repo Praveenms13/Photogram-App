@@ -1,8 +1,8 @@
 <?php
+$fingerprint = "I am Cookie...";
 if (isset($_POST['username']) and isset($_POST['password'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $fingerprint = $_POST['fingerprint'];
     $sessionToken = usersession::authenticate($username, $password, $fingerprint);
     Session::set('sessionUsername', $username);
 }
@@ -36,17 +36,17 @@ if (Session::get('sessionToken')) {
                     Session::delete('session_token');
                     Session::delete('sessionToken');
                     ?>
-    <!-- <h4>Token Expired, Login Again</h4>--><?php
+<!-- <h4>Token Expired, Login Again</h4>--><?php
                     loadAccess("userForm");
                 }
             } else {
                 ?>
-    <h4>ID Construction Failed, check usersession->constructor</h4><?php
+<h4>ID Construction Failed, check usersession->constructor</h4><?php
                 loadAccess("userForm");
             }
         } else {
             ?>
-    <h3>Token not in Session, login again</h3><?php
+<h3>Token not in Session, login again</h3><?php
             loadAccess("userForm");
         }
     } else {
@@ -55,3 +55,4 @@ if (Session::get('sessionToken')) {
 } else {
     loadAccess("userForm");
 }
+?>

@@ -28,7 +28,7 @@ class usersession
             $connection = Database::getConnection();
             $ip = $_SERVER['REMOTE_ADDR'];
             $userAgent = $_SERVER['HTTP_USER_AGENT'];
-            //echo "JSFingerPrint : " . $fingerprint;
+            echo "JSFingerPrint : " . $fingerprint; //fingerprint left without any use 
             $token = md5($username . $ip . $userAgent . time() . rand(0, 999));
             $query = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `useragent`, `active`)
                      VALUES ('$userobj->id', '$token', now(), '$ip', '$userAgent', '1');";
@@ -46,7 +46,7 @@ class usersession
     public static function authorize($username, $password, $token, $fingerprint)
     {
         try {
-            echo "JSFingerPrint Autho : " . $fingerprint;
+            echo "JSFingerPrint Auth : " . $fingerprint;
             $authSession = new usersession($token);
             if (isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER_AGENT'])) {
                 if ($authSession->isValid($token) and $authSession->isActive()) {
