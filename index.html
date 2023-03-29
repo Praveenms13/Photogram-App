@@ -226,6 +226,17 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
+			.then(FingerprintJS => FingerprintJS.load())
+		fpPromise
+			.then(fp => fp.get())
+			.then(result => {
+				const visitorId = result.visitorId
+				document.cookie = "visitorId=" + visitorId;
+				console.log(visitorId)
+			})
+	</script>
 </body>
 
 </html>

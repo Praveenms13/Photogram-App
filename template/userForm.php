@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<title>Login or Signup</title>
 	<link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'>
-	<link rel="stylesheet" href="../css/login|signup.css">
+	<link rel="stylesheet" href=<?php echo get_config('cssPath')?>>
 </head>
 
 <body>
@@ -56,20 +56,20 @@
 	<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 	<script src="../js/login|signup.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script>
-            // Initialize the agent at application startup.
-            const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
-                .then(FingerprintJS => FingerprintJS.load())
+	<script>
+		// Initialize the agent at application startup.
+		const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
+			.then(FingerprintJS => FingerprintJS.load())
 
-            // Get the visitor identifier when you need it.
-            fpPromise
-                .then(fp => fp.get())
-                .then(result => {
-                    // This is the visitor identifier:
-                    const visitorId = result.visitorId
-                    document.getElementById("fingerprint").value = visitorId;
-                })
-        </script>
+		// Get the visitor identifier when you need it.
+		fpPromise
+			.then(fp => fp.get())
+			.then(result => {
+				// This is the visitor identifier:
+				const visitorId = result.visitorId
+				document.getElementById("fingerprint").value = visitorId;
+			})
+	</script>
 </body>
 
 </html>
