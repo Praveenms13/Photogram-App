@@ -20,7 +20,7 @@ class usersession
 
     /*this fun() will return a session id if username and password is correct
     */
-    public static function authenticate($username, $password, $fingerprint)//I think returns error(return statement of login)
+    public static function authenticate($username, $password, $fingerprint = null)//I think returns error(return statement of login)
     {
         $username = user::login($username, $password)['username'];
         if ($username) {
@@ -28,13 +28,11 @@ class usersession
             $connection = Database::getConnection();
             $ip = $_SERVER['REMOTE_ADDR'];
             $userAgent = $_SERVER['HTTP_USER_AGENT'];
-            echo "JSFingerPrint : " . $fingerprint; //fingerprint left without any use 
             $token = md5($username . $ip . $userAgent . time() . rand(0, 999));
             $query = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `useragent`, `active`)
                      VALUES ('$userobj->id', '$token', now(), '$ip', '$userAgent', '1');";
             $queryresult = $connection->query($query);
             if ($queryresult) {
-                Session::set('sessionToken', $token);
                 return $token;
             } else {
                 return false;
@@ -43,10 +41,9 @@ class usersession
             return false;
         }
     }
-    public static function authorize($username, $password, $token, $fingerprint)
+    public static function authorize($username, $password, $token, $fingerprint = null)
     {
         try {
-            echo "JSFingerPrint Auth : " . $fingerprint;
             $authSession = new usersession($token);
             if (isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER_AGENT'])) {
                 if ($authSession->isValid($token) and $authSession->isActive()) {
@@ -57,7 +54,7 @@ class usersession
                     }
                 } else {
                     Session::unset();
-                    throw new Exception("Invalid Session");
+                    throw new Exception("Invalid Session, Login Again");
                 }
             } else {
                 throw new Exception("IP and UserAgent is NULL");
@@ -76,11 +73,10 @@ class usersession
         $connection = Database::getConnection();
         $connquery = "SELECT `login_time` FROM `session` WHERE `token` = '$token'";
         $result = $connection->query($connquery);
-        if ($result) { //if (strtotime($given_time) >= time()+300) echo "You are online";
+        if ($result) {
             $sqldata = mysqli_fetch_row($connection->query($connquery));
             $sqltime = strtotime($sqldata[0]);
             // echo time() . " "  . "sqltime" . $sqltime + 10;
-            //page validity for 10 seconds
             if (($sqltime + 60) > time()) {
                 return true;
             } else {

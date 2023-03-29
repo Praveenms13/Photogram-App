@@ -62,8 +62,11 @@
 			.then(fp => fp.get())
 			.then(result => {
 				const visitorId = result.visitorId
-				console.log(visitorId)
-				document.cookie = "fingerprint=" + visitorId;
+				console.log(visitorId);
+				<?php
+                   session_start();
+                   $_SESSION['fingerprint_vID'] = $visitorId;
+	?>
 			})
 	</script>
 </body>
