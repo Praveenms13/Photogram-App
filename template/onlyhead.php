@@ -13,7 +13,7 @@
   <link rel="manifest" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/manifest.json">
   <link rel="mask-icon" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/safari-pinned-tab.svg"
     color="#7952b3">
-    <link rel="icon" href="https://img.icons8.com/color/48/null/pandora-app.png">
+  <link rel="icon" href="https://img.icons8.com/color/48/null/pandora-app.png">
   <meta name="theme-color" content="#7952b3">
   <link href="./album/Album example for Bootstrap_files/bootstrap.min.css" rel="stylesheet">
   <link href="./album/Album example for Bootstrap_files/album.css" rel="stylesheet">
@@ -25,8 +25,8 @@
   <script>
     console.log("test passed")
     console
-    .log( <?php print(basename($_SERVER['PHP_SELF'], ".php"))?>
-      .css);
+      .log( <?php print(basename($_SERVER['PHP_SELF'], ".php"))?>
+        .css);
   </script>
   <link rel="stylesheet"
     href="css/<?=basename($_SERVER['PHP_SELF'], ".php")?>.css">

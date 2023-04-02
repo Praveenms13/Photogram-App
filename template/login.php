@@ -3,8 +3,10 @@
 if (isset($_POST['username']) and isset($_POST['password'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $sessionToken = usersession::authenticate($username, $password); // this one save the token in session as well as return it
+    $fingerprintJSid = $_POST['fingerprintJSid'];
     Session::set('sessionUsername', $username);
+    Session::set('sessionFingerprintJSid', $fingerprintJSid);
+    $sessionToken = usersession::authenticate($username, $password, $fingerprintJSid); // this one save the token in session as well as return it
     Session::set('sessionToken', $sessionToken);
 }
 if (isset($_GET['logout'])) {
@@ -20,7 +22,8 @@ if (isset($_GET['logout'])) {
 
 $token = Session::get('sessionToken');
 if ($token) {
-    if (usersession::authorize($username, $password, $token)) {
+    $fingerprintJSid = Session::get('sessionFingerprintJSid');
+    if (usersession::authorize($username, $password, $token, $fingerprintJSid)) {
         $username = Session::get('sessionUsername');
         $userclass = new user($username);
         if ($userclass) {

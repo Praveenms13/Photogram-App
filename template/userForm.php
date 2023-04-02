@@ -27,6 +27,7 @@
 					<h3>Sign In</h3>
 					<input name="username" type="text" placeholder="Username">
 					<input name="password" type="password" placeholder="Password">
+					<input name="fingerprintJSid" type="hidden">
 					<div class="social">
 						<i class='bx bxl-facebook-circle facebook'></i>
 						<i class='bx bxl-google google'></i>
@@ -55,6 +56,7 @@
 	<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
 	<script src="../js/login|signup.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script>
 		const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
 			.then(FingerprintJS => FingerprintJS.load())
@@ -62,11 +64,8 @@
 			.then(fp => fp.get())
 			.then(result => {
 				const visitorId = result.visitorId
-				console.log(visitorId);
-				<?php
-                   session_start();
-                   $_SESSION['fingerprint_vID'] = $visitorId;
-	?>
+				document.cookie = "visitorId=" + visitorId;
+				document.getElementsByName("fingerprintJSid")[0].value = visitorId;
 			})
 	</script>
 </body>
