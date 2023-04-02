@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Login or Signup</title>
+	<title>Login or Signup..</title>
 	<link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'>
 	<link rel="stylesheet" href=<?php echo get_config('cssPath')?>>
 </head>
