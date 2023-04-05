@@ -8,7 +8,7 @@ global $__DBconfigPath;
 $__DBconfigPath = dirname(is_link($_SERVER['DOCUMENT_ROOT']) ? readlink($_SERVER['DOCUMENT_ROOT']) : $_SERVER['DOCUMENT_ROOT']);
 // echo "Returned Path: " . $__DBconfigPath;
 if ($_SERVER['APPLICATION_ENV'] == "Production") {
-    $__DBconfig = file_get_contents($__DBconfigPath . "/config_files/photogram.json");
+    $__DBconfig = file_get_contents($__DBconfigPath . "/../config_files/photogram.json");
 }
 if ($_SERVER['APPLICATION_ENV'] == "Dev") { 
     $__DBconfig = file_get_contents($__DBconfigPath . "/config_files/photogramDev.json");
