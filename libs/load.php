@@ -8,9 +8,11 @@ global $__DBconfigPath;
 $__DBconfigPath = dirname(is_link($_SERVER['DOCUMENT_ROOT']) ? readlink($_SERVER['DOCUMENT_ROOT']) : $_SERVER['DOCUMENT_ROOT']);
 // echo "Returned Path: " . $__DBconfigPath;
 if ($_SERVER['APPLICATION_ENV'] == "Production") {
+    // keep the config file outside the web root /var/www/html/|till here|/../config_files/photogram.json
     $__DBconfig = file_get_contents($__DBconfigPath . "/../config_files/photogram.json");
 }
 if ($_SERVER['APPLICATION_ENV'] == "Dev") { 
+    // keep the config file outside the web root /var/www/|till here|/config_files/photogramDev.json
     $__DBconfig = file_get_contents($__DBconfigPath . "/config_files/photogramDev.json");
 }
 Session::start();
