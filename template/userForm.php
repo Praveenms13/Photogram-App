@@ -22,6 +22,17 @@
 			</div>
 		</div>
 		<div class="formBx">
+			<div class="form signupForm">
+				<form method="POST" action="signup.php">
+					<h3>Sign Up</h3>
+					<input name="username" type="text" placeholder="Username">
+					<input name="email" type="text" placeholder="Email Address">
+					<input name="phone" type="text" placeholder="phone">
+					<input name="password" type="password" placeholder="Password">
+					<input type="submit" value="Sign Up">
+					<a href="#" class="forgot">Forgot Password</a>
+				</form>
+			</div>
 			<div class="form signinForm">
 				<form method="POST" action="login.php">
 					<h3>Sign In</h3>
@@ -35,17 +46,6 @@
 						<i class='bx bxl-linkedin-square linkdein'></i>
 					</div>
 					<input type="submit" value="Sign In">
-					<a href="#" class="forgot">Forgot Password</a>
-				</form>
-			</div>
-			<div class="form signupForm">
-				<form method="POST" action="signup.php">
-					<h3>Sign Up</h3>
-					<input name="username" type="text" placeholder="Username">
-					<input name="email" type="text" placeholder="Email Address">
-					<input name="phone" type="text" placeholder="phone">
-					<input name="password" type="password" placeholder="Password">
-					<input type="submit" value="Sign Up">
 					<a href="#" class="forgot">Forgot Password</a>
 				</form>
 			</div>
