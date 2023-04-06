@@ -66,7 +66,7 @@ try {
                     return false;
                 }
             } catch (Exception $e) {
-                echo "Message :" . $e->getMessage();
+                echo $e->getMessage();
             }
         }
         public function getuser()
@@ -82,7 +82,7 @@ try {
                 $sqldata = mysqli_fetch_row($connection->query($connquery));
                 $sqltime = strtotime($sqldata[0]);
                 // echo time() . " "  . "sqltime" . $sqltime + 10;
-                if (($sqltime + 60) > time()) {
+                if (($sqltime + 10) > time()) {
                     return true;
                 } else {
                     $sql = "UPDATE `session` SET `active` = '0' WHERE `token` = '$token'";
@@ -138,5 +138,6 @@ try {
         }
     }
 } catch (Exception $e) {
-    echo "Message :" . $e->getMessage();
+    echo $e->getMessage();
 }
+?>

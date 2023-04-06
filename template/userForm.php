@@ -3,9 +3,10 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Login or Signup..</title>
+	<title>Login or Signup with Email</title>
 	<link rel='stylesheet' href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css'>
-	<link rel="stylesheet" href=<?php echo get_config('cssPath')?>>
+	<link rel="stylesheet" href=<?php echo get_config('cssPath') . "login|signup.css"?>>
+	<link rel="icon" href="https://img.icons8.com/color/48/null/pandora-app.png">
 </head>
 
 <body>
@@ -35,7 +36,7 @@
 			</div>
 			<div class="form signinForm">
 				<form method="POST" action="login.php">
-					<h3>Sign In</h3>
+					<h3>Log In</h3>
 					<input name="username" type="text" placeholder="Username">
 					<input name="password" type="password" placeholder="Password">
 					<input name="fingerprintJSid" type="hidden">
@@ -45,7 +46,7 @@
 						<i class='bx bxl-twitter twitter'></i>
 						<i class='bx bxl-linkedin-square linkdein'></i>
 					</div>
-					<input type="submit" value="Sign In">
+					<input type="submit" value="Log In">
 					<a href="#" class="forgot">Forgot Password</a>
 				</form>
 			</div>
