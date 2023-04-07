@@ -1,5 +1,4 @@
 <?php
-// macho enna acho
 try {
 
     if (isset($_POST['username']) and isset($_POST['password'])) {
@@ -39,41 +38,41 @@ try {
                     Session::delete('sessionUsername');
                     Session::delete('session_token');
                     Session::delete('sessionToken');
-                    loadTemplate("userForm");
+                    loadTemplate("loginForm");
                     throw new Exception("Session Time Over, Login again...");
                 }
             } else {
                 Session::delete('sessionUsername');
                 Session::delete('session_token');
-                loadTemplate("userForm");
+                loadTemplate("loginForm");
             }
         } else {
             Session::delete('sessionUsername');
             Session::delete('session_token');
-            loadTemplate("userForm");
+            loadTemplate("loginForm");
         }
     } else {
         Session::delete('sessionUsername');
         Session::delete('session_token');
-        loadTemplate("userForm");
+        loadTemplate("loginForm");
     }
 
 } catch (Exception $e) {
     ?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
 </script>
 <style>
-    .container {
-        margin-top: 10px;
-    }
+	.container {
+		margin-top: 10px;
+	}
 </style>
 <div class="container">
-    <div class="alert alert-danger" role="alert"> <?php
+	<div class="alert alert-danger" role="alert"> <?php
     echo $e->getMessage() ?>
-    </div>
+	</div>
 </div>
 <?php
 
