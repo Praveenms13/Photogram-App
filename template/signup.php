@@ -2,7 +2,6 @@
 try { ?>
 <?php
     $signup = false;
-    //$login = false;
     if (isset($_POST['username']) and isset($_POST['phone']) and isset($_POST['email']) and isset($_POST['password'])) {
         $username = $_POST['username'];
         $phone = $_POST['phone'];
