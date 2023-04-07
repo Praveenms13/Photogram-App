@@ -1,5 +1,10 @@
 <?php
 try { ?>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
 <?php
     $signup = false;
     //$login = false;
@@ -15,17 +20,17 @@ try { ?>
 <?php if (!$error) {
         ?>
 <div class="container">
-	<div class="bg-light p-5 rounded mt-3">
-		<h1>Sign-up Success!</h1>
-		<h2 class="lead">You can Login <a href="../login.php">Here</a></h2>
-	</div>
+    <div class="bg-light p-5 rounded mt-3">
+        <h1>Sign-up Success!</h1>
+        <h2 class="lead">You can Login <a href="../login.php">Here</a></h2>
+    </div>
 </div>
 <?php } else { ?>
 <main class="container">
-	<div class="bg-light p-5 rounded mt-3">
-		<h1>Sign-up Failed!</h1>
-		<h2>Something went wrong <?= $error ?></h2>
-	</div>
+    <div class="bg-light p-5 rounded mt-3">
+        <h1>Sign-up Failed!</h1>
+        <h2>Something went wrong <?= $error ?></h2>
+    </div>
 </main>
 <?php } ?>
 <?php } else {
@@ -35,11 +40,11 @@ try { ?>
     //echo 'Message: ' . $e->getMessage();
     ?>
 <main class="container">
-	<div class="bg-light p-5 rounded mt-3">
-		<h1>Sign-up Failed!</h1>
-		<p class="lead">Something went wrong <?= $e->getMessage() ?>
-		</p>
-	</div>
+    <div class="bg-light p-5 rounded mt-3">
+        <h1>Sign-up Failed!</h1>
+        <p class="lead">Something went wrong <?= $e->getMessage() ?>
+        </p>
+    </div>
 </main><?php
 }
 ?>
