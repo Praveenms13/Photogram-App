@@ -1,9 +1,11 @@
 <?php
-
+//------------------------------------------------------------
 include "_Includes/User.class.php";
 include "_Includes/Database.class.php";
 include "_Includes/Session.class.php";
 include "_Includes/UserSession.class.php";
+include "_Includes/WebAPI.class.php";
+//------------------------------------------------------------
 global $__DBconfig;
 global $__DBconfigPath;
 $__DBconfigPath = dirname(is_link($_SERVER['DOCUMENT_ROOT']) ? readlink($_SERVER['DOCUMENT_ROOT']) : $_SERVER['DOCUMENT_ROOT']);
@@ -11,13 +13,14 @@ $__DBconfigPath = dirname(is_link($_SERVER['DOCUMENT_ROOT']) ? readlink($_SERVER
 if ($_SERVER['APPLICATION_ENV'] == "Production") {
     // keep the config file outside the web root /var/www/html/|till here|/../config_files/photogram.json
     $__DBconfig = file_get_contents($__DBconfigPath . "/../config_files/photogram.json");
-}
-if ($_SERVER['APPLICATION_ENV'] == "Dev") {
+} else  {
     // keep the config file outside the web root /var/www/|till here|/config_files/photogramDev.json
     $__DBconfig = file_get_contents($__DBconfigPath . "/config_files/photogramDev.json");
 }
-Session::start();
-
+//------------------------------------------------------------
+$webAPI = new WebAPI();
+$webAPI->initiateSession();
+//------------------------------------------------------------
 function get_config($key, $default_key = 0)
 {
     global $__DBconfig;

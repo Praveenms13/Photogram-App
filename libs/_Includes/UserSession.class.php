@@ -141,7 +141,7 @@ try {
 </script>
 <style>
     .alert {
-        margin-top: 60px;
+        margin-top: 20px;
     }
 </style>
 <div class="alert alert-<?php echo $status ?> position-absolute"
