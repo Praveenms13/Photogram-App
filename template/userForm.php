@@ -54,7 +54,19 @@
 
 	</html>
 	<script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
-	<script src="../js/login|signup.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('.signupBtn').on('click', function() {
+				$('.formBx').addClass('active')
+				$('body').addClass('active')
+			})
+
+			$('.signinBtn').on('click', function() {
+				$('.formBx').removeClass('active')
+				$('body').removeClass('active')
+			})
+		});
+	</script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script>

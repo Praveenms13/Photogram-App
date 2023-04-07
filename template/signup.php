@@ -8,37 +8,29 @@ try { ?>
         $email = $_POST['email'];
         $password = $_POST['password'];
         $error = User::check_new_user($username, $phone, $email, $password);
-        $signup = true;
+        if (!$error) {
+            $signup = true;
+        } else {
+            $signup = false;
+        }
     }
-    if ($signup) { ?>
-<?php if (!$error) {
-        ?>
-<div class="container">
-    <div class="bg-light p-5 rounded mt-3">
-        <h1>Sign-up Success!</h1>
-        <h2 class="lead">You can Login <a href="../login.php">Here</a></h2>
-    </div>
-</div>
-<?php } else { ?>
-<main class="container">
-    <div class="bg-light p-5 rounded mt-3">
-        <h1>Sign-up Failed!</h1>
-        <h2>Something went wrong <?= $error ?></h2>
-    </div>
-</main>
-<?php } ?>
-<?php } else {
-    loadAccess("userForm");
-} ?><?php
+    if ($signup) {
+        if (!$error) {
+            throw new Exception("Sign-up Successful!, You can Login now.");
+        } else {
+            throw new Exception($error . "Please try again.");
+        }
+    } else {
+        loadAccess("userForm");
+    }
 } catch (Exception $e) {
-    //echo 'Message: ' . $e->getMessage();
-    ?>
-<main class="container">
-    <div class="bg-light p-5 rounded mt-3">
-        <h1>Sign-up Failed!</h1>
-        <p class="lead">Something went wrong <?= $e->getMessage() ?>
-        </p>
-    </div>
-</main><?php
+    $error = $e->getMessage();
+    $status = "danger";
+    if ($error == "Sign-up Successful!, You can Login now.") {
+        $status = "success";
+    }
+    usersession::dispError($error, $status);
+    loadTemplate("userForm");
+
 }
 ?>

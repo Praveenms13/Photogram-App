@@ -14,7 +14,7 @@ try {
         {
             $this->username = $username;
             $this->user_conn = Database::getConnection();
-            $userQuery = "SELECT `id` FROM `auth` WHERE `username` = '$username' OR `id` = '$username'";
+            $userQuery = "SELECT `id` FROM `auth` WHERE `username` = '$username' OR `email` = '$username'";
             $result = $this->user_conn->query($userQuery);
             if ($result->num_rows) {
                 $row_DB = $result->fetch_assoc();
@@ -61,7 +61,7 @@ try {
         public static function login($username, $password)
         {
             //$password = md5(strrev(sha1(md5(md5($password))))); //Security Obsecurity
-            $loginQuery = "SELECT * FROM `auth` WHERE `username` = '$username'";
+            $loginQuery = "SELECT * FROM `auth` WHERE `username` = '$username' OR `email` = '$username'";
             $signup_conn = Database::getConnection();
             $result = $signup_conn->query($loginQuery);
             if ($result->num_rows == 1) {
@@ -69,10 +69,10 @@ try {
                 if (password_verify($password, $row_DB['password'])) {
                     return $row_DB; //return $row_DB['username'];
                 } else {
-                    return false;
+                    throw new Exception("Password is incorrect");
                 }
             } else {
-                return false;
+                throw new Exception("User not found");
             }
         }
 
@@ -167,5 +167,10 @@ try {
 }
 // catch block
 catch (Exception $e) {
-    echo "Message :" . $e->getMessage();
+    $error = $e->getMessage();
+    $status = "danger";
+    if ($error == "User not found") {
+        $status = "danger";
+    }
+    usersession::dispError($error, $status);
 }

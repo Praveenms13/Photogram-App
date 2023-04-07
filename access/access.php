@@ -50,7 +50,7 @@
             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
             <circle cx="12" cy="13" r="4" />
           </svg>
-          <strong>Album</strong>
+          <strong>Photogram</strong>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
           aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,7 +65,7 @@
     <section class="py-5 text-center container">
       <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
-          <h1 class="fw-light">Album example</h1>
+          <h1 class="fw-light">Photogram example</h1>
           <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator,
             etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
           <p>
@@ -280,7 +280,7 @@
       <p class="float-end mb-1">
         <a href="#">Back to top</a>
       </p>
-      <p class="mb-1">Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+      <p class="mb-1">Photogram example is &copy; Bootstrap, but please download and customize it for yourself!</p>
       <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a
           href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
     </div>

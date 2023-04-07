@@ -44,29 +44,25 @@ try {
         }
         public static function authorize($username, $password, $token, $fingerprint = null)
         {
-            try {
-                $authSession = new usersession($token);
-                if (isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER_AGENT'])) {
-                    if ($authSession->isValid($token) and $authSession->isActive()) {
-                        if ($_SERVER['REMOTE_ADDR'] == $authSession->getIP() and $_SERVER['HTTP_USER_AGENT'] == $authSession->getUserAgent()) {
-                            if (password_verify($fingerprint, $authSession->getFingerPrintId())) {
-                                return true;
-                            } else {
-                                throw new Exception("FingerPrint JS Doesn't Match");
-                            }
+            $authSession = new usersession($token);
+            if (isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER_AGENT'])) {
+                if ($authSession->isValid($token) and $authSession->isActive()) {
+                    if ($_SERVER['REMOTE_ADDR'] == $authSession->getIP() and $_SERVER['HTTP_USER_AGENT'] == $authSession->getUserAgent()) {
+                        if (password_verify($fingerprint, $authSession->getFingerPrintId())) {
+                            return true;
                         } else {
-                            throw new Exception("User IP and Browser Doesn't Match");
+                            throw new Exception("FingerPrint JS Doesn't Match");
                         }
                     } else {
-                        Session::unset();
-                        throw new Exception("Login Expired, Login Again");
+                        throw new Exception("User IP and Browser Doesn't Match");
                     }
                 } else {
-                    throw new Exception("IP or UserAgent or FingerPrint JS may be NULL");
-                    return false;
+                    Session::unset();
+                    throw new Exception("Login Expired, Login Again");
                 }
-            } catch (Exception $e) {
-                echo "Message :" . $e->getMessage();
+            } else {
+                throw new Exception("IP or UserAgent or FingerPrint JS may be NULL");
+                return false;
             }
         }
         public function getuser()
@@ -136,7 +132,46 @@ try {
         {
             return $this->data['fingerPrintId'];
         }
+        public static function dispError($message, $status)
+        { ?>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
+<style>
+    .alert {
+        margin-top: 60px;
+    }
+</style>
+<div class="alert alert-<?php echo $status ?> position-absolute"
+    style="top: 0;">
+    <?php echo $message ?>
+</div>
+<?php
+        }
     }
 } catch (Exception $e) {
-    echo "Message :" . $e->getMessage();
+    $error = $e->getMessage();
+    $status = "danger";
+    if ($error == "Login Expired, Login Again") {
+        $status = "warning";
+    }
+    if ($error == "FingerPrint JS Doesn't Match") {
+        $status = "danger";
+    }
+    if ($error == "User IP and Browser Doesn't Match") {
+        $status = "danger";
+    }
+    if ($error == "IP or UserAgent or FingerPrint JS may be NULL") {
+        $status = "danger";
+    }
+    if ($error == "User Not Found") {
+        $status = "danger";
+    }
+    if ($error == "Password Doesn't Match") {
+        $status = "danger";
+    }
+    usersession::dispError($error, $status);
 }
+?>
