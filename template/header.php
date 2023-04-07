@@ -1,34 +1,37 @@
-<header>
-  <div class="collapse bg-dark" id="navbarHeader">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8 col-md-7 py-4">
-          <h4 class="text-white">About</h4>
-          <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-        </div>
-        <div class="col-sm-4 offset-md-1 py-4">
-          <h4 class="text-white">Contact</h4>
-          <ul class="list-unstyled">
-            <li><a href="https://getbootstrap.com/docs/4.1/examples/album/#" class="text-white">Follow on Twitter</a></li>
-            <li><a href="https://getbootstrap.com/docs/4.1/examples/album/#" class="text-white">Like on Facebook</a></li>
-            <li><a href="https://getbootstrap.com/docs/4.1/examples/album/#" class="text-white">Email me</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="navbar navbar-dark bg-dark shadow-sm">
-    <div class="container d-flex justify-content-between">
-      <a href="https://getbootstrap.com/docs/4.1/examples/album/#" class="navbar-brand d-flex align-items-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
-          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-          <circle cx="12" cy="13" r="4"></circle>
-        </svg>
-        <strong>Album</strong>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
-  </div>
-</header>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.84.0">
+  <title>Photogram</title>
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
+  <link href="./Signin Template · Bootstrap v5.0_files/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="apple-touch-icon" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/apple-touch-icon.png"
+    sizes="180x180">
+  <link rel="manifest" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/manifest.json">
+  <link rel="mask-icon" href="https://getbootstrap.com/docs/5.0/assets/img/favicons/safari-pinned-tab.svg"
+    color="#7952b3">
+  <link rel="icon" href="https://img.icons8.com/color/48/null/pandora-app.png">
+  <meta name="theme-color" content="#7952b3">
+  <link href="./album/Album example for Bootstrap_files/bootstrap.min.css" rel="stylesheet">
+  <link href="./album/Album example for Bootstrap_files/album.css" rel="stylesheet">
+  <?//print(basename($_SERVER['PHP_SELF'], ".php"));?>
+  <script>
+    console.log( <?php echo $_SERVER['DOCUMENT_ROOT'] ?> );
+  </script>
+  <?php if (file_exists($_SERVER['DOCUMENT_ROOT'] . get_config('path') . 'css/' . basename($_SERVER['PHP_SELF'], ".php").".css")) { ?>
+  <script>
+    console.log("test passed")
+    console
+      .log( <?php print(basename($_SERVER['PHP_SELF'], ".php"))?>
+        .css);
+  </script>
+  <link rel="stylesheet"
+    href="css/<?=basename($_SERVER['PHP_SELF'], ".php")?>.css">
+  <?php } else { ?>
+  <script>
+    console.log("Test Failed!");
+  </script><?php }?>
+</head>
