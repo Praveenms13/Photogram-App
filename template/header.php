@@ -4,7 +4,6 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Hugo 0.84.0">
-  <title>Photogram</title>
   <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
   <link href="./Signin Template · Bootstrap v5.0_files/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -16,6 +15,7 @@
   <link rel="icon" href="https://img.icons8.com/color/48/null/pandora-app.png">
   <meta name="theme-color" content="#7952b3">
   <link href="./album/Album example for Bootstrap_files/bootstrap.min.css" rel="stylesheet">
+  <title>Photogram</title>
   <link href="./album/Album example for Bootstrap_files/album.css" rel="stylesheet">
   <?//print(basename($_SERVER['PHP_SELF'], ".php"));?>
   <script>

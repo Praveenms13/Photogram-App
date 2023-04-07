@@ -30,28 +30,28 @@ if ($token) {
             $usersession = new usersession($token);
             $IsValid = $usersession->isValid($token);
             if ($IsValid) {
-                // echo "<br>Welcome " . $userclass->getUsername() . "<br>";
-                loadAc("album");
+                //echo "<br>Welcome " . $userclass->getUsername() . "<br>";
+                loadAccess("access");
             } else {
                 $IsValid = null;
                 Session::delete('sessionUsername');
                 Session::delete('session_token');
                 Session::delete('sessionToken');
                 echo "Session Time Over, Login again..";
-                loadAccess("userForm");
+                loadTemplate("userForm");
             }
         } else {
             Session::delete('sessionUsername');
             Session::delete('session_token');
-            loadAccess("userForm");
+            loadTemplate("userForm");
         }
     } else {
         Session::delete('sessionUsername');
         Session::delete('session_token');
-        loadAccess("userForm");
+        loadTemplate("userForm");
     }
 } else {
     Session::delete('sessionUsername');
     Session::delete('session_token');
-    loadAccess("userForm");
+    loadTemplate("userForm");
 }

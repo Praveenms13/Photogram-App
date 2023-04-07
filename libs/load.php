@@ -1,4 +1,5 @@
 <?php
+
 include "_Includes/User.class.php";
 include "_Includes/Database.class.php";
 include "_Includes/Session.class.php";
@@ -11,7 +12,7 @@ if ($_SERVER['APPLICATION_ENV'] == "Production") {
     // keep the config file outside the web root /var/www/html/|till here|/../config_files/photogram.json
     $__DBconfig = file_get_contents($__DBconfigPath . "/../config_files/photogram.json");
 }
-if ($_SERVER['APPLICATION_ENV'] == "Dev") { 
+if ($_SERVER['APPLICATION_ENV'] == "Dev") {
     // keep the config file outside the web root /var/www/|till here|/config_files/photogramDev.json
     $__DBconfig = file_get_contents($__DBconfigPath . "/config_files/photogramDev.json");
 }
@@ -27,11 +28,11 @@ function get_config($key, $default_key = 0)
         return $default_key;
     }
 }
-function loadAccess($file_form)
+function loadTemplate($file_form)
 {
     include $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "template/$file_form.php";
 }
-function loadAc($file)
+function loadAccess($file)
 {
-    include $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "album/$file.php";
+    include $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "access/$file.php";
 }

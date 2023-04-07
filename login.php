@@ -4,10 +4,10 @@ error_reporting(0);
 ini_set('display_errors', 0);?>
 <!DOCTYPE html>
 <html lang="en">
-<?php loadAccess("header");?>
-
+<?php loadTemplate("header");?>
+<title>Login now</title>
 <body class="text-center" _c_t_common="1">
-	<?php loadAccess("login"); ?>
+	<?php loadTemplate("login"); ?>
 	<script src="./album/Album example for Bootstrap_files/jquery-3.3.1.slim.min.js.download"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
 	</script>
