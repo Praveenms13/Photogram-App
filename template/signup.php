@@ -29,7 +29,7 @@ try { ?>
 </main>
 <?php } ?>
 <?php } else {
-    loadAccess("signupForm");
+    loadAccess("userForm");
 } ?><?php
 } catch (Exception $e) {
     //echo 'Message: ' . $e->getMessage();
