@@ -6,17 +6,20 @@ include "_Includes/Session.class.php";
 include "_Includes/UserSession.class.php";
 include "_Includes/WebAPI.class.php";
 //------------------------------------------------------------
-global $__DBconfig;
-global $__DBconfigPath;
-$__DBconfigPath = dirname(is_link($_SERVER['DOCUMENT_ROOT']) ? readlink($_SERVER['DOCUMENT_ROOT']) : $_SERVER['DOCUMENT_ROOT']);
+// global $__DBconfig;
+// global $__DBconfigPath; // moved to WebAPI.class.php
+// $__DBconfigPath = dirname(is_link($_SERVER['DOCUMENT_ROOT']) ? readlink($_SERVER['DOCUMENT_ROOT']) : $_SERVER['DOCUMENT_ROOT']); //moved to WebAPI.class.php
+//---------------------------For CI/CD Practises------------------------------------------------------------------------------------------------
 // echo "Returned Path: " . $__DBconfigPath;
-if ($_SERVER['APPLICATION_ENV'] == "Production") {
-    // keep the config file outside the web root /var/www/html/|till here|/../config_files/photogram.json
-    $__DBconfig = file_get_contents($__DBconfigPath . "/../config_files/photogram.json");
-} else  {
-    // keep the config file outside the web root /var/www/|till here|/config_files/photogramDev.json
-    $__DBconfig = file_get_contents($__DBconfigPath . "/config_files/photogramDev.json");
-}
+// if ($_SERVER['APPLICATION_ENV'] == "Production") {
+//     // keep the config file outside the web root /var/www/html/|till here|/../config_files/photogram.json
+//     $__DBconfig = file_get_contents($__DBconfigPath . "/../config_files/photogram.json");
+// } else  {
+//     // keep the config file outside the web root /var/www/|till here|/config_files/photogramDev.json
+//     $__DBconfig = file_get_contents($__DBconfigPath . "/config_files/photogramDev.json");
+// }
+//-------------------------------CI/CD Practises Ends--------------------------------------------------------------------------------------------
+//$__DBconfig = file_get_contents($__DBconfigPath . "/../config_files/photogram.json"); //moved to WebAPI.class.php
 //------------------------------------------------------------
 $webAPI = new WebAPI();
 $webAPI->initiateSession();
