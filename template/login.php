@@ -1,6 +1,7 @@
 <?php
 
 try {
+    Session::start('mode', 'web'); 
     if (isset($_POST['username']) and isset($_POST['password'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
