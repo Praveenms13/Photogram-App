@@ -10,9 +10,9 @@ Photogram is the online Social Media Platform which is like Pinterest. This Proj
 <hr>
 
 ## Screenshots : 
-<img src="photogram/images/photogram_mobo.jpeg" alt="drawing" width="200"/>
+<img src="htdocs/images/photogram_mobo.jpeg" alt="drawing" width="200"/>
 
-![App Screenshot](photogram/images/photogram_desk.png)
+![App Screenshot](htdocs/images/photogram_desk.png)
 
 <hr>
 
