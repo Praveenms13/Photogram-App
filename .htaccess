@@ -1,0 +1,2 @@
+RewriteEngine On
+RewriteRule ^login$ https://photogramapp.selfmade.one/login.php [L]
