@@ -6,7 +6,7 @@ Photogram is an online social media platform that functions similarly to Pintere
 
 ## Deployed
 
-At photogram.praveenms.site, Subdomain of www.praveenms.site.
+At https://photogram.praveenms.site, Subdomain of www.praveenms.site.
 
 ## Developed by, 
 
