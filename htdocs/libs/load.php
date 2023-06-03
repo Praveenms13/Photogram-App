@@ -42,3 +42,12 @@ function loadAccess($file)
 {
     include $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "access/$file.php";
 }
+function loadstarterTemplate($file_form)
+{
+    include $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "starterTemplate/$file_form.php";
+}
+function loadIndex($file)
+{
+    print($_SERVER['DOCUMENT_ROOT'] . get_config('path') . "$file.php");
+    include $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "$file.php";
+}

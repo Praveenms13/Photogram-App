@@ -1,22 +1,25 @@
 <?php
 include "libs/load.php";
 error_reporting(0);
-ini_set('display_errors', 0);?>
+ini_set('display_errors', 0); ?>
 <!DOCTYPE html>
 <html lang="en">
-<?php loadTemplate("header");?>
-<title>Login now</title>
-<body class="text-center" _c_t_common="1">
-	<?php loadTemplate("login"); ?>
-	<script src="./album/Album example for Bootstrap_files/jquery-3.3.1.slim.min.js.download"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-	</script>
-	<script>
-		window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
-	</script>
-	<script src="./album/Album example for Bootstrap_files/popper.min.js.download"></script>
-	<script src="./album/Album example for Bootstrap_files/bootstrap.min.js.download"></script>
-	<script src="./album/Album example for Bootstrap_files/holder.min.js.download"></script>
+<?php
+loadstarterTemplate('head')
+?>
+
+<body>
+    <div class="loader"></div>
+    <?php
+    loadstarterTemplate('header');
+    loadstarterTemplate('loginmain');
+    loadstarterTemplate('footer');
+    ?>
+    <!-- jQuery first, then Bootstrap JS. -->
+    <script src="dist/jquery/jquery.min.js"></script>
+    <script src="dist/popper/popper.min.js" integrity=""></script>
+    <script src="dist/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/main.min.js"></script>
 </body>
 
 </html>

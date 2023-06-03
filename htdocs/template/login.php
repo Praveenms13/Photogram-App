@@ -1,7 +1,10 @@
 <?php
 
+include "../libs/load.php";
+error_reporting(0);
+ini_set('display_errors', 0);
 try {
-    Session::start('mode', 'web'); 
+    Session::start('mode', 'web');
     if (isset($_POST['username']) and isset($_POST['password'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -55,7 +58,8 @@ try {
     } else {
         Session::delete('sessionUsername');
         Session::delete('session_token');
-        throw new Exception("Login Now !!");
+        print("Disable adblocker for this website and try again...");
+        throw new Exception("Login Now !!.");
     }
 
 } catch (Exception $e) {
@@ -67,9 +71,10 @@ try {
     if ($error == "Something went wrong, Login again...") {
         $status = "danger";
     }
-    if ($error == "Login Now !!") {
+    if ($error == "Login again !!") {
         $status = "primary";
     }
     usersession::dispError($error, $status);
-    loadTemplate("userForm");
+    print("<br>Redirecting to Login Page in 3 seconds...");
+    header("Refresh: 3; url=../login.php");
 }

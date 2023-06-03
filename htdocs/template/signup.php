@@ -1,4 +1,5 @@
 <?php
+include "../libs/load.php";
 try { ?>
 <?php
     $signup = false;
@@ -16,7 +17,12 @@ try { ?>
     }
     if ($signup) {
         if (!$error) {
-            throw new Exception("Sign-up Successful!, You can Login now.");
+            $status = "success";
+            $error = "Sign-up Successful!, You can Login now.";
+            usersession::dispError($error, $status);
+            echo "Sign-up Successful!, You can Login now.";
+            echo "<br>Redirecting to Login Page in 3 seconds...";
+            header("Refresh: 3; url=../login.php");
         } else {
             throw new Exception($error . "Please try again.");
         }
@@ -26,11 +32,9 @@ try { ?>
 } catch (Exception $e) {
     $error = $e->getMessage();
     $status = "danger";
-    if ($error == "Sign-up Successful!, You can Login now.") {
-        $status = "success";
-    }
     usersession::dispError($error, $status);
-    loadTemplate("userForm");
-
+    print("Something went wrong, Please try again...");
+    print("<br>Redirecting to Signup Page in 3 seconds...");
+    header("Refresh: 3; url=../signup.php");
 }
 ?>
