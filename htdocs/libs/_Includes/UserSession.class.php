@@ -3,6 +3,11 @@
 try {
     class usersession
     {
+        public $conn;
+        public $token;
+        public $userQuery;
+        public $data;
+        public $uid;
         public function __construct($token)
         {
             $this->conn = Database::getConnection();
