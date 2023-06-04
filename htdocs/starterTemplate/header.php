@@ -18,15 +18,15 @@
                         <h4>Contact</h4>
                         <ul class="list-unstyled">
                             <li>
-                                <a href="https://twitter.com/orbitThemes">
+                                <a href="https://www.instagram.com/praveen.ms_13/">
                                     <i class="fa-brands fa-instagram"></i> Follow Developer</a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="https://mail.google.com/mail/u/0/#inbox">
                                     <i class="fa-regular fa-envelope"></i> Email me</a>
                             </li>
                             <li>
-                                <a href="">
+                                <a href="https://github.com/Praveenms13/Photogram-App">
                                     <i class="fa-solid fa-bug"></i> Report Bug</a>
                             </li>
                         </ul>
