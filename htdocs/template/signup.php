@@ -1,7 +1,5 @@
 <?php
-include "../libs/load.php";
-try { ?>
-    <?php
+try {
     $signup = false;
     if (isset($_POST['username']) and isset($_POST['phone']) and isset($_POST['email']) and isset($_POST['password'])) {
         $username = $_POST['username'];
@@ -20,7 +18,7 @@ try { ?>
             // $status = "success";
             // $error = "Sign-up Successful!, You can Login now.";
             // usersession::dispError($error, $status);
-    ?>
+            ?>
             <style>
                 #footer {
                     position: fixed;
@@ -38,13 +36,13 @@ try { ?>
                 </div>
             </section>
     <?php
-            header("Refresh: 5; url=../login.php");
+                    header("Refresh: 5; url=../login.php");
         } else {
-            loadTemplate('_signupbody');
+            Session::loadTemplate('_signupbody');
             throw new Exception($error . "Please try again.");
         }
     } else {
-        loadTemplate('_signupbody');
+        Session::loadTemplate('_signupbody');
     }
 } catch (Exception $e) {
     $error = $e->getMessage();

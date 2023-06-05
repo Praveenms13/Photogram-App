@@ -14,7 +14,7 @@ try {
         {
             $this->username = $username;
             $this->user_conn = Database::getConnection();
-            $userQuery = "SELECT `id` FROM `auth` WHERE `username` = '$username' OR `email` = '$username'";
+            $userQuery = "SELECT `id` FROM `auth` WHERE `username` = '$username' OR `id` = '$username'";
             $result = $this->user_conn->query($userQuery);
             if ($result->num_rows) {
                 $row_DB = $result->fetch_assoc();
@@ -27,8 +27,6 @@ try {
 
         public function __call($name, $arguments)
         {
-            //echo "This is printing from __call method\n";
-            //using regular expression (REGEX)
             $securestring = strtolower(preg_replace("/\B([A-Z])/", "_$1", preg_replace("/[^0-9a-zA-z]/", "", substr($name, 3))));
             if (substr($name, 0, 3) == "get") {
                 return $this->_get_data($securestring);
@@ -82,7 +80,7 @@ try {
             if (!$this->conn) {
                 $this->conn = Database::getConnection();
             }
-            $dataQuery = "SELECT `$var` FROM `user` WHERE `id` = $this->id";
+            $dataQuery = "SELECT `$var` FROM `auth` WHERE `id` = $this->id";
             //print("<br>" . $dataQuery . "<br");
             $result = $this->conn->query($dataQuery);
             if ($result and $result->num_rows) {
@@ -98,7 +96,7 @@ try {
             if (!$this->conn) {
                 $this->conn = Database::getConnection();
             }
-            $dataQuery = "UPDATE `user` SET `$var` = '$data' WHERE `id` = $this->id";
+            $dataQuery = "UPDATE `auth` SET `$var` = '$data' WHERE `id` = $this->id";
             //print($dataQuery);
             $result = $this->conn->query($dataQuery);
             if ($result) {
@@ -112,10 +110,6 @@ try {
             if (checkdate($month, $day, $year)) {
                 return $this->_set_data_('dob', $year . '-' . $month . '-' . $day);
             }
-        }
-        public function getusername()
-        {
-            return $this->username;
         }
         //alternative of __call function
         // public function getdob(){

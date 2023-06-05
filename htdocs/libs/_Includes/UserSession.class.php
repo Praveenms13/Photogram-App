@@ -47,14 +47,15 @@ try {
                 return false;
             }
         }
-        public static function authorize($username, $password, $token, $fingerprint = null)
+        public static function authorize($token, $fingerprint = null)
         {
             $authSession = new usersession($token);
             if (isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER_AGENT'])) {
                 if ($authSession->isValid($token) and $authSession->isActive()) {
                     if ($_SERVER['REMOTE_ADDR'] == $authSession->getIP() and $_SERVER['HTTP_USER_AGENT'] == $authSession->getUserAgent()) {
                         if (password_verify($fingerprint, $authSession->getFingerPrintId())) {
-                            return true;
+                            Session::$user = $authSession->getuser();
+                            return $authSession;
                         } else {
                             throw new Exception("FingerPrint JS Doesn't Match");
                         }
@@ -74,9 +75,10 @@ try {
         {
             return new user($this->uid);
         }
-        public static function isValid($token)
+        public static function isValid()
         {
             $connection = Database::getConnection();
+            $token = Session::get('sessionToken');
             $connquery = "SELECT `login_time` FROM `session` WHERE `token` = '$token'";
             $result = $connection->query($connquery);
             if ($result) {

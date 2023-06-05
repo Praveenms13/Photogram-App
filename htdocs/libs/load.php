@@ -34,15 +34,3 @@ function get_config($key, $default_key = 0)
         return $default_key;
     }
 }
-function loadIndex($file)
-{
-    include $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "$file.php";
-}
-function loadTemplate($file_form)
-{
-    include $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "template/$file_form.php";
-}
-function loadAccess($file)
-{
-    include $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "access/$file.php";
-}

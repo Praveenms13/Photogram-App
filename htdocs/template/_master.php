@@ -11,7 +11,7 @@ Session::loadTemplate('_head')
     Session::loadTemplate(Session::currentScript());
     Session::loadTemplate('_footer');
     Session::loadTemplate('_script');
-    ?> 
+    ?>
 </body>
 
 </html>

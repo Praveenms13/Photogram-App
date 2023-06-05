@@ -1,9 +1,9 @@
 <?php
 
-use Session as GlobalSession;
-
 class Session
 {
+    public static $user = null;
+    public static $usersession = null;
     public static function start()
     {
         session_start();
@@ -37,6 +37,14 @@ class Session
             return $default;
         }
     }
+    public static function getUser()
+    {
+        return Session::$user;
+    }
+    public static function getUserSession()
+    {
+        return Session::$usersession;
+    }
     public static function loadTemplate($file_form)
     {
         $script = $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "template/$file_form.php";
@@ -46,7 +54,7 @@ class Session
             Session::loadIndex('404.php');
         }
     }
-    function loadIndex($file)
+    public function loadIndex($file)
     {
         include $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "$file.php";
     }
@@ -60,6 +68,17 @@ class Session
     }
     public static function isAuthenticated()
     {
+        //TODO : Is it a correct way to check the user is authenticated or not?
+        if (is_object(Session::getUserSession())) {
+            return Session::getUserSession()->isValid();
+        }
         return false;
+    }
+    public static function ensureLogin()
+    {
+        if (!Session::isAuthenticated()) {
+            header('Location: /login.php');
+            die();
+        }
     }
 }
