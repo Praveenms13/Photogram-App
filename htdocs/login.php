@@ -1,19 +1,6 @@
 <?php
-include "libs/load.php";?>
-<!DOCTYPE html>
-<html lang="en">
-<?php
-loadTemplate('_head')
+include "libs/load.php"; 
+
+Session::renderPage();
+
 ?>
-
-<body>
-    <div class="loader"></div>
-    <?php
-    loadTemplate('_header');
-    loadTemplate('_loginbody');
-    loadTemplate('_footer');
-    loadTemplate('_script');
-    ?>
-</body>
-
-</html>

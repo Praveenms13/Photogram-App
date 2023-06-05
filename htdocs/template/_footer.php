@@ -1,18 +1,18 @@
 <!-- Footer -->
 <footer id="footer">
-        <p class="copyright">Made with
-            <i class="fa fa-heart"></i> By
-            <a target="_blank" title="Orbit Themes" href="http://www.praveenms.site">Praveen</a> &copy;
-            <span id="currentYear"></span> All Rights Reserved.
-        </p>
-        <div class="social">
-            <a traget="_blank" href="https://github.com/Praveenms13" title="github" target="_blank">
-                <i class="fa fa-github"></i>
-            </a>
-            <a traget="_blank" href="https://www.instagram.com/praveen.ms_13/" title="instagram" target="_blank">
-                <i class="fa fa-instagram"></i>
-            </a>
-            <!-- <a traget="_blank" href="https://facebook.com/orbitthemes" title="facebook">
+    <p class="copyright">Made with
+        <i class="fa fa-heart"></i> By
+        <a target="_blank" title="Orbit Themes" href="http://www.praveenms.site">Praveen</a> &copy;
+        <span id="currentYear"></span> All Rights Reserved.
+    </p>
+    <div class="social">
+        <a traget="_blank" href="https://github.com/Praveenms13" title="github" target="_blank">
+            <i class="fa fa-github"></i>
+        </a>
+        <a traget="_blank" href="https://www.instagram.com/praveen.ms_13/" title="instagram" target="_blank">
+            <i class="fa fa-instagram"></i>
+        </a>
+        <!-- <a traget="_blank" href="https://facebook.com/orbitthemes" title="facebook">
                 <i class="fa fa-facebook"></i>
             </a>
             <a traget="_blank" href="https://twitter.com/orbitthemes" title="twitter">
@@ -36,5 +36,5 @@
             <a traget="_blank" href="https://orbitthemes.com/blog/" title="RSS" target="_blank">
                 <i class="fa fa-rss"></i>
             </a> -->
-        </div>
-    </footer>
+    </div>
+</footer>

@@ -1,7 +1,7 @@
 <?php
 include "../libs/load.php";
 try { ?>
-<?php
+    <?php
     $signup = false;
     if (isset($_POST['username']) and isset($_POST['phone']) and isset($_POST['email']) and isset($_POST['password'])) {
         $username = $_POST['username'];
@@ -17,24 +17,57 @@ try { ?>
     }
     if ($signup) {
         if (!$error) {
-            $status = "success";
-            $error = "Sign-up Successful!, You can Login now.";
-            usersession::dispError($error, $status);
-            echo "Sign-up Successful!, You can Login now.";
-            echo "<br>Redirecting to Login Page in 3 seconds...";
-            header("Refresh: 3; url=../login.php");
+            // $status = "success";
+            // $error = "Sign-up Successful!, You can Login now.";
+            // usersession::dispError($error, $status);
+    ?>
+            <style>
+                #footer {
+                    position: fixed;
+                    bottom: 0;
+                    width: 100%;
+                }
+            </style>
+            <section class="jumbotron text-center" id="mainBanner">
+                <div class="container">
+                    <h2 class="jumbotron-heading">Signup Successful!!</h2>
+                    <h2 class="jumbotron-heading">You can Login now, Redirecting to Login Page in 5 seconds....</h2>
+                    <p>
+                        <a type="button" class="btn btn-success" href="../login.php">Skip Time and Login Now &nbsp;<i class="fa-solid fa-exclamation"></i></a>
+                    </p>
+                </div>
+            </section>
+    <?php
+            header("Refresh: 5; url=../login.php");
         } else {
+            loadTemplate('_signupbody');
             throw new Exception($error . "Please try again.");
         }
     } else {
-        loadAccess("userForm");
+        loadTemplate('_signupbody');
     }
 } catch (Exception $e) {
     $error = $e->getMessage();
     $status = "danger";
     usersession::dispError($error, $status);
-    print("Something went wrong, Please try again...");
-    print("<br>Redirecting to Signup Page in 3 seconds...");
-    header("Refresh: 3; url=../signup.php");
+    ?>
+    <section class="jumbotron text-center" id="mainBanner">
+        <div class="container">
+            <h2 class="jumbotron-heading">Signup Error Occured!!</h2>
+            <h2 class="jumbotron-heading">Error Message: <?php echo $error; ?></h2>
+            <p>
+                <a type="button" class="btn btn-success" href="../signup.php">Signup again &nbsp;<i class="fa-solid fa-exclamation"></i></a>
+
+            </p>
+        </div>
+    </section>
+    <style>
+        #footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+<?php
 }
 ?>

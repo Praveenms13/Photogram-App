@@ -24,7 +24,7 @@ try {
 
         /*this fun() will return a session id if username and password is correct
         */
-        public static function authenticate($username, $password, $fingerprint = null)//I think returns error(return statement of login)
+        public static function authenticate($username, $password, $fingerprint = null) //I think returns error(return statement of login)
         {
             $username = user::login($username, $password)['username'];
             if ($username and isset($fingerprint)) {
@@ -139,14 +139,9 @@ try {
         }
         public static function dispError($message, $status)
         { ?>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-</script>
-<div class="alert alert-<?php echo $status ?> position-fixed top-50 start-50 translate-middle">
-  <?php echo $message ?>
-</div>
+            <div class="alert alert-<?php echo $status ?> position-absolute top-20 start-50 translate-middle" style="z-index: 1000;">
+                <?php echo $message ?>
+            </div>
 
 <?php
         }

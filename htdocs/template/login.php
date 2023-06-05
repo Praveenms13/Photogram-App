@@ -38,7 +38,7 @@ try {
                     // echo "<br>Welcome " . $userclass->getUsername() . "<br>";
                     // loadAccess("access");
                     loadTemplate("_photogram");
-                    usersession::dispError("Welcome, " . $userclass->getUsername(), "success");
+                    // usersession::dispError("Welcome, " . $userclass->getUsername(), "success");
                 } else {
                     $IsValid = null;
                     Session::delete('sessionUsername');
@@ -59,10 +59,8 @@ try {
     } else {
         Session::delete('sessionUsername');
         Session::delete('session_token');
-        print("Disable adblocker for this website and try again...");
-        throw new Exception("Login Now !!.");
+        throw new Exception("Login Now !!");
     }
-
 } catch (Exception $e) {
     $error = $e->getMessage();
     $status = "danger";
@@ -72,13 +70,12 @@ try {
     if ($error == "Something went wrong, Login again...") {
         $status = "danger";
     }
-    if ($error == "User is not Authorised, Login again.."){
+    if ($error == "User is not Authorised, Login again..") {
         $status = "danger";
     }
-    if ($error == "Login again !!") {
+    if ($error == "Login Now !!") {
         $status = "primary";
     }
     usersession::dispError($error, $status);
-    print("<br>Redirecting to Login Page in 3 seconds...");
-    header("Refresh: 3; url=../login.php");
+    loadTemplate('_loginbody');
 }
