@@ -35,8 +35,9 @@ try {
                 $usersession = new usersession($token);
                 $IsValid = $usersession->isValid($token);
                 if ($IsValid) {
-                    //echo "<br>Welcome " . $userclass->getUsername() . "<br>";
-                    loadAccess("access");
+                    // echo "<br>Welcome " . $userclass->getUsername() . "<br>";
+                    // loadAccess("access");
+                    loadTemplate("_photogram");
                     usersession::dispError("Welcome, " . $userclass->getUsername(), "success");
                 } else {
                     $IsValid = null;
@@ -53,7 +54,7 @@ try {
         } else {
             Session::delete('sessionUsername');
             Session::delete('session_token');
-            throw new Exception("Something went wrong, Login again..");
+            throw new Exception("User is not Authorised, Login again..");
         }
     } else {
         Session::delete('sessionUsername');
@@ -69,6 +70,9 @@ try {
         $status = "warning";
     }
     if ($error == "Something went wrong, Login again...") {
+        $status = "danger";
+    }
+    if ($error == "User is not Authorised, Login again.."){
         $status = "danger";
     }
     if ($error == "Login again !!") {
