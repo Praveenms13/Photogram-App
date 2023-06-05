@@ -22,8 +22,16 @@ loadTemplate('_head')
         </div>
     </section>
     <?php
+    loadTemplate('_footer');
     loadTemplate('_script');
     ?>
+    <style>
+        #footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </body>
 
 </html>

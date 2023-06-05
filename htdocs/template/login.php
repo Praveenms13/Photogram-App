@@ -36,9 +36,15 @@ try {
                 $IsValid = $usersession->isValid($token);
                 if ($IsValid) {
                     // echo "<br>Welcome " . $userclass->getUsername() . "<br>";
-                    // loadAccess("access");
-                    loadTemplate("_photogram");
                     // usersession::dispError("Welcome, " . $userclass->getUsername(), "success");
+?>
+                    <main id="main" role="main">
+                        <?php
+                        Session::loadTemplate("index/photogram");
+                        Session::loadTemplate('index/cards');
+                        ?>
+                    </main>
+<?php
                 } else {
                     $IsValid = null;
                     Session::delete('sessionUsername');
@@ -77,5 +83,5 @@ try {
         $status = "primary";
     }
     usersession::dispError($error, $status);
-    loadTemplate('_loginbody');
+    Session::loadTemplate('_loginbody');
 }

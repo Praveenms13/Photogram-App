@@ -1,4 +1,7 @@
 <?php
+
+use Session as GlobalSession;
+
 class Session
 {
     public static function start()
@@ -34,17 +37,18 @@ class Session
             return $default;
         }
     }
+    public static function loadTemplate($file_form)
+    {
+        $script = $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "template/$file_form.php";
+        if (is_file($script)) {
+            include $script;
+        } else {
+            Session::loadIndex('404.php');
+        }
+    }
     function loadIndex($file)
     {
         include $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "$file.php";
-    }
-    public static function loadTemplate($file_form)
-    {
-        include $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "template/$file_form.php";
-    }
-    public static function loadAccess($file)
-    {
-        include $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "access/$file.php";
     }
     public static function renderPage()
     {
@@ -53,5 +57,9 @@ class Session
     public static function currentScript()
     {
         return basename($_SERVER['PHP_SELF'], '.php');
+    }
+    public static function isAuthenticated()
+    {
+        return false;
     }
 }

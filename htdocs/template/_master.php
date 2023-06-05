@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-loadTemplate('_head')
+Session::loadTemplate('_head')
 ?>
 
 <body>
     <div class="loader"></div>
     <?php
-    loadTemplate('_header');
-    loadTemplate(Session::currentScript());
-    loadTemplate('_footer');
-    loadTemplate('_script');
+    Session::loadTemplate('_header');
+    Session::loadTemplate(Session::currentScript());
+    Session::loadTemplate('_footer');
+    Session::loadTemplate('_script');
     ?> 
 </body>
 
