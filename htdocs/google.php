@@ -3,13 +3,13 @@ include "libs/load.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php
-loadTemplate('_head')
+Session::loadTemplate('_head')
 ?>
 
 <body>
     <div class="loader"></div>
     <?php
-    loadTemplate('_header');
+    Session::loadTemplate('_header');
     ?>
     <section class="jumbotron text-center" id="mainBanner">
         <div class="container">
@@ -22,8 +22,8 @@ loadTemplate('_head')
         </div>
     </section>
     <?php
-    loadTemplate('_footer');
-    loadTemplate('_script');
+    Session::loadTemplate('_footer');
+    Session::loadTemplate('_script');
     ?>
     <style>
         #footer {

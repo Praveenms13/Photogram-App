@@ -2,7 +2,7 @@
 <footer id="footer">
     <p class="copyright">Made with
         <i class="fa fa-heart"></i> By
-        <a target="_blank" title="Orbit Themes" href="http://www.praveenms.site">Praveen</a> &copy;
+        <a target="_blank" title="Orbit Themes" href="https://rootwitch.praveenms.site/">Praveen</a> &copy;
         <span id="currentYear"></span> All Rights Reserved.
     </p>
     <div class="social">
