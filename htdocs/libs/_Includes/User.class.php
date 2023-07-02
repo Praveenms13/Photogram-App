@@ -7,14 +7,12 @@ try {
         public $id;
         public $username;
         public $user_conn;
-
-        //all users frameworks
-        //user object can be constructed with username or userid
         public function __construct($username)
         {
             $this->username = $username;
             $this->user_conn = Database::getConnection();
-            $userQuery = "SELECT `id` FROM `auth` WHERE `username` = '$username' OR `id` = '$username'";
+            $table = get_config('UserTable');
+            $userQuery = "SELECT `id` FROM `$table` WHERE `username` = '$username' OR `id` = '$username'";
             $result = $this->user_conn->query($userQuery);
             if ($result->num_rows) {
                 $row_DB = $result->fetch_assoc();
@@ -38,13 +36,11 @@ try {
         }
         public static function check_new_user($username, $phone, $email, $password)
         {
-            //$password = md5(strrev(sha1(md5(md5($password)))));  //Security Obsecurity
-            //$password = password_hash($password, PASSWORD_DEFAULT);  //Default hashing
-            $costAmount = ['cost' => 8]; //--0.016sec for cost 8 for hashing passwords
-            //cost shld not more than 10 for a nrml server
+            $costAmount = ['cost' => 8];
             $password = password_hash($password, PASSWORD_BCRYPT, $costAmount);
             $login_conn = Database::getConnection();
-            $signup_query = "INSERT INTO `auth` (`username`, `phone`, `email`, `password`)
+            $table = get_config('UserTable');
+            $signup_query = "INSERT INTO `$table` (`username`, `phone`, `email`, `password`)
                 VALUES ('$username', '$phone', '$email', '$password');";
 
             $error = false;
@@ -58,8 +54,8 @@ try {
         }
         public static function login($username, $password)
         {
-            //$password = md5(strrev(sha1(md5(md5($password))))); //Security Obsecurity
-            $loginQuery = "SELECT * FROM `auth` WHERE `username` = '$username' OR `email` = '$username'";
+            $table = get_config('UserTable');
+            $loginQuery = "SELECT * FROM `$table` WHERE `username` = '$username' OR `email` = '$username'";
             $signup_conn = Database::getConnection();
             $result = $signup_conn->query($loginQuery);
             if ($result->num_rows == 1) {
@@ -76,12 +72,11 @@ try {
 
         private function _get_data($var)
         {
-            //print("Hello, " . $var . "<br>");
             if (!$this->conn) {
                 $this->conn = Database::getConnection();
             }
-            $dataQuery = "SELECT `$var` FROM `auth` WHERE `id` = $this->id";
-            //print("<br>" . $dataQuery . "<br");
+            $table = get_config('UserTable');
+            $dataQuery = "SELECT `$var` FROM `$table` WHERE `id` = $this->id";
             $result = $this->conn->query($dataQuery);
             if ($result and $result->num_rows) {
                 $value = $result->fetch_assoc()["$var"];
@@ -96,7 +91,8 @@ try {
             if (!$this->conn) {
                 $this->conn = Database::getConnection();
             }
-            $dataQuery = "UPDATE `auth` SET `$var` = '$data' WHERE `id` = $this->id";
+            $table = get_config('UserTable');
+            $dataQuery = "UPDATE `$table` SET `$var` = '$data' WHERE `id` = $this->id";
             //print($dataQuery);
             $result = $this->conn->query($dataQuery);
             if ($result) {

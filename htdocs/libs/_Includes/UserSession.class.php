@@ -12,7 +12,8 @@ try {
         {
             $this->conn = Database::getConnection();
             $this->token = $token;
-            $this->userQuery = "SELECT * FROM `session` WHERE `token` = '$this->token'";
+            $table = get_config('SessionTable');
+            $this->userQuery = "SELECT * FROM `$table` WHERE `token` = '$this->token'";
             $result = $this->conn->query($this->userQuery);
             if ($result->num_rows) {
                 $row_DB = $result->fetch_assoc();
@@ -20,10 +21,6 @@ try {
                 $this->uid = $row_DB['uid'];
             }
         }
-
-
-        /*this fun() will return a session id if username and password is correct
-        */
         public static function authenticate($username, $password, $fingerprint = null) //I think returns error(return statement of login)
         {
             $username = user::login($username, $password)['username'];
@@ -35,7 +32,8 @@ try {
                 $token = md5($username . $ip . $userAgent . time() . rand(0, 999));
                 $costAmount = ['cost' => 8];
                 $fingerprint = password_hash($fingerprint, PASSWORD_BCRYPT, $costAmount);
-                $query = "INSERT INTO `session` (`uid`, `token`, `login_time`, `ip`, `useragent`, `fingerPrintId` , `active`)
+                $table = get_config('SessionTable');
+                $query = "INSERT INTO `$table` (`uid`, `token`, `login_time`, `ip`, `useragent`, `fingerPrintId` , `active`)
                      VALUES ('$userobj->id', '$token', now(), '$ip', '$userAgent', '$fingerprint' , '1');";
                 $queryresult = $connection->query($query);
                 if ($queryresult) {
@@ -79,7 +77,8 @@ try {
         {
             $connection = Database::getConnection();
             $token = Session::get('sessionToken');
-            $connquery = "SELECT `login_time` FROM `session` WHERE `token` = '$token'";
+            $table = get_config('SessionTable');
+            $connquery = "SELECT `login_time` FROM `$table` WHERE `token` = '$token'";
             $result = $connection->query($connquery);
             if ($result) {
                 $sqldata = mysqli_fetch_row($connection->query($connquery));
@@ -102,12 +101,13 @@ try {
                 $this->conn = Database::getConnection();
             }
             if (isset($this->uid)) {
+                $table = get_config('SessionTable');
                 if ($this->isActive() == "1") {
                     $this->deactivate();
-                    $sql = "DELETE FROM `session` WHERE `uid` = $this->uid";
+                    $sql = "DELETE FROM `$table` WHERE `uid` = $this->uid";
                     return $this->conn->query($sql) ? true : false;
                 } else {
-                    $sql = "DELETE FROM `session` WHERE `uid` = $this->uid";
+                    $sql = "DELETE FROM `$table` WHERE `uid` = $this->uid";
                     return $this->conn->query($sql) ? true : false;
                 }
             } else {
@@ -123,7 +123,8 @@ try {
             if (!$this->conn) {
                 $this->conn = Database::getConnection();
             }
-            $sql = "UPDATE `session` SET `active` = 0 WHERE `uid`=$this->uid";
+            $table = get_config('SessionTable');
+            $sql = "UPDATE `$table` SET `active` = 0 WHERE `uid`=$this->uid";
 
             return $this->conn->query($sql) ? true : false;
         }
