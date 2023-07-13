@@ -6,7 +6,7 @@ try {
         $phone = $_POST['phone'];
         $email = $_POST['email'];
         $password = $_POST['password'];
-        $error = User::check_new_user($username, $phone, $email, $password);
+        $error = User::signup($username, $phone, $email, $password);
         if (!$error) {
             $signup = true;
         } else {
@@ -48,8 +48,9 @@ try {
     $error = $e->getMessage();
     $status = "danger";
     usersession::dispError($error, $status);
+    Session::loadTemplate('_signupbody');
     ?>
-    <section class="jumbotron text-center" id="mainBanner">
+    <!-- <section class="jumbotron text-center" id="mainBanner">
         <div class="container">
             <h2 class="jumbotron-heading">Signup Error Occured!!</h2>
             <h2 class="jumbotron-heading">Error Message: <?php echo $error; ?></h2>
@@ -58,14 +59,14 @@ try {
 
             </p>
         </div>
-    </section>
-    <style>
+    </section> -->
+    <!-- <style>
         #footer {
             position: fixed;
             bottom: 0;
             width: 100%;
         }
-    </style>
+    </style> -->
 <?php
 }
 ?>

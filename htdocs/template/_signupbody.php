@@ -26,6 +26,7 @@
           <div class="form-floating mb-3">
             <input name="password" type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
+            <p>&nbsp;Allowed Password Charecters: [A-Z,a-z,0-9,*]</p>
           </div>
           <input name="fingerprintJSid" type="hidden">
           <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign up</button>

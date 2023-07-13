@@ -95,21 +95,15 @@ try {
                 return false;
             }
         }
-        public function logout()
+        public function removeSession()
         {
             if (!$this->conn) {
                 $this->conn = Database::getConnection();
             }
             if (isset($this->uid)) {
                 $table = get_config('SessionTable');
-                if ($this->isActive() == "1") {
-                    $this->deactivate();
-                    $sql = "DELETE FROM `$table` WHERE `uid` = $this->uid";
-                    return $this->conn->query($sql) ? true : false;
-                } else {
-                    $sql = "DELETE FROM `$table` WHERE `uid` = $this->uid";
-                    return $this->conn->query($sql) ? true : false;
-                }
+                $sql = "DELETE FROM `$table` WHERE `uid` = $this->uid";
+                return $this->conn->query($sql) ? true : false;
             } else {
                 return false;
             }
