@@ -8,6 +8,7 @@ try {
         public $userQuery;
         public $data;
         public $uid;
+        // TODO :To ADD a parameterized query and statements to prevent SQL injection in all the queries
         public function __construct($token)
         {
             $this->conn = Database::getConnection();
@@ -45,6 +46,8 @@ try {
                 return false;
             }
         }
+        //Below function is used in login.php and it is used to check whether the user is valid or not
+        // Prevents Cookie Hijacking, Session Hijacking, Session Fixation, Session Expiration
         public static function authorize($token, $fingerprint = null)
         {
             $authSession = new usersession($token);

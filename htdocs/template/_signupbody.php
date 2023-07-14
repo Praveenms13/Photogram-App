@@ -4,12 +4,10 @@
     <div class="modal-content rounded-4 shadow">
       <div class="modal-header p-5 pb-4 border-bottom-0">
         <h1 class="fw-bold mb-0 fs-2">Signup</h1>
-        <span>Already have an account? <a href="login.php">login here</a>
-        </span>
-
+        <span><a href="login.php" class="btn btn-outline-primary rounded-3">login here</a></span>
       </div>
 
-      <div class="modal-body p-5 pt-0">
+      <div class="modal-body pt-0"> <!-- p-5 --> 
         <form method="POST" action="signup.php">
           <div class="form-floating mb-3">
             <input name="username" type="text" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
