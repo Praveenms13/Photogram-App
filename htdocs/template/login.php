@@ -1,5 +1,6 @@
 <?php
 try {
+    //$login_page = true;
     if (isset($_POST['username']) and isset($_POST['password'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -8,6 +9,7 @@ try {
         Session::set('sessionUsername', $username);
         Session::set('sessionFingerprintJSid', $fingerprint);
         Session::set('sessionToken', $sessionToken);
+        //$login_page = false;
     }
     if (isset($_GET['logout'])) {
         if (Session::get('sessionToken')) {
@@ -27,18 +29,21 @@ try {
             $userclass = new user($username);
             if ($userclass) {
                 $usersession = new usersession($token);
-                $IsValid = $usersession->isValid();
+                $IsValid = $usersession->isValid();   
                 if ($IsValid) {
-                    // echo "<br>Welcome " . $userclass->getUsername() . "<br>";
-                    // usersession::dispError("Welcome, " . $userclass->getUsername(), "success");
-?>
-                    <main id="main" role="main">
-                        <?php
-                        Session::loadTemplate("index/photogram");
-                        Session::loadTemplate('index/cards');
-                        ?>
-                    </main>
-<?php
+                    $redirectTo = Session::get('_redirect');
+                    $defaultRedirect = Session::loadTemplate('index');
+                    if ($redirectTo) {
+                        $defaultRedirect = $redirectTo;
+                        Session::delete('_redirect');
+                    }
+                    ?>
+                    <script>
+                        window.location.href = "<?php echo $defaultRedirect; ?>";
+                        console.log("Redirecting to <?php echo $defaultRedirect ? $defaultRedirect : "/" ?>");
+                        console.log("Session Token: <?php echo $token; ?>");
+                    </script>
+                    <?php
                 } else {
                     $IsValid = null;
                     Session::delete('sessionUsername');

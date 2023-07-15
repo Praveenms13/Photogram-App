@@ -15,17 +15,7 @@ try {
     }
     if ($signup) {
         if (!$error) {
-            // $status = "success";
-            // $error = "Sign-up Successful!, You can Login now.";
-            // usersession::dispError($error, $status);
             ?>
-            <style>
-                #footer {
-                    position: fixed;
-                    bottom: 0;
-                    width: 100%;
-                }
-            </style>
             <section class="jumbotron text-center" id="mainBanner">
                 <div class="container">
                     <h2 class="jumbotron-heading">Signup Successful!!</h2>
@@ -34,9 +24,7 @@ try {
                         <a type="button" class="btn btn-success" href="../login.php">Skip Time and Login Now &nbsp;<i class="fa-solid fa-exclamation"></i></a>
                     </p>
                 </div>
-            </section>
-    <?php
-                    header("Refresh: 5; url=../login.php");
+            </section><?php header("Refresh: 5; url=../login.php");
         } else {
             Session::loadTemplate('_signupbody');
             throw new Exception($error . "Please try again.");
@@ -50,7 +38,7 @@ try {
     usersession::dispError($error, $status);
     Session::loadTemplate('_signupbody');
     ?>
-    <!-- <section class="jumbotron text-center" id="mainBanner">
+    <section class="jumbotron text-center" id="mainBanner">
         <div class="container">
             <h2 class="jumbotron-heading">Signup Error Occured!!</h2>
             <h2 class="jumbotron-heading">Error Message: <?php echo $error; ?></h2>
@@ -59,14 +47,7 @@ try {
 
             </p>
         </div>
-    </section> -->
-    <!-- <style>
-        #footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style> -->
+    </section>
 <?php
 }
 ?>

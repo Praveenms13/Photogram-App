@@ -25,13 +25,6 @@ Session::loadTemplate('_head')
     Session::loadTemplate('_footer');
     Session::loadTemplate('_script');
     ?>
-    <style>
-        #footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
 </body>
 
 </html>

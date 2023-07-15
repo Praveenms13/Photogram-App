@@ -137,13 +137,14 @@ try {
         {
             return $this->data['fingerPrintId'];
         }
+        // TODO : To make this print the error in the login page
         public static function dispError($message, $status)
-        { ?>
-            <div class="alert alert-<?php echo $status ?> position-absolute top-20 start-50 translate-middle" style="z-index: 1000;">
-                <?php echo $message ?>
-            </div>
-
-<?php
+        {
+            ?>
+            <script>
+                console.log("<?php echo $message; ?>");
+            </script>
+            <?php
         }
     }
 } catch (Exception $e) {
@@ -169,4 +170,3 @@ try {
     }
     usersession::dispError($error, $status);
 }
-?>
