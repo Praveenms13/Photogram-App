@@ -37,17 +37,6 @@ try {
     $status = "danger";
     usersession::dispError($error, $status);
     Session::loadTemplate('_signupbody');
-    ?>
-    <section class="jumbotron text-center" id="mainBanner">
-        <div class="container">
-            <h2 class="jumbotron-heading">Signup Error Occured!!</h2>
-            <h2 class="jumbotron-heading">Error Message: <?php echo $error; ?></h2>
-            <p>
-                <a type="button" class="btn btn-success" href="../signup.php">Signup again &nbsp;<i class="fa-solid fa-exclamation"></i></a>
-
-            </p>
-        </div>
-    </section>
-<?php
+    
 }
 ?>

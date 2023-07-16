@@ -17,7 +17,7 @@
             <label for="floatingPassword">Password</label>
           </div>
           <input name="fingerprintJSid" type="hidden">
-          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign up</button>
+          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign In</button>
           <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
           <p>New to Photogram ? <a href="signup.php" class="link-primary">Signup here</a></p> 
           <hr class="my-3">

@@ -1,11 +1,13 @@
 <section class="jumbotron text-center" id="mainBanner">
     <div class="container">
-        <h1 class="jumbotron-heading">Welcome To Photogram</h1>
-        <h2 class="jumbotron-heading">Hi, <?php echo Session::getUser()->getUsername();?></h2>
-        <p class="lead text-muted">What's on your Mind !!</p>
-        <div>
-            <label for="formFileLg" class="form-label">Upload Your Memories Here !!</label>
-            <input class="form-control form-control-lg" id="formFileLg" type="file">
-        </div>
+        <h2 class="jumbotron-heading">Hi, <?php echo Session::getUser()->getUsername(); ?>, Welcome To Photogram</h2>
+        <hr class="my-3">
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <label for="formFileLg" class="form-label"><h5>What's on your Mind?  Upload Your Memories Here !!</h5></label>
+            <textarea name="up_text" placeholder="What are you upto ?" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <input type="file" name="fileToUpload" id="fileToUpload" name="up_image" class="form-control form-control-lg">
+            <hr class="my-3">
+            <input type="submit" name="submit" value="Upload" class="btn btn-success">
+        </form>
     </div>
 </section>

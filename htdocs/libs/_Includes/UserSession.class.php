@@ -137,7 +137,7 @@ try {
         {
             return $this->data['fingerPrintId'];
         }
-        // TODO : To make this print the error in the login page
+        // TODO: To make this print the error in the login page
         public static function dispError($message, $status)
         {
             ?>
