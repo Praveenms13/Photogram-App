@@ -90,7 +90,7 @@ try {
                 if (($sqltime + 60) > time()) {
                     return true;
                 } else {
-                    $sql = "UPDATE `session` SET `active` = '0' WHERE `token` = '$token'";
+                    $sql = "UPDATE $table SET `active` = '0' WHERE `token` = '$token'";
                     $connection->query($sql);   //due to this there is some glitch in login page.......
                     return false;
                 }

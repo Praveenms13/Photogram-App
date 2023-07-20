@@ -17,7 +17,7 @@ trait SQLGetterSetter
         } elseif (substr($name, 0, 3) == "set") {
             return $this->_set_data_($securestring, $arguments[0]);
         } else {
-            throw new Exception("posts::__call() -> $name, function not available");
+            throw new Exception(__CLASS__."::__call() -> $name, function not available");
         }
     }
     private function _get_data($var)
@@ -25,13 +25,17 @@ trait SQLGetterSetter
         if (!$this->conn) {
             $this->conn = Database::getConnection();
         }
-        $dataQuery = "SELECT `$var` FROM `$this->table` WHERE `id` = $this->id";
-        $result = $this->conn->query($dataQuery);
-        if ($result and $result->num_rows) {
-            $value = $result->fetch_assoc()["$var"];
-            return $value;
-        } else {
-            return null;
+        try {
+            $dataQuery = "SELECT `$var` FROM `$this->table` WHERE `id` = $this->id";
+            $result = $this->conn->query($dataQuery);
+            if ($result and $result->num_rows) {
+                $value = $result->fetch_assoc()["$var"];
+                return $value;
+            } else {
+                return null;
+            }
+        } catch (Exception $e) {
+            throw new Exception(__CLASS__."::_get_data() -> $e");
         }
     }
     private function _set_data_($var, $data)
@@ -39,13 +43,16 @@ trait SQLGetterSetter
         if (!$this->conn) {
             $this->conn = Database::getConnection();
         }
-        $dataQuery = "UPDATE `$this->table` SET `$var` = '$data' WHERE `id` = $this->id";
-        //print($dataQuery);
-        $result = $this->conn->query($dataQuery);
-        if ($result) {
-            return true;
-        } else {
-            return false;
+        try {
+            $dataQuery = "UPDATE `$this->table` SET `$var` = '$data' WHERE `id` = $this->id";
+            $result = $this->conn->query($dataQuery);
+            if ($result) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $e) {
+            throw new Exception(__CLASS__."::_set_data_() -> $e");
         }
     }
 }

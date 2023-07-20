@@ -1,4 +1,3 @@
-<pre>
 <?php
 include "libs/load.php";
 
@@ -7,5 +6,7 @@ echo $p->getOwner() . "<br>";
 echo $p->getLike_count(). "<br>";
 echo $p->getImage_uri(). "<br>";
 echo $p->getPost_text();
+
+$user = Session::getUser();
+echo $user->getEmail();
 ?>
-</pre> 
