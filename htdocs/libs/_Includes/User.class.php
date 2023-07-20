@@ -1,16 +1,23 @@
 <?php
 
+include_once $_SERVER['DOCUMENT_ROOT'] . "/libs/_traits/SQLGetterSetter.trait.php";
+
 try {
     class user
     {
+        use SQLGetterSetter;
+
         private $conn;
         public $id;
         public $username;
         public $user_conn = null;
+        public $table = null;
+
         public function __construct($username)
         {
             $this->username = $username;
             $this->user_conn = Database::getConnection();
+            $this->table = get_config('UserTable');
             $table = self::getTableName();
             $userQuery = "SELECT `id` FROM `$table` WHERE `username` = '$username' OR `id` = '$username'";
             $result = $this->user_conn->query($userQuery);
@@ -27,18 +34,6 @@ try {
         {
             $tablename = get_config('UserTable');
             return $tablename;
-        }
-
-        public function __call($name, $arguments)
-        {
-            $securestring = strtolower(preg_replace("/\B([A-Z])/", "_$1", preg_replace("/[^0-9a-zA-z]/", "", substr($name, 3))));
-            if (substr($name, 0, 3) == "get") {
-                return $this->_get_data($securestring);
-            } elseif (substr($name, 0, 3) == "set") {
-                return $this->_set_data_($securestring, $arguments[0]);
-            } else {
-                throw new Exception("Method $name does not exist");
-            }
         }
 
         // --------------INPUT CHECK Start----------------//
@@ -198,37 +193,6 @@ try {
             }
         }
 
-        private function _get_data($var)
-        {
-            if (!$this->conn) {
-                $this->conn = Database::getConnection();
-            }
-            $table = get_config('UserTable');
-            $dataQuery = "SELECT `$var` FROM `$table` WHERE `id` = $this->id";
-            $result = $this->conn->query($dataQuery);
-            if ($result and $result->num_rows) {
-                $value = $result->fetch_assoc()["$var"];
-                //print("<br>Res : " . $value);
-                return $value;
-            } else {
-                return null;
-            }
-        }
-        private function _set_data_($var, $data)
-        {
-            if (!$this->conn) {
-                $this->conn = Database::getConnection();
-            }
-            $table = get_config('UserTable');
-            $dataQuery = "UPDATE `$table` SET `$var` = '$data' WHERE `id` = $this->id";
-            //print($dataQuery);
-            $result = $this->conn->query($dataQuery);
-            if ($result) {
-                return true;
-            } else {
-                return false;
-            }
-        }
         public function setdob($year, $month, $day)
         {
             if (checkdate($month, $day, $year)) {
