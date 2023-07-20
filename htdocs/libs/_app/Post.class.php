@@ -27,16 +27,19 @@ class posts
         if (!isset($text) or !isset($imageTmp)) {
             throw new Exception("Invalid Parameters");
         }
-        if (isset($_FILES['up_image'])) {
+        if (is_file($imageTmp) and exif_imagetype($imageTmp) != false) {
             $author = Session::getUser()->getEmail();
-            $imageFileType = strtolower(pathinfo($imageTmp["name"], PATHINFO_EXTENSION));
-            $imageName = md5($author.time()) . "." . $imageFileType; #TODO: To Change the ID GEN Method
+            #TODO: To Change the ID GEN Method
+            $imageName = md5($author . time()) . image_type_to_extension(exif_imagetype($imageTmp));
             $imagePath = get_config("ImgUploadPath") . $imageName;
+            // TODO: RESUME FROM HERE, below code is going to else part 
             if (move_uploaded_file($imageTmp, $imagePath)) {
-                $query = "INSERT INTO `posts` (`post_text`, `image_uri`, `like_count`, `uploaded_time`, `owner`) #TODO: To Sanitize
+                #TODO: To Sanitize
+                $query = "INSERT INTO `posts` (`post_text`, `multi_image_uri`, `image_uri`, `like_count`, `uploaded_time`, `owner`) 
                 VALUES (
                     '$text', 
-                    'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/HelloWorld.svg/1280px-HelloWorld.svg.png', 
+                    0,
+                    '/images/ . $imageName', 
                     '0', 
                     now(), 
                     '$author'
@@ -52,7 +55,7 @@ class posts
                 throw new Exception("image not uploaded");
             }
         } else {
-            throw new Exception("image not uploaded");
+            throw new Exception("image not uploaded or some problem with image....");
         }
     }
 }

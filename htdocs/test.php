@@ -1,6 +1,6 @@
 <?php
 include "libs/load.php";
-
+echo "From Test.php";
 $p = new posts(1);
 echo $p->getOwner() . "<br>";
 echo $p->getLike_count(). "<br>";

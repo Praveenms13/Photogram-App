@@ -3,12 +3,20 @@ RewriteBase /
 
 RewriteRule ^/?images/([^/]+)?$ images.php?name=$1 [L,QSA,NC]
 
+RewriteRule ^/?login?$ login.php [L,QSA,NC]
+RewriteRule ^/?signup?$ signup.php [L,QSA,NC]
+RewriteRule ^/?index?$ index.php [L,QSA,NC]
+RewriteRule ^/?settings?$ settings.php [L,QSA,NC]
+RewriteRule ^/?test?$ test.php [L,QSA,NC]
+RewriteRule ^/?upload?$ upload.php [L,QSA,NC]
+RewriteRule ^/?google?$ google.php [L,QSA,NC]
+RewriteRule ^/?404?$ 404.php [L,QSA,NC]
 ## For general files, if not above, just remove .php
 
 # Redirect external .php requests to 404 Error (Pretending that I am not doing PHP)
-RewriteCond %{THE_REQUEST} ^(.+)\.php([#?][^\ ]*)?\ HTTP/
-RewriteRule ^(.+)\.php$ "http://%{HTTP_HOST}/$1" [R=404,L]
+# RewriteCond %{THE_REQUEST} ^(.+)\.php([#?][^\ ]*)?\ HTTP/
+# RewriteRule ^(.+)\.php$ "http://%{HTTP_HOST}/$1" [R=404,L]
 
 # Resolve .php file for extensionless php urls
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^([^/.]+)$ $1.php [L]
+# RewriteCond %{REQUEST_FILENAME}\.php -f
+# RewriteRule ^([^/.]+)$ $1.php [L]
