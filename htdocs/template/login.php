@@ -4,22 +4,24 @@ try {
     if (isset($_POST['username']) and isset($_POST['password'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $fingerprint = $_POST['fingerprintJSid'];
+        //TODO:  Replace with the dummy fingerprint for your user to check it in a Postman.
+        $fingerprint = "havdhwv641"; //$_POST['fingerprintJSid'];
         $sessionToken = usersession::authenticate($username, $password, $fingerprint);
         Session::set('sessionUsername', $username);
         Session::set('sessionFingerprintJSid', $fingerprint);
         Session::set('sessionToken', $sessionToken);
         //$login_page = false;
     }
-    if (isset($_GET['logout'])) {
-        if (Session::get('sessionToken')) {
-            $token = Session::get('sessionToken');
-            $usersession = new usersession($token);
-            $usersession->logout();
-            Session::delete('sessionUsername');
-            Session::delete('sessionToken');
-        }
-    }
+    // TODO: Below Code will no longer be to remove it soon if not required
+    // if (isset($_GET['logout'])) {
+    //     if (Session::get('sessionToken')) {
+    //         $token = Session::get('sessionToken');
+    //         $usersession = new usersession($token);
+    //         $usersession->removeSession();
+    //         Session::delete('sessionUsername');
+    //         Session::delete('sessionToken');
+    //     }
+    // }
 
     $token = Session::get('sessionToken');
     if ($token) {
@@ -29,7 +31,7 @@ try {
             $userclass = new user($username);
             if ($userclass) {
                 $usersession = new usersession($token);
-                $IsValid = $usersession->isValid();   
+                $IsValid = $usersession->isValid();
                 if ($IsValid) {
                     $redirectTo = Session::get('_redirect');
                     $defaultRedirect = Session::loadTemplate('index');

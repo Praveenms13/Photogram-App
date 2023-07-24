@@ -91,7 +91,7 @@ try {
                     return true;
                 } else {
                     $sql = "UPDATE $table SET `active` = '0' WHERE `token` = '$token'";
-                    $connection->query($sql);   //due to this there is some glitch in login page.......
+                    $connection->query($sql);
                     return false;
                 }
             } else {
