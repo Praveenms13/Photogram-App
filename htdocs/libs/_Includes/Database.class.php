@@ -1,4 +1,5 @@
 <?php
+// namespace praveen_db; if you want to use namespace then you have to use it in all files like /mysqli
 
 class Database
 {

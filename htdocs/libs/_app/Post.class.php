@@ -1,9 +1,11 @@
 <?php
 
 include_once $_SERVER['DOCUMENT_ROOT'] . "/libs/_traits/SQLGetterSetter.trait.php";
+use Carbon\Carbon; // including a namespace
+
 class posts
 {
-    use SQLGetterSetter;
+    use SQLGetterSetter; // including a trait
     public $id;
     public $author;
     public $text;
@@ -29,30 +31,54 @@ class posts
         }
         if (is_file($imageTmp) and exif_imagetype($imageTmp) != false) {
             $author = Session::getUser()->getEmail();
+            $authorId =  Session::getUser()->getId();
             // TODO: To Change the ID GEN Method
             $imageName = md5($author . time()) . image_type_to_extension(exif_imagetype($imageTmp));
             $imagePath = get_config("ImgUploadPath") . $imageName;
             if (move_uploaded_file($imageTmp, $imagePath)) {
-                $imageUri = "/images/$imageName";
+                $imageUri = "/files/$imageName";
                 $multiImageUri = '0';
                 $likeCount = 0;
-                $text = mysqli_real_escape_string(Database::getConnection(), $text); //TODO: TO sanitize with other methods
+                $text = mysqli_real_escape_string(Database::getConnection(), $text); // TODO: Sanitize with other methods
                 $table = get_config('PostTable');
-                $query = "INSERT INTO `$table` (`post_text`, `multi_image_uri`, `image_uri`, `like_count`, `uploaded_time`, `owner`) 
-                VALUES (?, ?, ?, ?, now(), ?)";
-                $stmt = Database::getConnection()->prepare($query);
-                $stmt->bind_param("sssis", $text, $multiImageUri, $imageUri, $likeCount, $author);
-
-                if ($stmt->execute()) {
-                    echo "Post Uploaded and Registered Successfully";
-                    $id = mysqli_insert_id(Database::getConnection());
-                    return new posts($id);
+                $query = "INSERT INTO `$table` (`author`, `author_id`, `post_text`, `image_uri`, `multi_image_uri`, `like_count`, `uploaded_time`) 
+                          VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
+                $connection = Database::getConnection();
+                $statement = $connection->prepare($query);
+                $statement->bind_param("ssssii", $author, $authorId, $text, $imageUri, $multiImageUri, $likeCount);            
+                $result = $statement->execute();
+                if ($result) {
+                    echo "Post Registered Successfully...";
+                    return true;
                 } else {
-                    throw new Exception("Database Error");
+                    throw new Exception("Error in Registering Post");
                 }
             }
+            
         } else {
             throw new Exception("image not uploaded or some problem with image....");
+        }
+    }
+
+    public static function getAllPosts()
+    {
+        $table = get_config('PostTable');
+        $query = "SELECT * FROM `$table` ORDER BY `uploaded_time` DESC";
+        $result = Database::getConnection()->query($query);
+        if ($result->num_rows > 0) {
+            $posts = array();
+            return iterator_to_array($result);
+            // or
+            // while ($row = $result->fetch_assoc()) {
+            //     $post = new posts($row['id']);
+            //     $post->setAuthor($row['owner']);
+            //     $post->setText($row['post_text']);
+            //     $post->setImageTmp($row['image_uri']);
+            //     $post->setDate($row['uploaded_time']);
+            //     array_push($posts, $post);
+            // }
+        } else {
+            return null;
         }
     }
 }

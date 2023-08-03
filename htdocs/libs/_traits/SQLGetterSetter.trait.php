@@ -25,13 +25,13 @@ trait SQLGetterSetter
         if (!$this->conn) {
             $this->conn = Database::getConnection();
         }
-        try {
+        try { 
             $dataQuery = "SELECT `$var` FROM `$this->table` WHERE `id` = $this->id";
             $result = $this->conn->query($dataQuery);
-            if ($result and $result->num_rows) {
+            if ($result->num_rows) {
                 $value = $result->fetch_assoc()["$var"];
                 return $value;
-            } else {
+            } else { 
                 return null;
             }
         } catch (Exception $e) {

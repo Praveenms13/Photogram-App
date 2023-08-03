@@ -1,2 +1,5 @@
-
 WorkSpaceConfiguration/
+vendor/
+composer.phar
+composer.lock
+composer.json

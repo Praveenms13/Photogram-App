@@ -87,7 +87,7 @@ try {
                 $sqldata = mysqli_fetch_row($connection->query($connquery));
                 $sqltime = strtotime($sqldata[0]);
                 // echo time() . " "  . "sqltime" . $sqltime + 10;
-                if (($sqltime + 60) > time()) {
+                if (($sqltime + 600) > time()) {
                     return true;
                 } else {
                     $sql = "UPDATE $table SET `active` = '0' WHERE `token` = '$token'";

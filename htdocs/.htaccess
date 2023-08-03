@@ -1,7 +1,7 @@
 RewriteEngine On
 RewriteBase /
 
-RewriteRule ^/?images/([^/]+)?$ images.php?name=$1 [L,QSA,NC]
+RewriteRule ^/?files/([^/]+)?$ files.php?name=$1 [L,QSA,NC]
 
 RewriteRule ^/?login?$ login.php [L,QSA,NC]
 RewriteRule ^/?signup?$ signup.php [L,QSA,NC]

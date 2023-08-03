@@ -19,7 +19,7 @@ try {
             $this->user_conn = Database::getConnection();
             $this->table = get_config('UserTable');
             $table = self::getTableName();
-            $userQuery = "SELECT `id` FROM `$table` WHERE `username` = '$username' OR `id` = '$username'";
+            $userQuery = "SELECT `id` FROM `$table` WHERE `username` = '$username' OR `id` = '$username' OR `email` = '$username'";
             $result = $this->user_conn->query($userQuery);
             if ($result->num_rows) {
                 $row_DB = $result->fetch_assoc();

@@ -1,5 +1,4 @@
 <?php
-
 include_once "libs/load.php";
 $upload_path = get_config('ImgUploadPath');
 $fname = $_GET['name'];
