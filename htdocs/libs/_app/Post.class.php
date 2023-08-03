@@ -48,10 +48,9 @@ class posts
                 $statement->bind_param("ssssii", $author, $authorId, $text, $imageUri, $multiImageUri, $likeCount);            
                 $result = $statement->execute();
                 if ($result) {
-                    echo "Post Registered Successfully...";
                     return true;
                 } else {
-                    throw new Exception("Error in Registering Post");
+                    return false;
                 }
             }
             

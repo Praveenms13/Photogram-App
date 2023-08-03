@@ -18,20 +18,24 @@
                     $postObj = new posts($post['id']);
                     $uploadedTime = Carbon::parse($postObj->getUploadedTime());
                     $uploadedTime = $uploadedTime->diffForHumans();
-                    $author = $postObj->getAuthor();
-                    $user = new user($author);
+                    $authorEmail = $postObj->getAuthor();
+                    $user = new user($authorEmail);
                     $author = $user->getUsername();
                     ?> 
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
                         <img class="card-img-top" src="<?php echo $postObj->getImageUri(); ?>" alt="image">
                         <div class="card-body">
-                            <h7>@<?php echo $author ?></h7>
+                            <h7>@<?php echo $author ?></h7>  
                             <p class="card-text"><?php echo $postObj->getPostText(); ?></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Like</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                                    <button type="button" class="btn btn-sm btn-outline-primary">Like</button>
+                                    <button type="button" class="btn btn-sm btn-outline-success">Share</button>
+                                    <?php
+                                        if (Session::isOwner($user->getEmail())) {?>
+                                            <button type="button" class="btn btn-sm btn-outline-danger">Delete</button><?php
+                                        } ?>
                                 </div>
                                 <small class="text-muted"><?php echo $uploadedTime; ?></small>
                             </div>

@@ -35,7 +35,7 @@ class Session
             return $_SESSION[$key];
         } else {
             return $default;
-        }
+        } 
     }
     public static function getUser()
     {
@@ -44,6 +44,23 @@ class Session
     public static function getUserSession()
     {
         return Session::$usersession;
+    }
+    /**
+     * 1. Takes an user Email as parameter also can take user object
+     * 2. But it is recommended to use email
+     * 3. Checks if the user is authenticated or not
+     * 4. If authenticated, checks if the user is owner of the session
+     * 5. If owner(checks session user has same email), returns true
+     * 6. Else returns false
+     */
+    public static function isOwner($user)
+    {
+        if (Session::isAuthenticated()) {
+            if (Session::getUser()->getEmail() == $user) {
+                return true;
+            }
+        }
+        return false;
     }
     public static function loadTemplate($file_form)
     {
