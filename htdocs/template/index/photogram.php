@@ -29,7 +29,7 @@ try {
             <textarea name="up_text" placeholder="What are you upto ?" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             <input type="file" id="up_image" name="up_image" class="form-control form-control-lg" accept="image/*">
             <hr class="my-3">
-            <input type="submit" name="submit" value="Upload" class="btn btn-success">
+            <input type="submit" name="submit" value="Share Memory" class="btn btn-success">
         </form>
     </div>
 </section>

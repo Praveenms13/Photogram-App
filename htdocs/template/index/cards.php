@@ -6,7 +6,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" data-masonry='{"percentPosition": true }'>
             <?php
             $posts = posts::getAllPosts();
             use Carbon\Carbon;
@@ -22,9 +22,9 @@
                     $user = new user($authorEmail);
                     $author = $user->getUsername();
                     ?> 
-                <div class="col-md-4">
+                <div class="col-lg-4 mb-4">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" src="<?php echo $postObj->getImageUri(); ?>" alt="image">
+                        <img class="card-img-top" src="<?php echo $postObj->getImageUri(); ?>" alt="image" width="100%" height="100%">
                         <div class="card-body">
                             <h7>@<?php echo $author ?></h7>  
                             <p class="card-text"><?php echo $postObj->getPostText(); ?></p>
