@@ -45,15 +45,16 @@ class posts
                           VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)";
                 $connection = Database::getConnection();
                 $statement = $connection->prepare($query);
-                $statement->bind_param("ssssii", $author, $authorId, $text, $imageUri, $multiImageUri, $likeCount);            
+                $statement->bind_param("ssssii", $author, $authorId, $text, $imageUri, $multiImageUri, $likeCount);
                 $result = $statement->execute();
                 if ($result) {
                     return true;
                 } else {
                     return false;
                 }
+            } else {
+                throw new Exception("image not uploaded or some problem with image....");
             }
-            
         } else {
             throw new Exception("image not uploaded or some problem with image....");
         }

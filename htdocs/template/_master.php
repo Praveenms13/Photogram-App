@@ -3,7 +3,6 @@
 <?php
 Session::loadTemplate('_head')
 ?>
-
 <body>
     <div class="loader"></div>
     <?php
@@ -12,6 +11,7 @@ Session::loadTemplate('_head')
     Session::loadTemplate('_footer');
     Session::loadTemplate('_script');
     ?>
+
 </body>
 
 </html>
