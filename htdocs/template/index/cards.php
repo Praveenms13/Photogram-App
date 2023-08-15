@@ -6,7 +6,7 @@
             </div>
         </div>
 
-        <div class="row" data-masonry='{"percentPosition": true }'>
+        <div class="row" id="masonry-area">
             <?php
             $posts = posts::getAllPosts();
 
@@ -22,7 +22,7 @@
                     $authorEmail = $postObj->getAuthor();
                     $user = new user($authorEmail);
                     $author = $user->getUsername();
-            ?>
+                    ?>
                     <div class="col-lg-4 mb-4">
                         <div class="card mb-4 box-shadow">
                             <img class="card-img-top" src="<?php echo $postObj->getImageUri(); ?>" alt="image" width="100%" height="100%">
@@ -34,9 +34,9 @@
                                         <button type="button" class="btn btn-sm btn-outline-primary">Like</button>
                                         <button type="button" class="btn btn-sm btn-outline-success">Share</button>
                                         <?php
-                                        if (Session::isOwner($user->getEmail())) { ?>
+                                                if (Session::isOwner($user->getEmail())) { ?>
                                             <button type="button" class="btn btn-sm btn-outline-danger">Delete</button><?php
-                                                                                                                    } ?>
+                                                } ?>
                                     </div>
                                     <small class="text-muted"><?php echo $uploadedTime; ?></small>
                                 </div>
@@ -44,21 +44,10 @@
                         </div>
                     </div>
             <?php }
-            } ?>
+                } ?>
         </div>
     </div>
 </div>
 <a href="#" class="btn btn-primary scrollUp">
     <i class="fa fa-arrow-circle-o-up"></i>
 </a>
-<!-- this will happen when whole .album class tag is loaded completed  -->
-<!-- to execute this we need masonry, imageuploaded lib, jquery cdn -->
-<script>
-    $('.album').imagesLoaded({
-            // options...
-        },     
-        function() {
-            console.log('Images have loaded');
-        }
-    );
-</script>
