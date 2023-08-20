@@ -1,23 +1,3 @@
-/* Developed By Praveen on Last Sync: 20/8/2023 @ 11:48:8*/
-// this will happen when whole .album class tag is loaded completed
-// to execute this we need masonry, imageuploaded lib, jquery cdn
-
-var $grid = $("#masonry-area").masonry({
-  percentPosition: true,
-});
-$grid.imagesLoaded().progress(function () {
-  $grid.masonry("layout");
-});
-$.post(
-  "/api/posts/count",
-  {
-    id: 54,
-  },
-  function (data) {
-    $("#total-posts").html("Total Posts: " + data.Post_Count);
-  }
-);
-
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -612,5 +592,3 @@ function display_dialog(bt_name, content, func) {
   ]);
   d.show();
 }
-
-//# sourceMappingURL=script.js.map

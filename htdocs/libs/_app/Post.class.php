@@ -68,15 +68,19 @@ class posts
         if ($result->num_rows > 0) {
             $posts = array();
             return iterator_to_array($result);
-            // or
-            // while ($row = $result->fetch_assoc()) {
-            //     $post = new posts($row['id']);
-            //     $post->setAuthor($row['owner']);
-            //     $post->setText($row['post_text']);
-            //     $post->setImageTmp($row['image_uri']);
-            //     $post->setDate($row['uploaded_time']);
-            //     array_push($posts, $post);
-            // }
+        } else {
+            return null;
+        }
+    }
+
+    public static function countAllPosts()
+    {
+        $table = get_config('PostTable');
+        $query = "SELECT COUNT(*) as count FROM `$table` ORDER BY `uploaded_time` DESC";
+        $result = Database::getConnection()->query($query);
+        if ($result->num_rows > 0) {
+            $posts = array();
+            return iterator_to_array($result)[0]['count'];
         } else {
             return null;
         }

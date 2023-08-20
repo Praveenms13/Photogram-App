@@ -3,6 +3,9 @@ RewriteBase /
 
 RewriteRule ^/?files/([^/]+)?$ files.php?name=$1 [L,QSA,NC]
 
+RewriteRule ^/?api/([^/]+)?$ api.php?method=$1 [L,QSA,NC]
+RewriteRule ^/?api/([^/]+)/([^/]+)?$ api.php?method=$2&namespace=$1 [L,QSA,NC]
+
 RewriteRule ^/?login?$ login.php [L,QSA,NC]
 RewriteRule ^/?signup?$ signup.php [L,QSA,NC]
 RewriteRule ^/?index?$ index.php [L,QSA,NC]

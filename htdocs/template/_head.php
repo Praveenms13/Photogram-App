@@ -18,4 +18,6 @@
     <link rel="stylesheet" href="dist/font-awesome/css/font-awesome.min.css" />
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="csss/main.min.css">
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>

@@ -1,7 +1,6 @@
 <?php
 include "libs/load.php";
 
-// TODO : To fix the bug of logout button once logged in (Logout button is not Showing)
 if (isset($_GET['logout'])) {
     echo "Logging Out...";
     if (Session::isset('sessionToken')) {
