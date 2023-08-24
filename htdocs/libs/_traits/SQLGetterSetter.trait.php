@@ -17,7 +17,7 @@ trait SQLGetterSetter
         } elseif (substr($name, 0, 3) == "set") {
             return $this->_set_data_($securestring, $arguments[0]);
         } else {
-            throw new Exception(__CLASS__."::__call() -> $name, function not available");
+            throw new Exception(__CLASS__ . "::__call() -> $name, function not available");
         }
     }
     private function _get_data($var)
@@ -25,17 +25,17 @@ trait SQLGetterSetter
         if (!$this->conn) {
             $this->conn = Database::getConnection();
         }
-        try { 
+        try {
             $dataQuery = "SELECT `$var` FROM `$this->table` WHERE `id` = $this->id";
             $result = $this->conn->query($dataQuery);
             if ($result->num_rows) {
                 $value = $result->fetch_assoc()["$var"];
                 return $value;
-            } else { 
-                return null;
+            } else {
+                return "No Data Found";
             }
         } catch (Exception $e) {
-            throw new Exception(__CLASS__."::_get_data() -> $e");
+            throw new Exception(__CLASS__ . "::_get_data() -> $e");
         }
     }
     private function _set_data_($var, $data)
@@ -52,7 +52,33 @@ trait SQLGetterSetter
                 return false;
             }
         } catch (Exception $e) {
-            throw new Exception(__CLASS__."::_set_data_() -> $e");
+            throw new Exception(__CLASS__ . "::_set_data_() -> $e");
+        }
+    }
+
+    public function delete()
+    {
+        if (!$this->conn) {
+            $this->conn = Database::getConnection();
+        }
+        try {
+            // Delete the image from the server before deleting the post
+            $imageUri = $this->getImageUri();
+            $imageUri = substr($imageUri, 7);
+            $imagePath = $_SERVER['DOCUMENT_ROOT'] . "/../photogram_uploads/" . $imageUri;
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+            // Delete the post from the database
+            $dataQuery = "DELETE FROM `$this->table` WHERE `id` = $this->id";
+            $result = $this->conn->query($dataQuery);
+            if ($result) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $e) {
+            throw new Exception(__CLASS__ . "::_set_data_() -> $e");
         }
     }
 }
