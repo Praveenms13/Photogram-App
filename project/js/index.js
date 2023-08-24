@@ -58,7 +58,6 @@ $(".btn-delete").click(function () {
   d.show();
 });
 
-
 // TODO: To make it more efficient, we can use this function to check if all tasks are completed
 function continueAfterTasks() {
   if (allTasksCompleted()) {
