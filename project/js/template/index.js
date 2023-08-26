@@ -7,20 +7,28 @@ var $grid = $("#masonry-area").masonry({
 $grid.imagesLoaded().progress(function () {
   $grid.masonry("layout");
 });
-$.post(
-  "/api/posts/count",
-  {
-    id: 54,
-  },
-  function (data) {
-    console.log(data.Post_Count);
-    $("#total-posts").html("Total Posts: " + data.Post_Count);
-  }
-);
+// $.post(
+//   "/api/posts/count",
+//   {
+//     id: 67,
+//   },
+//   function (data) {
+//     console.log(data.Post_Count);
+//     $("#total-posts").html("Total Posts: " + data.Post_Count);
+//   }
+// );
 $(".btn-delete").click(function () {
   post_id = $(this).parent().attr("data-id");
   d = new Dialog("Delete Post", "Are you sure you want to delete this post?");
   d.setButtons([
+    {
+      name: "Cancel",
+      class: "btn-secondary",
+      onClick: function (event) {
+        $(event.data.modal).modal("hide");
+        continueAfterTasks();
+      },
+    },
     {
       name: "Delete",
       class: "btn-danger",
@@ -31,8 +39,8 @@ $(".btn-delete").click(function () {
             id: post_id,
           },
           function (data, textSuccess) {
-            console.log(data);
-            console.log(textSuccess);
+            // console.log(data);
+            // console.log(textSuccess);
             if (textSuccess == "success") {
               console.log("Post Deleted Successfully");
               $(`#post-${post_id}`).remove();
@@ -43,15 +51,6 @@ $(".btn-delete").click(function () {
           }
         );
         $(event.data.modal).modal("hide");
-      },
-    },
-    {
-      name: "Cancel",
-      class: "btn-secondary",
-      onClick: function (event) {
-        console.log("Post Not Deleted");
-        $(event.data.modal).modal("hide");
-        continueAfterTasks();
       },
     },
   ]);
