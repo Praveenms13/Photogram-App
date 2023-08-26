@@ -358,237 +358,86 @@ var CryptoJS =
   r.HmacMD5 = t._createHmacHelper(q);
 })(Math);
 
-class Dialog {
-  /**
-   * Constructs a dialog with the given title and message.
-   *
-   * If options is a string, it is assumed to be the size of the dialog.
-   * If options is an object, it is assumed to be a list of options.
-   *
-   * @param {string} title
-   * @param {string} message
-   * @param {string|object|null} options
-   */
-
-  constructor(title, message, options = null) {
-    if (typeof title === "undefined") {
-      title = "";
-    }
-
-    if (typeof message === "undefined") {
-      message = "";
-    }
-
+class Toast {
+  constructor(
+    title,
+    subtitle,
+    message,
+    options = undefined,
+    icon = "https://img.icons8.com/fluency-systems-regular/48/alarm--v1.png"
+  ) {
+    this.title = title;
+    this.subtitle = subtitle;
+    this.message = message;
+    // Default options
     this.options = {
-      framework: "bootstrap",
-      clone_id: "dummy-dialog-modal",
+      placement: "top-right",
     };
-
-    if (typeof options === "undefined") {
-      this.options.size = "medium";
-    }
-
-    if (typeof options === "object") {
-      this.options = { ...this.options, options };
-    }
-
-    if (typeof options === "string") {
-      this.options.size = options;
-    }
-
-    // console.log(this.options);
-
-    (this.title = title), (this.message = message);
-    this.clone = $("#" + this.options.clone_id).clone();
-    this.cloneId = CryptoJS.MD5(Math.random() + "").toString();
-    this.buttons = "default";
-
-    this.bs_framework = {
-      dismissattr: "data-bs-dismiss",
-      eventaction: "bs.modal",
+    // If options is not undefined, then it will override the default options
+    this.options = { ...this.options, ...options };
+    this.icon = icon;
+    this.id = "toast_" + CryptoJS.MD5(Math.random() + "").toString();
+    this.placement_position = {
+      "top-left": "top-0 start-0",
+      "top-center": "top-0 start-50 translate-middle-x",
+      "top-right": "top-0 end-0",
+      "middle-left": "top-50 start-0 translate-middle-y",
+      "middle-center": "top-50 start-50 translate-middle",
+      "middle-right": "top-50 end-0 translate-middle-y",
+      "bottom-left": "bottom-0 start-0",
+      "bottom-center": "bottom-0 start-50 translate-middle-x",
+      "bottom-right": "bottom-0 end-0",
     };
+    this.domInit();
+  }
 
-    this.coreui_framework = {
-      dismissattr: "data-coreui-dismiss",
-      eventaction: "coreui.modal",
-    };
-
-    if (this.options.framework == "bootstrap") {
-      this.framework = this.bs_framework;
-    } else if (this.options.framework == "coreui") {
-      this.framework = this.coreui_framework;
+  domInit() {
+    this.placement_class = this.placement_position[this.options.placement];
+    // if already exists, it will not create again - if condition
+    if ($("#toast_" + this.options.placement).length == 0) {
+      $("body").append(`
+        <div id="toast_${this.options.placement}" class="toast-container position-fixed ${this.placement_class}">
+        </div>
+      `);
     }
   }
 
-  setEvents(events) {
-    this.events = events;
+  show() {
+    var toast_template = `
+      <div class="toast" id="${this.id}" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="..." class="rounded me-2" alt="...">
+            <strong class="me-auto">${this.title}</strong>
+            <small class="text-body-secondary">${this.subtitle}</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            ${this.message}
+        </div>
+      </div>
+      `;
+    // ------------------------------------------------------------
+    // $(`#toast_${this.options.placement }`).append(toast_template);
+    // $(document.getElementById(`${this.id}`)).on("hidden.bs.toast", function () {
+    //   $(this).remove();
+    // });
+    // $(`#${this.id}`).toast("show");
+    // ------------------------------------------------------------
+    // above code is modified to below code to send the options
+    // ------------------------------------------------------------
+    $(`#toast_${this.options.placement}`).append(toast_template);
+    var toast_dom = new bootstrap.Toast(
+      document.getElementById(`${this.id}`),
+      this.options
+    );
+    $(document.getElementById(`${this.id}`)).on("hidden.bs.toast", function () {
+      $(this).remove();
+    });
+    toast_dom.show();
+    // ------------------------------------------------------------
+    //to execute the above code, go to console and type:
+    // new Toast("Danger", "lab is throttling", "shdcvdhc hd c dc dhc ", {
+    //   "placement": "middle-right", delay: 500
+    // }).show()
   }
-
-  renderButtons() {
-    for (var button in this.buttons) {
-      var buttonElement = document.createElement("button");
-      var id = CryptoJS.MD5(Math.random() + "").toString();
-      $(buttonElement).attr("id", id);
-      $(buttonElement).prop("type", "button");
-      $(buttonElement).addClass("btn");
-      if (typeof this.buttons[button]["class"] !== "undefined") {
-        $(buttonElement).addClass(this.buttons[button]["class"]);
-      } else {
-        $(buttonElement).addClass("btn-primary");
-      }
-
-      if (typeof this.buttons[button]["dismiss"] !== "undefined") {
-        if (this.buttons[button]["dismiss"] == true) {
-          $(buttonElement).attr(this.framework.dismissattr, "modal");
-        }
-      }
-      if (typeof this.buttons[button]["name"] !== "undefined") {
-        $(buttonElement).html(this.buttons[button]["name"]);
-      } else {
-        $(buttonElement).html("Unnamed");
-      }
-
-      $("#" + this.cloneId + " .modal-footer").append(
-        buttonElement.outerHTML + "&nbsp;"
-      );
-      //on functuonality can be extended
-      if (typeof this.buttons[button]["onClick"] === "function") {
-        $("button#" + id).click(
-          { modal: this.clone },
-          this.buttons[button]["onClick"]
-        );
-      }
-    }
-  }
-
-  assignEvents(events) {
-    if (typeof events !== "undefined") {
-      for (var event in events) {
-        if (
-          $.inArray(events[event].action, [
-            "show",
-            "shown",
-            "hide",
-            "hidden",
-          ]) == -1
-        ) {
-          console.error(
-            "Invalid event " +
-              events[event].action +
-              ". Valid events are show, shown, hide, hidden."
-          );
-          continue;
-        } else {
-          var action = events[event].action + "." + this.framework.eventaction;
-          if (typeof events[event].callback === "function") {
-            var callback = events[event].callback;
-            $("#" + this.cloneId).on(
-              action,
-              {
-                target: this,
-                modal: this.clone,
-              },
-              callback
-            );
-          }
-        }
-      }
-    }
-  }
-
-  setButtons(buttons) {
-    this.buttons = buttons;
-  }
-
-  show(theme = "warning") {
-    this.clone.prop("id", this.cloneId);
-    this.clone.appendTo("#modalsGarbage");
-    if (typeof this.options.size !== "undefined") {
-      // console.log("setting size: "+this.options.size);
-      if (this.options.size === "large") {
-        $("#" + this.cloneId + " .modal-dialog").addClass("modal-lg");
-      } else if (this.options.size === "small") {
-        $("#" + this.cloneId + " .modal-dialog").addClass("modal-sm");
-      } else if (this.options.size === "xlarge") {
-        $("#" + this.cloneId + " .modal-dialog").addClass("modal-xl");
-      } else if (this.options.size === "medium") {
-        $("#" + this.cloneId + " .modal-dialog").addClass("modal-md");
-      }
-    }
-    this.assignEvents(this.events);
-    $("#" + this.cloneId).addClass();
-    $("#" + this.cloneId + " .modal-title").html(this.title);
-    $("#" + this.cloneId + " .modal-body").html(this.message);
-    $("#" + this.cloneId + " .modal-footer").html("");
-    if (this.buttons === "default") {
-      $("#" + this.cloneId + " .modal-footer").html(
-        `<button type="button" class="btn btn-${theme}" ${this.framework.dismissattr}="modal">Okay</button>`
-      );
-    } else {
-      this.renderButtons();
-    }
-
-    if (this.options.framework == "bootstrap") {
-      var myModal = new bootstrap.Modal(document.getElementById(this.cloneId), {
-        keyboard: false,
-      });
-      myModal.show();
-
-      $("#" + this.cloneId).on(
-        "hidden.bs.modal",
-        {
-          target: this,
-          modal: this.clone,
-        },
-        function (event) {
-          // console.log("Hidden bs modal event");
-          $("#" + event.data.target.cloneId).remove();
-        }
-      );
-    } else if (this.options.framework == "coreui") {
-      var dg = new coreui.Modal(document.getElementById(this.cloneId), {
-        keyboard: false,
-      });
-      dg.show();
-      $("#" + this.cloneId).on(
-        "hidden.coreui.modal",
-        {
-          target: this,
-          modal: this.clone,
-        },
-        function (event) {
-          //console.log(event);
-          $("#" + event.data.target.cloneId).remove();
-        }
-      );
-      return dg;
-    }
-  }
-}
-
-function dialog(title, message) {
-  d = new Dialog(title, message);
-  d.show();
-}
-
-function display_dialog(bt_name, content, func) {
-  d = new Dialog(content);
-  d.setButtons([
-    {
-      name: "Cancel",
-      class: "btn-secondary",
-      onClick: function (event) {
-        $(event.data.modal).modal("hide");
-      },
-    },
-    {
-      name: bt_name,
-      class: "btn-danger btn-loading",
-      onClick: function (event) {
-        func();
-        $(event.data.modal).modal("hide");
-      },
-    },
-  ]);
-  d.show();
 }

@@ -2,22 +2,23 @@
 
 try {
     ${basename(__FILE__, ".php")} = function () {
-?>
+        $id = "model_" . md5((string)microtime()); ?>
+        <br>
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#demoModel">
-            Launch demo modal
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#<?php echo $id ?>">
+            Launch demo modal #<?php echo $id ?>
         </button>
 
         <!-- Modal -->
-        <div class="modal fade" id="demoModel" tabindex="-1" aria-labelledby="demoModelLabel" aria-hidden="true">
+        <div class="modal fade" id="<?php echo $id ?>" tabindex="-1" aria-labelledby="<?php echo $id ?>Label" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="demoModelLabel">Modal title</h1>
+                        <h1 class="modal-title fs-5" id="<?php echo $id ?>Label">Modal title</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        This is loaded from Modal API, time is <?php echo date("Y-m-d H:i:s") ?>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
