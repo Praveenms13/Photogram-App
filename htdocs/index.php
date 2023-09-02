@@ -1,6 +1,5 @@
 <?php
 include "libs/load.php";
-
 if (isset($_GET['logout'])) {
     echo "Logging Out...";
     if (Session::isset('sessionToken')) {

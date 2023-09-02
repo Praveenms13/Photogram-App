@@ -11,6 +11,7 @@ include_once "_Includes/WebAPI.class.php";
 include_once "_app/Post.class.php";
 include_once "_Includes/REST-API.class.php";
 include_once "_Includes/API.class.php";
+include_once "_app/Like.class.php";
 // include "_traits/SQLGetterSetter.trait.php";
 //------------------------------------------------------------
 //------------------------------------------------------------

@@ -32,11 +32,17 @@ $(document).ready(function () {
   $("#liveToastBtn").on("click", function () {
     $("#liveToast").toast("show");
   });
-  
 
   $("#FetchModal").on("click", function () {
     $.get("/api/demo/modal", function (data, textSuccess) {
       $("main#main").append(data);
     });
+  });
+
+  $("#FetchToast").on("click", function () {
+    console.log("Toast is being fetched");
+    new Toast("Danger", "lab is throttling", "shdcvdhc hd c dc dhc ", {
+      delay: 5000,
+    }).show();
   });
 });

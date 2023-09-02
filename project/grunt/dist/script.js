@@ -1,4 +1,4 @@
-/* Developed By Praveen on Last Sync: 26/8/2023 @ 9:15:15*/
+/* Developed By Praveen on Last Sync: 2/9/2023 @ 10:34:25*/
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -1047,16 +1047,7 @@ var $grid = $("#masonry-area").masonry({
 $grid.imagesLoaded().progress(function () {
   $grid.masonry("layout");
 });
-// $.post(
-//   "/api/posts/count",
-//   {
-//     id: 67,
-//   },
-//   function (data) {
-//     console.log(data.Post_Count);
-//     $("#total-posts").html("Total Posts: " + data.Post_Count);
-//   }
-// );
+
 $(".btn-delete").click(function () {
   post_id = $(this).parent().attr("data-id");
   d = new Dialog("Delete Post", "Are you sure you want to delete this post?");
@@ -1089,7 +1080,10 @@ $(".btn-delete").click(function () {
             }
             continueAfterTasks();
           }
-        );
+        ).fail(function (jqXHR, textStatus, errorThrown) {
+          console.log("AJAX Request Failed:", textStatus, errorThrown);
+          console.log("Response Text:", jqXHR.responseText); // Add this line
+        });
         $(event.data.modal).modal("hide");
       },
     },
@@ -1107,6 +1101,30 @@ function continueAfterTasks() {
 function allTasksCompleted() {
   return true;
 }
+
+// TODO: TO Fix Console.log error(Not Working)
+$(".btn-like").click(function () {
+  post_id = $(this).parent().attr("data-id");
+  $.post(
+    "/api/posts/like",
+    {
+      id: post_id,
+    },
+    function (data, textSuccess) {
+      console.log(data);
+      console.log(textSuccess);
+      if (textSuccess == "success") {
+        console.log("Post Liked Successfully");
+        $(`#post-${post_id}`).remove();
+      } else {
+        console.log("Post Not Liked, error");
+      }
+    }
+  ).fail(function (jqXHR, textStatus, errorThrown) {
+    console.log("AJAX Request Failed:", textStatus, errorThrown);
+    console.log("Response Text:", jqXHR.responseText); // Add this line
+  });
+});
 
 $(document).ready(function () {
   dialog("Notify", "Page finished loading !!");
@@ -1142,12 +1160,18 @@ $(document).ready(function () {
   $("#liveToastBtn").on("click", function () {
     $("#liveToast").toast("show");
   });
-  
 
   $("#FetchModal").on("click", function () {
     $.get("/api/demo/modal", function (data, textSuccess) {
       $("main#main").append(data);
     });
+  });
+
+  $("#FetchToast").on("click", function () {
+    console.log("Toast is being fetched");
+    new Toast("Danger", "lab is throttling", "shdcvdhc hd c dc dhc ", {
+      delay: 5000,
+    }).show();
   });
 });
 

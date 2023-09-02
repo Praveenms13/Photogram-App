@@ -8,6 +8,10 @@
     Fetch new modal
 </button>
 
+<button type="button" class="btn btn-primary" id="FetchToast">
+    Show live toast
+</button>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

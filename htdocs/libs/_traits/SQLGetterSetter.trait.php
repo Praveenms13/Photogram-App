@@ -26,7 +26,8 @@ trait SQLGetterSetter
             $this->conn = Database::getConnection();
         }
         try {
-            $dataQuery = "SELECT `$var` FROM `$this->table` WHERE `id` = $this->id";
+            $dataQuery = "SELECT `$var` FROM `$this->table` WHERE `id` = '$this->id'";
+            // print_r($dataQuery); 
             $result = $this->conn->query($dataQuery);
             if ($result->num_rows) {
                 $value = $result->fetch_assoc()["$var"];
@@ -44,7 +45,7 @@ trait SQLGetterSetter
             $this->conn = Database::getConnection();
         }
         try {
-            $dataQuery = "UPDATE `$this->table` SET `$var` = '$data' WHERE `id` = $this->id";
+            $dataQuery = "UPDATE `$this->table` SET `$var` = '$data' WHERE `id` = '$this->id'";
             $result = $this->conn->query($dataQuery);
             if ($result) {
                 return true;
@@ -80,5 +81,10 @@ trait SQLGetterSetter
         } catch (Exception $e) {
             throw new Exception(__CLASS__ . "::_set_data_() -> $e");
         }
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 }

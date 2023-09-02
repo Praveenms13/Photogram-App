@@ -10,19 +10,19 @@
         <form method="POST" action="signup.php">
           <div class="form-floating mb-3">
             <input name="username" type="text" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Username</label>
+            <label for="floatingInput1">Username</label>
           </div>
           <div class="form-floating mb-3">
             <input name="email" type="text" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email address</label>
+            <label for="floatingInput2">Email address</label>
           </div>
           <div class="form-floating mb-3">
             <input name="phone" type="text" class="form-control rounded-3" id="floatingInput" placeholder="phonenumber">
-            <label for="floatingInput">Phone Number</label>
+            <label for="floatingInput3">Phone Number</label>
           </div>
           <div class="form-floating mb-3">
             <input name="password" type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
+            <label for="floatingPassword4">Password</label>
             <hr class="my-2">
             <p>&nbsp;Allowed Password Charecters: [A-Z,a-z,0-9,*]</p>
           </div>
