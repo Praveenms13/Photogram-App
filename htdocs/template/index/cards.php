@@ -24,13 +24,12 @@
                     $uploadedTime = $uploadedTime->diffForHumans();
                     $authorEmail = $postObj->getAuthor();
                     $user = new user($authorEmail);
-                    $author = $user->getUsername();
                     ?>
                     <div class="col-lg-4 mb-4" id="post-<?= $post['id'] ?>">
                         <div class="card mb-4 box-shadow">
                             <img class="card-img-top" src="<?php echo $postObj->getImageUri(); ?>" alt="image" width="100%" height="100%">
                             <div class="card-body">
-                                <h7>@<?php echo $author ?></h7>
+                                <h7>@<?php echo $user->getUsername(); ?></h7>
                                 <p class="card-text"><?php echo $postObj->getPostText(); ?></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group" data-id="<?= $post['id'] ?>">

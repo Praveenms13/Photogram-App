@@ -15,6 +15,7 @@ try {
 
         public function __construct($username)
         {
+            // TODO: 1. Change this if username parameter is an email
             $this->username = $username;
             $this->user_conn = Database::getConnection();
             $this->table = get_config('UserTable');
@@ -23,6 +24,8 @@ try {
             $result = $this->user_conn->query($userQuery);
             if ($result->num_rows) {
                 $row_DB = $result->fetch_assoc();
+                // TODO: 2. Change this if username parameter is an email
+                $this->username = $row_DB['username'];
                 $this->id = $row_DB['id'];
             } else {
                 throw new Exception("User not found");
@@ -159,7 +162,6 @@ try {
                 $signup_conn->close();
                 return $error;
             }
-
         }
 
         public static function login($username, $password)
