@@ -1,4 +1,4 @@
-/* Developed By Praveen on Last Sync: 3/9/2023 @ 7:22:10*/
+/* Developed By Praveen on Last Sync: 6/9/2023 @ 7:28:52*/
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -381,7 +381,7 @@ class Dialog {
     }
 
     this.options = {
-      framework: "bootstrap",
+      framework: "bootstrap", //coreui
       clone_id: "dummy-dialog-modal",
     };
 

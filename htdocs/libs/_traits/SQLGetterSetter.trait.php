@@ -27,7 +27,7 @@ trait SQLGetterSetter
         }
         try {
             $dataQuery = "SELECT `$var` FROM `$this->table` WHERE `id` = '$this->id'";
-            // print_r($dataQuery); 
+            // print_r($dataQuery);
             $result = $this->conn->query($dataQuery);
             if ($result->num_rows) {
                 $value = $result->fetch_assoc()["$var"];
@@ -59,6 +59,8 @@ trait SQLGetterSetter
 
     public function delete()
     {
+        // TODO: If the post is liked na it can't be deleted
+        // TODO: Image is displayed although the post is deleted cuz of the cache
         if (!$this->conn) {
             $this->conn = Database::getConnection();
         }

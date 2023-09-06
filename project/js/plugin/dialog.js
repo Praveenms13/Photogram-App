@@ -380,7 +380,7 @@ class Dialog {
     }
 
     this.options = {
-      framework: "bootstrap",
+      framework: "bootstrap", //coreui
       clone_id: "dummy-dialog-modal",
     };
 
