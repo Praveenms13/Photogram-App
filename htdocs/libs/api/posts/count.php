@@ -2,7 +2,7 @@
 
 try {
     ${basename(__FILE__, ".php")} = function () {
-        $postObj = new posts('67');
+        $postObj = new posts($this->$_REQUEST["id"]);
         $data = [
             "Login_Status" => $this->isAuthenticated(),
             "Post_Count" => posts::countAllPosts(),

@@ -1048,6 +1048,11 @@ $grid.imagesLoaded().progress(function () {
   $grid.masonry("layout");
 });
 
+$.post("/api/posts/count", function (data) {
+  console.log(data.Post_Count);
+  $("#total-posts").html("Total Posts: " + data.Post_Count);
+});
+
 $(".btn-delete").click(function () {
   post_id = $(this).parent().attr("data-id");
   d = new Dialog("Delete Post", "Are you sure you want to delete this post?");
