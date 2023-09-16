@@ -134,7 +134,7 @@ try {
 
         // --------------INPUT CHECK End----------------//
 
-        public static function signup($username, $phone, $email, $password)
+        public static function signup($username, $phone, $email, $password, $fingerprintJSid = null)
         {
             $signup_conn = Database::getConnection();
             if (self::CheckInput($username, $phone, $email, $password, $signup_conn)) {

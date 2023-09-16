@@ -6,7 +6,7 @@
         <h1 class="fw-bold mb-0 fs-2">Signup</h1>
       </div>
 
-      <div class="modal-body pt-0"> <!-- p-5 --> 
+      <div class="modal-body pt-0"> <!-- p-5 -->
         <form method="POST" action="signup.php">
           <div class="form-floating mb-3">
             <input name="username" type="text" class="form-control rounded-3" id="floatingInput-1" placeholder="name@example.com">
@@ -26,10 +26,9 @@
             <hr class="my-2">
             <p>&nbsp;Allowed Password Charecters: [A-Z,a-z,0-9,*]</p>
           </div>
-          <input name="fingerprintJSid" type="hidden">
           <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign up</button>
           <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
-          <p>Already have an account? <a href="login.php" class="link-primary">login here</a></p> 
+          <p>Already have an account? <a href="login.php" class="link-primary">login here</a></p>
           <hr class="my-3">
         </form>
         <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="button" id="googleButton">

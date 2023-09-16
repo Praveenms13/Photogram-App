@@ -16,10 +16,9 @@
             <input name="password" type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
             <label for="floatingPassword">Password</label>
           </div>
-          <input name="fingerprintJSid" type="hidden">
           <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign In</button>
           <small class="text-body-secondary">By clicking Sign up, you agree to the terms of use.</small>
-          <p>New to Photogram ? <a href="signup.php" class="link-primary">Signup here</a></p> 
+          <p>New to Photogram ? <a href="signup.php" class="link-primary">Signup here</a></p>
           <hr class="my-3">
         </form>
         <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="button" id="googleButton">
@@ -38,14 +37,3 @@
   </div>
 </div>
 <div class="b-example-divider"></div>
-<script>
-  const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
-    .then(FingerprintJS => FingerprintJS.load())
-  fpPromise
-    .then(fp => fp.get())
-    .then(result => {
-      const visitorId = result.visitorId
-      document.cookie = "visitorId=" + visitorId;
-      document.getElementsByName("fingerprintJSid")[0].value = visitorId;
-    })
-</script>

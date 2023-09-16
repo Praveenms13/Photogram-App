@@ -1,13 +1,14 @@
 <?php
 
+// Path: https://photogram.praveenms.site/api/posts/count
 try {
     ${basename(__FILE__, ".php")} = function () {
         $postObj = new posts($this->$_REQUEST["id"]);
         $data = [
-            "Login_Status" => $this->isAuthenticated(),
+            // "Login_Status" => $this->isAuthenticated(),
             "Post_Count" => posts::countAllPosts(),
-            "Author" => $postObj->getAuthor(),
-            "Username" => Session::getUser()->getEmail()
+            // "Author" => $postObj->getAuthor(),
+            // "Username" => Session::getUser()->getEmail()
         ];
         $this->response($this->json($data), 200);
     };

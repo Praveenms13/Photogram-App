@@ -1,32 +1,18 @@
 <?php
 try {
-    //$login_page = true;
     if (isset($_POST['username']) and isset($_POST['password'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
         //TODO:  Replace with the dummy fingerprint for your user to check it in a Postman.
-        $fingerprint = "havdhwv641"; //$_POST['fingerprintJSid'];
+        $fingerprint = $_COOKIE['fingerprintJSid'];
         $sessionToken = usersession::authenticate($username, $password, $fingerprint);
         Session::set('sessionUsername', $username);
-        Session::set('sessionFingerprintJSid', $fingerprint);
         Session::set('sessionToken', $sessionToken);
-        //$login_page = false;
     }
-    // TODO: Below Code will no longer be to remove it soon if not required
-    // if (isset($_GET['logout'])) {
-    //     if (Session::get('sessionToken')) {
-    //         $token = Session::get('sessionToken');
-    //         $usersession = new usersession($token);
-    //         $usersession->removeSession();
-    //         Session::delete('sessionUsername');
-    //         Session::delete('sessionToken');
-    //     }
-    // }
 
     $token = Session::get('sessionToken');
     if ($token) {
-        $fingerprintJSid = Session::get('sessionFingerprintJSid');
-        if (usersession::authorize($token, $fingerprintJSid)) {
+        if (usersession::authorize($token)) {
             $username = Session::get('sessionUsername');
             $userclass = new user($username);
             if ($userclass) {
@@ -39,13 +25,13 @@ try {
                         $defaultRedirect = $redirectTo;
                         Session::delete('_redirect');
                     }
-                    ?>
+?>
                     <script>
                         window.location.href = "<?php echo $defaultRedirect; ?>";
                         console.log("Redirecting to <?php echo $defaultRedirect ? $defaultRedirect : "/" ?>");
                         console.log("Session Token: <?php echo $token; ?>");
                     </script>
-                    <?php
+<?php
                 } else {
                     $IsValid = null;
                     Session::delete('sessionUsername');

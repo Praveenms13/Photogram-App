@@ -1,0 +1,7 @@
+1. ReCaptcha 
+2. OTP
+3. UI
+4. API for login and signup (Authorise and tracking)
+5. Image Saving in S3 or Minio
+6. Signup with Google and Gitlab
+7. Active - Offline

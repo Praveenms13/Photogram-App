@@ -1,5 +1,6 @@
 <?php
 
+// Path: https://photogram.praveenms.site/api/posts/like
 try {
     ${basename(__FILE__, ".php")} = function () {
         if ($this->get_request_method() == "POST") {
@@ -16,8 +17,6 @@ try {
                 $this->response($this->json($data), 200);
             } else {
                 $data = [
-                    "LoginStatus" => $this->isAuthenticated(),
-                    "PostStatus" => isset($this->_request['id']),
                     "msg" => "You are not logged in or some problem may occured with the post"
                 ];
                 $this->response($this->json($data), 401);

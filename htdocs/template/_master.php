@@ -8,7 +8,7 @@ Session::loadTemplate('_head')
     <div class="loader"></div>
     <?php
     Session::loadTemplate('_header');
-?>
+    ?>
     <main id="main">
         <div id="modalsGarbage">
             <div class="modal fade animate__animated" id="dummy-dialog-modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
@@ -28,10 +28,20 @@ Session::loadTemplate('_head')
     </main>
 
     <?php
-Session::loadTemplate(Session::currentScript());
-Session::loadTemplate('_footer');
-Session::loadTemplate('_script');
-?>
+    Session::loadTemplate(Session::currentScript());
+    Session::loadTemplate('_footer');
+    Session::loadTemplate('_script');
+    ?>
+    <script>
+        const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
+            .then(FingerprintJS => FingerprintJS.load())
+        fpPromise
+            .then(fp => fp.get())
+            .then(result => {
+                const visitorId = result.visitorId
+                setCookie("fingerprintJSid", visitorId, 1);
+            });
+    </script>
 </body>
 
 </html>

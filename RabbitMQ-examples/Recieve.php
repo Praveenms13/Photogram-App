@@ -13,14 +13,14 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 
-$connection = new AMQPStreamConnection('rabbitmq.selfmade.ninja', 5672, '', '', '');
+$connection = new AMQPStreamConnection('rabbitmq.selfmade.ninja', 5672, 'praveenphotogram', '@,', 'mspraveenkumar77_photogram');
 $channel = $connection->channel();
 
 $channel->queue_declare('HomeSted-2', false, false, false, false);
 
 echo " [*] Waiting for messages. To exit press CTRL+C\n";
 $callback = function ($msg) {
-    print_r($msg);
+    // print_r($msg);
     echo ' [x] Received ', $msg->body, "\n";
 };
 

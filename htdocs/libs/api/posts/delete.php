@@ -1,9 +1,9 @@
 <?php
 
+// Path: https://photogram.praveenms.site/api/posts/delete
 try {
     ${basename(__FILE__, ".php")} = function () {
         if ($this->get_request_method() == "POST") {
-
             if ($this->isAuthenticated() and isset($this->_request['id'])) {
                 $postObj = new posts($this->_request['id']);
                 if ($postObj->getAuthor() == Session::getUser()->getEmail()) {

@@ -17,15 +17,17 @@ try {
             $this->userQuery = "SELECT * FROM `$table` WHERE `token` = '$this->token'";
             $result = $this->conn->query($this->userQuery);
             if ($result->num_rows) {
-                $row_DB = $result->fetch_assoc();
-                $this->data = $row_DB;
-                $this->uid = $row_DB['uid'];
+                $this->data = $result->fetch_assoc();
+                $this->uid = $this->data['uid'];
             }
         }
         public static function authenticate($username, $password, $fingerprint = null) //I think returns error(return statement of login)
         {
             $username = user::login($username, $password)['username'];
-            if ($username and isset($fingerprint)) {
+            if ($fingerprint == null) {
+                $fingerprint = $_COOKIE['fingerprintJSid'];
+            }
+            if ($username) {
                 $userobj = new user($username);
                 $connection = Database::getConnection();
                 $ip = $_SERVER['REMOTE_ADDR'];
@@ -48,17 +50,20 @@ try {
         }
         //Below function is used in login.php and it is used to check whether the user is valid or not
         // Prevents Cookie Hijacking, Session Hijacking, Session Fixation, Session Expiration
-        public static function authorize($token, $fingerprint = null)
+        public static function authorize($token)
         {
             $authSession = new usersession($token);
             if (isset($_SERVER['REMOTE_ADDR']) and isset($_SERVER['HTTP_USER_AGENT'])) {
-                if ($authSession->isValid($token) and $authSession->isActive()) {
+                if ($authSession->isValid() and $authSession->isActive()) {
                     if ($_SERVER['REMOTE_ADDR'] == $authSession->getIP() and $_SERVER['HTTP_USER_AGENT'] == $authSession->getUserAgent()) {
-                        if (password_verify($fingerprint, $authSession->getFingerPrintId())) {
+                        // TODO: The below code is useless and session or cookie hijacking is still possible
+                        // TODO: The below code is always true and the fingerprint is not verified
+                        // TODO: Possible Solution: Again generate the fingerprint and compare it with the fingerprint stored in the database
+                        if (password_verify($_COOKIE['fingerprintJSid'], $authSession->getFingerPrintId())) {
                             Session::$user = $authSession->getuser();
                             return $authSession;
                         } else {
-                            throw new Exception("FingerPrint JS Doesn't Match");
+                            throw new Exception("FingerPrint JS Doesn't Match .....");
                         }
                     } else {
                         throw new Exception("User IP and Browser Doesn't Match");
@@ -74,29 +79,23 @@ try {
         }
         public function getuser()
         {
+            // TODO: I think this code will not work .......
             return new user($this->uid);
         }
-        public static function isValid()
+        public function isValid()
         {
-            $connection = Database::getConnection();
-            $token = Session::get('sessionToken');
-            $table = get_config('SessionTable');
-            $connquery = "SELECT `login_time` FROM `$table` WHERE `token` = '$token'";
-            $result = $connection->query($connquery);
-            if ($result) {
-                $sqldata = mysqli_fetch_row($connection->query($connquery));
-                $sqltime = strtotime($sqldata[0]);
-                // echo time() . " "  . "sqltime" . $sqltime + 10;
+            if (isset($this->data['login_time'])) {
+                $sqltime = strtotime($this->data['login_time']);
                 if (($sqltime + 3600) > time()) {
                     return true;
                 } else {
-                    $sql = "UPDATE $table SET `active` = '0' WHERE `token` = '$token'";
-                    $connection->query($sql);
+                    $this->deactivate();
                     return false;
                 }
             } else {
-                return false;
+                throw new Exception("Login Time is not set");
             }
+
         }
         public function removeSession()
         {
@@ -113,7 +112,7 @@ try {
         }
         public function isActive()
         {
-            return $this->data['active'];
+            return $this->data['active'] ? true : false;
         }
         public function deactivate()
         {
@@ -135,38 +134,19 @@ try {
         }
         public function getFingerPrintId()
         {
-            return $this->data['fingerPrintId'];
+            return $this->data['fingerPrintId'] ? $this->data['fingerPrintId'] : false;
         }
-        // TODO: To make this print the error in the login page
         public static function dispError($message, $status)
         {
             ?>
             <script>
                 console.log("<?php echo $message; ?>");
             </script>
-            <?php
+<?php
         }
     }
 } catch (Exception $e) {
     $error = $e->getMessage();
     $status = "danger";
-    if ($error == "Login Expired, Login Again") {
-        $status = "warning";
-    }
-    if ($error == "FingerPrint JS Doesn't Match") {
-        $status = "danger";
-    }
-    if ($error == "User IP and Browser Doesn't Match") {
-        $status = "danger";
-    }
-    if ($error == "IP or UserAgent or FingerPrint JS may be NULL") {
-        $status = "danger";
-    }
-    if ($error == "User Not Found") {
-        $status = "danger";
-    }
-    if ($error == "Password Doesn't Match") {
-        $status = "danger";
-    }
     usersession::dispError($error, $status);
 }

@@ -1,4 +1,4 @@
-/* Developed By Praveen on Last Sync: 6/9/2023 @ 7:28:52*/
+/* Developed By Praveen on Last Sync: 16/9/2023 @ 14:9:49*/
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -1052,6 +1052,14 @@ $.post("/api/posts/count", function (data) {
   console.log(data.Post_Count);
   $("#total-posts").html("Total Posts: " + data.Post_Count);
 });
+function setCookie(name, value, daystoExpire) {
+  // console.log("Setting Cookie");
+  // console.log("Cookie name: " + name + " Cookie Value: " + value);
+  var date = new Date();
+  date.setTime(date.getTime() + daystoExpire * 24 * 60 * 60 * 1000);
+  document.cookie = name + "=" + value + "; expires=" + date.toGMTString();
+  // console.log(document.cookie);
+}
 
 $(".btn-delete").click(function () {
   post_id = $(this).parent().attr("data-id");
@@ -1110,24 +1118,30 @@ function allTasksCompleted() {
 // TODO: TO Fix Console.log error(Not Working)
 $(".btn-like").click(function () {
   post_id = $(this).parent().attr("data-id");
+  $this = $(this);
+  $(this).html() = "Like" ? $(this).html("Liked") : $(this).html("Like");
+  $(this).hasClass("btn-outline-primary") ? $(this).removeClass("btn-outline-primary").addClass("btn-primary") : $(this).removeClass("btn-primary").addClass("btn-outline-primary");
   $.post(
     "/api/posts/like",
     {
       id: post_id,
     },
-    function (data, textSuccess) {
+    function (data, textSuccess, jqXHR) {
       console.log(data);
       console.log(textSuccess);
       if (textSuccess == "success") {
-        console.log("Post Liked Successfully");
-        $(`#post-${post_id}`).remove();
-      } else {
-        console.log("Post Not Liked, error");
+        if (data.Liked) {
+          $($this).html("Liked");
+          $($this).removeClass("btn-outline-primary").addClass("btn-primary");
+        } else {
+          $($this).html("Like");
+          $($this).removeClass("btn-primary").addClass("btn-outline-primary");
+        }
       }
     }
   ).fail(function (jqXHR, textStatus, errorThrown) {
     console.log("AJAX Request Failed:", textStatus, errorThrown);
-    console.log("Response Text:", jqXHR.responseText); // Add this line
+    console.log("Response Text:", jqXHR.responseText);
   });
 });
 

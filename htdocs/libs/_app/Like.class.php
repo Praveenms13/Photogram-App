@@ -20,14 +20,13 @@ class Like
         $this->conn = Database::getConnection();
 
         try {
-            $this->checkIfLikeExists();
-            $this->insertLike($post);
+            $this->checkIfLikeExists($post);
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
         }
     }
 
-    private function checkIfLikeExists()
+    private function checkIfLikeExists($post)
     {
         $query = "SELECT 1 FROM `$this->table` WHERE `id` = ?";
         $stmt = $this->conn->prepare($query);
@@ -36,7 +35,9 @@ class Like
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            throw new Exception("Like Exists");
+            return true;
+        } else {
+            return $this->insertLike($post);
         }
     }
 
@@ -52,8 +53,7 @@ class Like
         $stmt->execute();
 
         if ($stmt->affected_rows === 1) {
-            // Like Created
-            echo "Like Created";
+            return true;
         } else {
             throw new Exception("Error in creating like");
         }
