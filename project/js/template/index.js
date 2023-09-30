@@ -79,7 +79,7 @@ function allTasksCompleted() {
 $(".btn-like").click(function () {
   post_id = $(this).parent().attr("data-id");
   $this = $(this);
-  $(this).html() = "Like" ? $(this).html("Liked") : $(this).html("Like");
+  $(this).html() === "Like" ? $(this).html("Liked") : $(this).html("Like");
   $(this).hasClass("btn-outline-primary") ? $(this).removeClass("btn-outline-primary").addClass("btn-primary") : $(this).removeClass("btn-primary").addClass("btn-outline-primary");
   $.post(
     "/api/posts/like",

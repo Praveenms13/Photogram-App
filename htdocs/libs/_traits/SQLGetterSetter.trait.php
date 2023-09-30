@@ -75,9 +75,18 @@ trait SQLGetterSetter
             // Delete the post from the database
             $dataQuery = "DELETE FROM `$this->table` WHERE `id` = $this->id";
             $result = $this->conn->query($dataQuery);
-            if ($result) {
+            if ($result) {?>
+            <script>
+                console.log("Post Deleted");
+            </script>
+            <?php
                 return true;
             } else {
+                ?>
+                <script>
+                    console.log("Post Not Deleted");
+                </script>
+                <?php
                 return false;
             }
         } catch (Exception $e) {
