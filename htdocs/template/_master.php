@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <?php
 Session::loadTemplate('_head')
 ?>
 
 <body>
-    <div class="loader"></div>
     <?php
     Session::loadTemplate('_header');
     ?>

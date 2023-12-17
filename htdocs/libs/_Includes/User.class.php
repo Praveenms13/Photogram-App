@@ -54,7 +54,7 @@ try {
                 if (strlen($username) < 4) {
                     throw new Exception("Username must be at least 4 characters long");
                 }
-                if (!preg_match("/^[a-zA-Z0-9*]+$/", $username)) {
+                if (!preg_match("/^[a-zA-Z0-9*@]+$/", $username)) {
                     throw new Exception("Username must contain only [A-Z, a-z, 0-9, *]");
                 }
 

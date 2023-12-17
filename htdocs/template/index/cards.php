@@ -8,37 +8,34 @@
                 <h3 id="total-posts">Total Posts: N/A</h3>
             </div>
         </div>
-
-        <div class="row" id="masonry-area">
+        <div class="row" id="masonry-area" style="position: relative; height: 1160px;">
             <?php
-            $posts = posts::getAllPosts();
-
             use Carbon\Carbon;
+            $posts = posts::getAllPosts();
 
             if ($posts == null) {
                 echo "No Posts Yet";
             } else {
                 foreach ($posts as $post) {
                     $postObj = new posts($post['id']);
-                    $uploadedTime = Carbon::parse($postObj->getUploadedTime());
-                    $uploadedTime = $uploadedTime->diffForHumans();
+                    $uploadedTime = Carbon::parse($postObj->getUploadedTime())->diffForHumans();
                     $authorEmail = $postObj->getAuthor();
                     $user = new user($authorEmail);
-                    ?>
-                    <div class="col-lg-4 mb-4" id="post-<?= $post['id'] ?>">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="<?php echo $postObj->getImageUri(); ?>" alt="image" width="100%" height="100%">
+            ?>
+                    <div class="col-lg-3 mb-4" id="post-<?= $post['id'] ?>" style="position: absolute; left: 0%; top: 0px;">
+                        <div class="card">
+                            <img class="bd-placeholder-img card-img-top" src="<?php echo $postObj->getImageUri(); ?>">
                             <div class="card-body">
                                 <h7>@<?php echo $user->getUsername(); ?></h7>
                                 <p class="card-text"><?php echo $postObj->getPostText(); ?></p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group" data-id="<?= $post['id'] ?>">
+                                    <div class="btn-group" data-id="80">
                                         <button type="button" class="btn btn-sm btn-outline-primary btn-like">Like</button>
                                         <button type="button" class="btn btn-sm btn-outline-success btn-share">Share</button>
                                         <?php
-                                                if (Session::isOwner($user->getEmail())) { ?>
+                                        if (Session::isOwner($user->getEmail())) { ?>
                                             <button type="button" class="btn btn-sm btn-outline-danger btn-delete">Delete</button>
-                                  <?php } ?>
+                                        <?php } ?>
                                     </div>
                                     <small class="text-muted"><?php echo $uploadedTime; ?></small>
                                 </div>
@@ -46,10 +43,7 @@
                         </div>
                     </div>
             <?php }
-                } ?>
+            } ?>
         </div>
     </div>
 </div>
-<a href="#" class="btn btn-primary scrollUp">
-    <i class="fa fa-arrow-circle-o-up"></i>
-</a>

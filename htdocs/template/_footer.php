@@ -1,27 +1,9 @@
-<!-- Footer -->
-<style>
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; 
-}
-#footer {
-  padding: 20px;
-  margin-top: auto;
-}
-</style>
-<footer id="footer">
-    <p class="copyright">Made with
-        <i class="fa fa-heart"></i> By
-        <a target="_blank" title="Orbit Themes" href="https://rootwitch.praveenms.site/">Praveen</a> &copy;
-        <span id="currentYear"></span> All Rights Reserved.
+<footer class="text-body-secondary py-5">
+  <div class="container">
+    <p class="float-end mb-1">
+      <a href="#">Back to top</a>
     </p>
-    <div class="social">
-        <a traget="_blank" href="https://github.com/Praveenms13" title="github" target="_blank">
-            <i class="fa fa-github"></i>
-        </a>
-        <a traget="_blank" href="https://www.instagram.com/praveen.ms_13/" title="instagram" target="_blank">
-            <i class="fa fa-instagram"></i>
-        </a>
-    </div>
+    <p class="mb-1">Album example is © Bootstrap, but please download and customize it for yourself!</p>
+    <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.3/getting-started/introduction/">getting started guide</a>.</p>
+  </div>
 </footer>
