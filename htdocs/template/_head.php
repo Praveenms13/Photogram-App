@@ -10,6 +10,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="icon" href="https://img.icons8.com/fluency/48/sound-recording-copyright.png">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;

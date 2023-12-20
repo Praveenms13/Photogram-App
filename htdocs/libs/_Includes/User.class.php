@@ -64,8 +64,8 @@ try {
                 if (strlen($password) < 8) {
                     throw new Exception("Password must be at least 8 characters long");
                 }
-                if (!preg_match("/^[a-zA-Z0-9*]+$/", $password)) {
-                    throw new Exception("Password must contain only [A-Z, a-z, 0-9, *]");
+                if (!preg_match("/^[a-zA-Z0-9*@]+$/", $password)) {
+                    throw new Exception("Password must contain only [A-Z, a-z, 0-9, *, @]");
                 }
 
                 if (empty($phone)) {
@@ -123,8 +123,8 @@ try {
                 if (empty($password)) {
                     throw new Exception("Password cannot be empty");
                 }
-                if (!preg_match("/^[a-zA-Z0-9*]+$/", $password)) {
-                    throw new Exception("Password must contain only [A-Z, a-z, 0-9, *]");
+                if (!preg_match("/^[a-zA-Z0-9*@]+$/", $password)) {
+                    throw new Exception("Password must contain only [A-Z, a-z, 0-9, *, @]");
                 }
                 return true;
             } else {
