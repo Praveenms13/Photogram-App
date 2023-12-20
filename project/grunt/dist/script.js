@@ -1,4 +1,4 @@
-/* Developed By Praveen on Last Sync: 17/12/2023 @ 6:54:29*/
+/* Developed By Praveen on Last Sync: 20/12/2023 @ 12:9:47*/
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -1146,7 +1146,7 @@ $(".btn-like").click(function () {
 });
 
 $(document).ready(function () {
-  dialog("Notify", "Page finished loading !!");
+  //dialog("Notify", "Page finished loading !!");
 
   $("#exampleModal").on("click", function () {
     console.log("Modal is clicked");
@@ -1180,16 +1180,17 @@ $(document).ready(function () {
     console.log(event.originalEvent.key + " Key is released");
   });
 
-  $("#liveToastBtn").on("click", function () {
-    $("#liveToast").toast("show");
-  });
-
   $("#FetchModal").on("click", function () {
     $.get("/api/demo/modal", function (data, textSuccess) {
       $("main#main").append(data);
     });
   });
 
+  $("#liveToastBtn").on("click", function () {
+    $("#liveToast").toast("show");
+  });
+
+  
   $("#FetchToast").on("click", function () {
     console.log("Toast is being fetched");
     new Toast("Danger", "lab is throttling", "shdcvdhc hd c dc dhc ", {

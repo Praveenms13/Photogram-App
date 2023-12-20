@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  dialog("Notify", "Page finished loading !!");
+  //dialog("Notify", "Page finished loading !!");
 
   $("#exampleModal").on("click", function () {
     console.log("Modal is clicked");
@@ -33,16 +33,17 @@ $(document).ready(function () {
     console.log(event.originalEvent.key + " Key is released");
   });
 
-  $("#liveToastBtn").on("click", function () {
-    $("#liveToast").toast("show");
-  });
-
   $("#FetchModal").on("click", function () {
     $.get("/api/demo/modal", function (data, textSuccess) {
       $("main#main").append(data);
     });
   });
 
+  $("#liveToastBtn").on("click", function () {
+    $("#liveToast").toast("show");
+  });
+
+  
   $("#FetchToast").on("click", function () {
     console.log("Toast is being fetched");
     new Toast("Danger", "lab is throttling", "shdcvdhc hd c dc dhc ", {
