@@ -53,10 +53,10 @@ class posts
                     return false;
                 }
             } else {
-                throw new Exception("image not uploaded or some problem with image....");
+                throw new Exception("Image not found or not uploaded properly");
             }
         } else {
-            throw new Exception("image not uploaded or some problem with image....");
+            throw new Exception("Invalid Image or Image Type !!");
         }
     }
 
