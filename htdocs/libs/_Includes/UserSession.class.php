@@ -136,56 +136,16 @@ try {
         {
             return $this->data['fingerPrintId'] ? $this->data['fingerPrintId'] : false;
         }
-        public static function dispError($message = null, $status = null, $subject = null)
+        public static function dispError($subject = null, $message = null)
         {  
-            $message == null ? 'Some Unknown Error' : $message;
-            echo "<script>new Toast('$message', 'lab is throttling', 'shdcvdhc hd c dc dhc ', { 'placement': 'top-right', delay: 5000 }).show();</script>";
-            ?>
-            <style>
-                /* Style the notification to look like an alert and place it at the top center */
-                #demo {
-                    position: fixed;
-                    top: 120px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    width: 300px;
-                    background-color: #f8d7da;
-                    color: #721c24;
-                    border: 1px solid #f5c6cb;
-                    padding: 10px;
-                    border-radius: 4px;
-                    text-align: center;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
-                @media (max-width: 599px) {
-                    #demo {
-                        top: 70px;
-                    }
-                }
-            </style>
-
-            <div id="demo">
-                <?php echo $message; ?>
-            </div>
-
-            <script>
-                function loadDoc() {
-                    var notification = document.getElementById("demo");
-                    setTimeout(function() {
-                        notification.style.display = "none";
-                    }, 6000);
-                }
-                loadDoc();
-            </script>
-            <?php
+            require $_SERVER['DOCUMENT_ROOT'] . '/template/_script.php';
+            echo "<script>new Toast('$subject', 'In Development !!', '$message', { 'placement': 'top-right', delay: 5000 }).show();</script>";
         }
 
 
     }
 } catch (Exception $e) {
-    $error = $e->getMessage();
-    $status = "danger";
-    usersession::dispError($error, $status);
+    $errorMessage = $e->getMessage();
+    $errorSubject = "Error !!";
+    usersession::dispError($errorSubject, $errorMessage);
 }

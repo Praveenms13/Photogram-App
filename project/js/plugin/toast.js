@@ -406,7 +406,7 @@ class Toast {
     var toast_template = `
       <div class="toast" id="${this.id}" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-header">
-            <img src="..." class="rounded me-2" alt="...">
+            <img width="25px" src="https://img.icons8.com/fluency/48/sound-recording-copyright.png" class="rounded me-2" alt="...">
             <strong class="me-auto">${this.title}</strong>
             <small class="text-body-secondary">${this.subtitle}</small>
             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>

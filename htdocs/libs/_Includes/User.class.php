@@ -251,10 +251,7 @@ try {
 }
 // catch block
 catch (Exception $e) {
-    $error = $e->getMessage();
-    $status = "danger";
-    if ($error == "User not found") {
-        $status = "danger";
-    }
-    usersession::dispError($error, $status);
+    $errorMessage = $e->getMessage();
+    $errorSubject = "Error !!";
+    usersession::dispError($errorSubject, $errorMessage);
 }

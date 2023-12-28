@@ -25,8 +25,9 @@ class WebAPI
                 Session::$usersession = usersession::authorize(Session::get('sessionToken'), Session::get('sessionFingerprintJSid'));
             }
         } catch (Exception $e) {
-            usersession::dispError($e->getMessage(), "danger");
-            //TODO : Handle Error 
+            $errorMessage = $e->getMessage();
+            $errorSubject = "Error !!";
+            usersession::dispError($errorSubject, $errorMessage);
         }
     }
 }

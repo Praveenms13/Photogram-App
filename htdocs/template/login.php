@@ -51,20 +51,11 @@ try {
         throw new Exception("Login Now !!");
     }
 } catch (Exception $e) {
-    $error = $e->getMessage();
-    $status = "danger";
-    if ($error == "Login Time Over, Login again..") {
-        $status = "warning";
+    $errorMessage = $e->getMessage();
+    $errorSubject = "Error !!";
+    if ($errorMessage == "Login Now !!") {
+        $errorSubject = "Welcome !!";
     }
-    if ($error == "Something went wrong, Login again...") {
-        $status = "danger";
-    }
-    if ($error == "User is not Authorised, Login again..") {
-        $status = "danger";
-    }
-    if ($error == "Login Now !!") {
-        $status = "primary";
-    }
-    usersession::dispError($error, $status);
+    usersession::dispError($errorSubject, $errorMessage);
     Session::loadTemplate('_loginbody');
 }

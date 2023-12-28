@@ -33,9 +33,9 @@ try {
         Session::loadTemplate('_signupbody');
     }
 } catch (Exception $e) {
-    $error = $e->getMessage();
-    $status = "danger";
-    usersession::dispError($error, $status);
+    $errorMessage = $e->getMessage();
+    $errorSubject = "Error !!";
+    usersession::dispError($errorSubject, $errorMessage);
     Session::loadTemplate('_signupbody');
     
 }
