@@ -1,6 +1,7 @@
 <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
+      
         <h1 class="jumbotron-heading">Photogram</h1>
         <p class="lead text-body-secondary">Photogram helps you connect and share with the people in your life. <br>You can Post photos here!!, For that you need to join us..</p>
         <p>

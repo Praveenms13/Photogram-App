@@ -36,6 +36,7 @@ trait SQLGetterSetter
                 return "No Data Found";
             }
         } catch (Exception $e) {
+            usersession::dispError("Error !!", $data);
             throw new Exception(__CLASS__ . "::_get_data() -> $e");
         }
     }
@@ -53,6 +54,7 @@ trait SQLGetterSetter
                 return false;
             }
         } catch (Exception $e) {
+            usersession::dispError("Error !!", $data);
             throw new Exception(__CLASS__ . "::_set_data_() -> $e");
         }
     }
@@ -90,6 +92,7 @@ trait SQLGetterSetter
                 return false;
             }
         } catch (Exception $e) {
+            usersession::dispError("Error !!", $data);
             throw new Exception(__CLASS__ . "::_set_data_() -> $e");
         }
     }

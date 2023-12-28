@@ -23,15 +23,14 @@ try {
                     $defaultRedirect = Session::loadTemplate('index');
                     if ($redirectTo) {
                         $defaultRedirect = $redirectTo;
+                        Session::set('_redirectInfo', $defaultRedirect);
                         Session::delete('_redirect');
-                    }
-?>
+                    }?>
                     <script>
                         window.location.href = "<?php echo $defaultRedirect; ?>";
                         console.log("Redirecting to <?php echo $defaultRedirect ? $defaultRedirect : "/" ?>");
-                        console.log("Session Token: <?php echo $token; ?>");
-                    </script>
-<?php
+                        console.log("Session Token: <?php echo $token; ?>"); 
+                    </script><?php
                 } else {
                     $IsValid = null;
                     Session::delete('sessionUsername');
@@ -56,6 +55,10 @@ try {
     if ($errorMessage == "Login Now !!") {
         $errorSubject = "Welcome !!";
     }
-    usersession::dispError($errorSubject, $errorMessage);
+    if (Session::get("__redirectFrom") == "signup.php" or Session::get("__redirectFrom") == "signup"){
+        usersession::dispError($errorSubject, "Signup Successfull, " . $errorMessage);    
+    } else {
+        usersession::dispError($errorSubject, $errorMessage);
+    }
     Session::loadTemplate('_loginbody');
 }

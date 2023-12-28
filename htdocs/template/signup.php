@@ -15,26 +15,26 @@ try {
     }
     if ($signup) {
         if (!$error) {
+            Session::set('__redirectFrom', basename(__FILE__));
             ?>
-            <section class="jumbotron text-center" id="mainBanner">
-                <div class="container">
-                    <h2 class="jumbotron-heading">Signup Successful!!</h2>
-                    <h2 class="jumbotron-heading">You can Login now, Redirecting to Login Page in 5 seconds....</h2>
-                    <p>
-                        <a type="button" class="btn btn-success" href="../login.php">Skip Time and Login Now &nbsp;<i class="fa-solid fa-exclamation"></i></a>
-                    </p>
-                </div>
-            </section><?php header("Refresh: 5; url=../login.php");
+            <script>
+                window.location.href = "<?php echo "/login.php" ?>";
+            </script>
+            <?php
         } else {
             Session::loadTemplate('_signupbody');
             throw new Exception($error . "Please try again.");
         }
     } else {
         Session::loadTemplate('_signupbody');
+        throw new Exception("Signup Now !!");
     }
 } catch (Exception $e) {
     $errorMessage = $e->getMessage();
     $errorSubject = "Error !!";
+    if ($errorMessage == "Signup Now !!"){
+        $errorSubject = "Welcome !!";
+    }
     usersession::dispError($errorSubject, $errorMessage);
     Session::loadTemplate('_signupbody');
     

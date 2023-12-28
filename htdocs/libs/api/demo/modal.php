@@ -36,4 +36,5 @@ try {
         "Error" => $e->getMessage()
     ];
     $this->response($this->json($data), 404);
+    usersession::dispError("Error !!", $data);
 }

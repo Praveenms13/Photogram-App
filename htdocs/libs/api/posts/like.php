@@ -26,6 +26,7 @@ ${basename(__FILE__, ".php")} = function () {
             $error = array('status' => "ERROR", "msg" => $e->getMessage());
             $error = $this->json($error);
             $this->response($error, 500);
+            usersession::dispError("Error !!", $data);
         }
     } else {
         $error = array('status' => 'WRONG_CALL', "msg" => "The type of call cannot be accepted by our servers, by API: REST API");

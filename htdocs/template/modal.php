@@ -1,3 +1,18 @@
+<?php
+try{
+    if (Session::get('_redirectInfo') == "/modal.php"){
+        $redirectPage = explode("/", Session::get('_redirectInfo'))[1];
+        $redirectPage = explode(".php", $redirectPage)[0];
+        Session::delete('_redirectInfo');
+        usersession::dispError("Redirect Info", "Successfully redirected to " . $redirectPage . " Page");
+    } else {
+        usersession::dispError("Info", "Modal Page !!");
+    }
+} catch (Exception $e){
+    usersession::dispError("Notification Error", $e->getMessage());
+}
+?>
+
 <h1>Hello world</h1>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
