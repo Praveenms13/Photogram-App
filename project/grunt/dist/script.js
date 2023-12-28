@@ -1,4 +1,4 @@
-/* Developed By Praveen on Last Sync: 28/12/2023 @ 10:29:28*/
+/* Developed By Praveen on Last Sync: 28/12/2023 @ 12:30:55*/
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -960,7 +960,7 @@ class Toast {
     subtitle,
     message,
     options = undefined,
-    icon = "https://img.icons8.com/fluency-systems-regular/48/alarm--v1.png"
+    icon = "https://img.icons8.com/fluency/48/sound-recording-copyright.png"
   ) {
     this.title = title;
     this.subtitle = subtitle;
@@ -1145,8 +1145,7 @@ $(".btn-like").click(function () {
   });
 });
 $(document).ready(function () {
-  //dialog("Notify", "Page finished loading !!");
-
+  // dialog("Notify", "Page finished loading !!");
   $("#exampleModal").on("click", function () {
     console.log("Modal is clicked");
   });

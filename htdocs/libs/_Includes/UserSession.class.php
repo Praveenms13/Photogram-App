@@ -136,9 +136,11 @@ try {
         {
             return $this->data['fingerPrintId'] ? $this->data['fingerPrintId'] : false;
         }
-        public static function dispError($message, $status)
-        { 
-            ?> 
+        public static function dispError($message = null, $status = null, $subject = null)
+        {  
+            $message == null ? 'Some Unknown Error' : $message;
+            echo "<script>new Toast('$message', 'lab is throttling', 'shdcvdhc hd c dc dhc ', { 'placement': 'top-right', delay: 5000 }).show();</script>";
+            ?>
             <style>
                 /* Style the notification to look like an alert and place it at the top center */
                 #demo {

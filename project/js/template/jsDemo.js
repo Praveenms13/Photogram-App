@@ -1,6 +1,5 @@
 $(document).ready(function () {
-  //dialog("Notify", "Page finished loading !!");
-
+  // dialog("Notify", "Page finished loading !!");
   $("#exampleModal").on("click", function () {
     console.log("Modal is clicked");
   });

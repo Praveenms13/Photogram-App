@@ -364,7 +364,7 @@ class Toast {
     subtitle,
     message,
     options = undefined,
-    icon = "https://img.icons8.com/fluency-systems-regular/48/alarm--v1.png"
+    icon = "https://img.icons8.com/fluency/48/sound-recording-copyright.png"
   ) {
     this.title = title;
     this.subtitle = subtitle;

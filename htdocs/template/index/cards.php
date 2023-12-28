@@ -37,8 +37,8 @@
                                             <button type="button" class="btn btn-sm btn-outline-danger btn-delete">Delete</button>
                                         <?php } ?>
                                     </div>
-                                    <small class="text-muted"><?php echo $uploadedTime; ?></small>
                                 </div>
+                                <small class="text-muted"><?php echo "Posted " . $uploadedTime; ?></small>
                             </div>
                         </div>
                     </div>
