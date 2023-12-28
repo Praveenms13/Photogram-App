@@ -13,6 +13,7 @@ class Like
 
     public function __construct(posts $post)
     {
+        print_r($post);
         $user_id = Session::getUser()->getId();
         $post_id = $post->getId();
         $this->id = md5($user_id . '_' . $post_id);
@@ -22,7 +23,7 @@ class Like
         try {
             $this->checkIfLikeExists($post);
         } catch (Exception $e) {
-            echo 'Error: ' . $e->getMessage();
+            throw new Exception($e->getMessage());
         }
     }
 
@@ -45,13 +46,12 @@ class Like
     {
         $user_id = Session::getUser()->getId();
         $post_id = $post->getId();
-
+        echo "ID: $this->id, User ID: $user_id, Post ID: $post_id";
         $query = "INSERT INTO `$this->table` (`id`, `user_id`, `post_id`, `like`, `timestamp`) 
               VALUES (?, ?, ?, 0, now())";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param("ssi", $this->id, $user_id, $post_id);
         $stmt->execute();
-
         if ($stmt->affected_rows === 1) {
             return true;
         } else {
@@ -71,6 +71,6 @@ class Like
 
     public function isLiked()
     {
-        return boolval($this->getLike());
+        echo boolval($this->getLike());
     }
 }

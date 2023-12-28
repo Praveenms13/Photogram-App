@@ -1,4 +1,4 @@
-/* Developed By Praveen on Last Sync: 20/12/2023 @ 12:9:47*/
+/* Developed By Praveen on Last Sync: 28/12/2023 @ 10:29:28*/
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -1144,7 +1144,6 @@ $(".btn-like").click(function () {
     console.log("Response Text:", jqXHR.responseText);
   });
 });
-
 $(document).ready(function () {
   //dialog("Notify", "Page finished loading !!");
 
