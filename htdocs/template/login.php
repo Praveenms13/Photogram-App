@@ -4,7 +4,11 @@ try {
         $username = $_POST['username'];
         $password = $_POST['password'];
         //TODO:  Replace with the dummy fingerprint for your user to check it in a Postman.
-        $fingerprint = $_COOKIE['fingerprintJSid'];
+        $fingerprint = $_COOKIE['fingerprintJSid']; 
+        if (!isset($fingerprint)){
+            usersession::dispError("Invalid Token", "Invalid Auth Token !!");
+            Session::loadTemplate('_loginbody');
+        }   
         $sessionToken = usersession::authenticate($username, $password, $fingerprint);
         Session::set('sessionUsername', $username);
         Session::set('sessionToken', $sessionToken);

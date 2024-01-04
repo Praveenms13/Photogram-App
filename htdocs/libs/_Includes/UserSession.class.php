@@ -24,9 +24,6 @@ try {
         public static function authenticate($username, $password, $fingerprint = null) //I think returns error(return statement of login)
         {
             $username = user::login($username, $password)['username'];
-            if ($fingerprint == null) {
-                $fingerprint = $_COOKIE['fingerprintJSid'];
-            }
             if ($username) {
                 $userobj = new user($username);
                 $connection = Database::getConnection();
