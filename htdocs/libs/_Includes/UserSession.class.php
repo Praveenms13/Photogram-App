@@ -134,12 +134,17 @@ try {
             return $this->data['fingerPrintId'] ? $this->data['fingerPrintId'] : false;
         }
         public static function dispError($subject = null, $message = null)
-        {  
-            require $_SERVER['DOCUMENT_ROOT'] . '/template/_script.php';
+        {
+            require $_SERVER['DOCUMENT_ROOT'] . '/template/_script.php'; ?>
+            <script>
+                console.log("You can see Toast Logs Here !")
+                console.log("Error: <?php echo $subject; ?>");
+                console.log("Message: <?php echo $message; ?>");
+            </script>
+            <?php 
+            $message = str_replace("'", "", $message);
             echo "<script>new Toast('$subject', 'In Development !!', '$message', { 'placement': 'top-right', delay: 5000 }).show();</script>";
         }
-
-
     }
 } catch (Exception $e) {
     $errorMessage = $e->getMessage();

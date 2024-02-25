@@ -32,6 +32,7 @@ Session::loadTemplate('_head')
     Session::loadTemplate('_script');
     ?>
     <script>
+        //alert("Hi!, Due to unavoidable situations, All the datas in the database are deleted, even I dont have any backup for this database 😭. I am working on it and will fix as soon as possible 🥰. Users Can't Login, Signup, Post Images, Videos, do likes and shares.")
         const fpPromise = import('https://openfpcdn.io/fingerprintjs/v3')
             .then(FingerprintJS => FingerprintJS.load())
         fpPromise
