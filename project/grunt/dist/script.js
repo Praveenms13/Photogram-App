@@ -1,4 +1,4 @@
-/* Developed By Praveen on Last Sync: 2/3/2024 @ 9:8:9*/
+/* Developed By Praveen on Last Sync: 2/3/2024 @ 10:26:30*/
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -1051,9 +1051,12 @@ $grid.imagesLoaded().progress(function () {
 $("#share-memory").click(function () {
   var formData = new FormData();
   var file = $("#post_image")[0].files[0];
+  // check whether the input datas are correct
+  console.log("File: ", file);
+  console.log("Text: ", $("#post_text").val());
   if (file) {
     formData.append("post_image", file);
-    formData.append("post_text", $("#text").val());
+    formData.append("post_text", $("#post_text").val());
     $.ajax({
       url: "/api/posts/create",
       type: "POST",
@@ -1062,6 +1065,7 @@ $("#share-memory").click(function () {
       contentType: false,
       success: function (data) {
         console.log(data);
+        console.log("Post Created Successfully");
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.log("AJAX Request Failed:", textStatus, errorThrown);
@@ -1075,7 +1079,7 @@ $("#share-memory").click(function () {
 });
 
 $.post("/api/posts/count", function (data) {
-  console.log(data.Post_Count);
+  // console.log(data.Post_Count);
   $("#total-posts").html("Total Posts: " + data.Post_Count);
 });
 function setCookie(name, value, daystoExpire) {
@@ -1114,6 +1118,7 @@ $(".btn-delete").click(function () {
             if (textSuccess == "success") {
               console.log("Post Deleted Successfully");
               $(`#post-${post_id}`).remove();
+              refreshTotalPostCount();
             } else {
               console.log("Post Not Deleted, error");
             }
@@ -1129,6 +1134,12 @@ $(".btn-delete").click(function () {
   ]);
   d.show();
 });
+
+function refreshTotalPostCount() {
+  $.post("/api/posts/count", function (data) {
+    $("#total-posts").html("Total Posts: " + data.Post_Count);
+  });
+}
 
 // TODO: To make it more efficient, we can use this function to check if all tasks are completed
 function continueAfterTasks() {

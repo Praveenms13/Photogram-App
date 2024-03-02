@@ -20,11 +20,11 @@ ${basename(__FILE__, ".php")} = function () {
                     Session::loadtemplate(
                         "index/postcard",
                         [
-                        "msg" => "Post Uploaded successfully",
-                        "postObj" => $post,
-                        "user" => Session::getUser(),
-                        "uploadedTime" => Carbon::parse($post->getUploadedTime())->diffForHumans(),
-                    ]
+                            "msg" => "Post Uploaded successfully",
+                            "postObj" => $post,
+                            "user" => Session::getUser(),
+                            "uploadedTime" => Carbon::parse($post->getUploadedTime())->diffForHumans(),
+                        ]
                     );
                 } else {
                     Session::loadTemplate("index/postcard.php", [

@@ -49,9 +49,9 @@ class posts
                 $statement->bind_param("ssssii", $author, $authorId, $text, $imageUri, $multiImageUri, $likeCount);
                 $result = $statement->execute();
                 if ($result) {
-                    return true;
+                    return new posts($connection->insert_id);
                 } else {
-                    return false;
+                    throw new Exception("Failed to register post");
                 }
             } else {
                 throw new Exception("Image not found or not uploaded properly");
