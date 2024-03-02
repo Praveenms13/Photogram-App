@@ -22,21 +22,27 @@ try {
             </script>
             <?php
         } else {
-            Session::loadTemplate('_signupbody');
+            Session::loadTemplate('_signupbody', [
+                'title' => "Signup Here !!"
+            ]);
             throw new Exception($error . "Please try again.");
         }
     } else {
-        Session::loadTemplate('_signupbody');
+        Session::loadTemplate('_signupbody', [
+            'title' => "Signup Here !!"
+        ]);
         throw new Exception("Signup Now !!");
     }
 } catch (Exception $e) {
     $errorMessage = $e->getMessage();
     $errorSubject = "Error !!";
-    if ($errorMessage == "Signup Now !!"){
+    if ($errorMessage == "Signup Now !!") {
         $errorSubject = "Welcome !!";
     }
     usersession::dispError($errorSubject, $errorMessage);
-    Session::loadTemplate('_signupbody');
-    
+    Session::loadTemplate('_signupbody', [
+        'title' => "Signup Here !!"
+    ]);
+
 }
 ?>

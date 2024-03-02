@@ -1,4 +1,4 @@
-/* Developed By Praveen on Last Sync: 28/12/2023 @ 13:28:13*/
+/* Developed By Praveen on Last Sync: 2/3/2024 @ 9:8:9*/
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -1048,6 +1048,32 @@ $grid.imagesLoaded().progress(function () {
   $grid.masonry("layout");
 });
 
+$("#share-memory").click(function () {
+  var formData = new FormData();
+  var file = $("#post_image")[0].files[0];
+  if (file) {
+    formData.append("post_image", file);
+    formData.append("post_text", $("#text").val());
+    $.ajax({
+      url: "/api/posts/create",
+      type: "POST",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (data) {
+        console.log(data);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.log("AJAX Request Failed:", textStatus, errorThrown);
+        console.log("Response Text:", jqXHR.responseText);
+      },
+    });
+  } else {
+    console.log("No Image Selected");
+    new Toast("Error", "now", "Please select a file to upload").show();
+  }
+});
+
 $.post("/api/posts/count", function (data) {
   console.log(data.Post_Count);
   $("#total-posts").html("Total Posts: " + data.Post_Count);
@@ -1062,7 +1088,7 @@ function setCookie(name, value, daystoExpire) {
 }
 
 $(".btn-delete").click(function () {
-  post_id = $(this).parent().attr("data-id");
+  post_id = $(this).attr("data-id");
   d = new Dialog("Delete Post", "Are you sure you want to delete this post?");
   d.setButtons([
     {

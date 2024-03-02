@@ -35,7 +35,7 @@ class Session
             return $_SESSION[$key];
         } else {
             return $default;
-        } 
+        }
     }
     public static function getUser()
     {
@@ -62,8 +62,9 @@ class Session
         }
         return false;
     }
-    public static function loadTemplate($file_form)
+    public static function loadTemplate($file_form, $data = [])
     {
+        extract($data);
         $script = $_SERVER['DOCUMENT_ROOT'] . get_config('path') . "template/$file_form.php";
         if (is_file($script)) {
             include $script;

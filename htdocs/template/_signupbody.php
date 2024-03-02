@@ -3,7 +3,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content rounded-4 shadow">
       <div class="modal-header border-bottom-0"> <!-- p-5 pb-4 -->
-        <h1 class="fw-bold mb-0 fs-2">Signup</h1>
+        <h1 class="fw-bold mb-0 fs-2"><?= $title; ?></h1>
       </div>
 
       <div class="modal-body pt-0"> <!-- p-5 -->

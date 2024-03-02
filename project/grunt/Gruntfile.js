@@ -160,4 +160,13 @@ module.exports = function (grunt) {
     "obfuscator",
     "watch",
   ]);
+  grunt.build("default", [
+    "copy",
+    "concat",
+    "cssmin:css",
+    "sass",
+    "cssmin:scss",
+    "uglify",
+    "obfuscator",
+  ]);
 };

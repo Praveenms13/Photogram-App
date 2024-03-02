@@ -4,7 +4,13 @@
 try {
     ${basename(__FILE__, ".php")} = function () {
         if ($this->get_request_method() == "POST") {
-            if ($this->isAuthenticated() and isset($this->_request['id'])) {
+            if (!$this->isAuthenticated()) {
+                $data = [
+                    "msg" => "User Not Logged In"
+                ];
+                $this->response($this->json($data), 401);
+            }
+            if (isset($this->_request['id'])) {
                 $postObj = new posts($this->_request['id']);
                 if ($postObj->getAuthor() == Session::getUser()->getEmail()) {
                     if ($postObj->delete()) {
@@ -16,7 +22,7 @@ try {
                     $this->response($this->json(['error' => 'unauthorized']), 401);
                 }
             } else {
-                $this->response($this->json(['error' => 'unauthorized']), 401);
+                $this->response($this->json(['error' => 'post_id_not_found']), 400);
             }
         } else {
             $error = array('status' => 'WRONG_CALL', "msg" => "The type of call cannot be accepted by our servers, by API: REST API");

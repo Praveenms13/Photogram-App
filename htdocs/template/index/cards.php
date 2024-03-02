@@ -1,8 +1,8 @@
 <div class="album py-5 bg-light">
     <div class="container">
-        <div class="row">
+        <div class="row text-center">
             <div class="col-md-12" id="collection-heading">
-                <span>Photogram Collections</span>
+                <h2>Photogram Collections</h2>
             </div>
             <div class="col-md-12" id="collection-heading">
                 <h3 id="total-posts">Total Posts: N/A</h3>
@@ -11,8 +11,8 @@
         <div class="row" id="masonry-area" style="position: relative; height: 1160px;">
             <?php
             use Carbon\Carbon;
-            $posts = posts::getAllPosts();
 
+$posts = posts::getAllPosts();
             if ($posts == null) {
                 echo "No Posts Yet";
             } else {
@@ -21,28 +21,13 @@
                     $uploadedTime = Carbon::parse($postObj->getUploadedTime())->diffForHumans();
                     $authorEmail = $postObj->getAuthor();
                     $user = new user($authorEmail);
-            ?>
-                    <div class="col-lg-3 mb-4" id="post-<?= $post['id'] ?>" style="position: absolute; left: 0%; top: 0px;">
-                        <div class="card">
-                            <img class="bd-placeholder-img card-img-top" src="<?php echo $postObj->getImageUri(); ?>">
-                            <div class="card-body">
-                                <h7>@<?php echo $user->getUsername(); ?></h7>
-                                <p class="card-text"><?php echo $postObj->getPostText(); ?></p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group" >
-                                        <button type="button"data-id="<?= $post['id'] ?>" class="btn btn-sm btn-outline-primary btn-like-noChange"><span class="btn-like">Like</span>&nbsp;&#x2764;&nbsp;<?php echo $postObj->getLike_count(); ?></button>
-                                        <button type="button" class="btn btn-sm btn-outline-success btn-share">Share</button>
-                                        <?php
-                                        if (Session::isOwner($user->getEmail())) { ?>
-                                            <button type="button" class="btn btn-sm btn-outline-danger btn-delete">Delete</button>
-                                        <?php } ?>
-                                    </div>
-                                </div>
-                                <small class="text-muted"><?php echo "Posted " . $uploadedTime; ?></small>
-                            </div>
-                        </div>
-                    </div>
-            <?php }
+                    Session::loadTemplate("index/postcard", [
+                        "post" => $post,
+                        "postObj" => $postObj,
+                        "user" => $user,
+                        "uploadedTime" => $uploadedTime
+                    ]);
+                }
             } ?>
         </div>
     </div>
