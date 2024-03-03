@@ -11,7 +11,6 @@ $grid.imagesLoaded().progress(function () {
 $("#share-memory").click(function () {
   var formData = new FormData();
   var file = $("#post_image")[0].files[0];
-  // check whether the input datas are correct
   console.log("File: ", file);
   console.log("Text: ", $("#post_text").val());
   if (file) {
@@ -26,10 +25,24 @@ $("#share-memory").click(function () {
       success: function (data) {
         console.log(data);
         console.log("Post Created Successfully");
+        new Toast("Success", "now", "Post Created Successfully, Post not visible? refresh the page !!").show();
+        refreshTotalPostCount();
+        continueAfterTasks();
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.log("AJAX Request Failed:", textStatus, errorThrown);
         console.log("Response Text:", jqXHR.responseText);
+        try {
+          var responseJson = JSON.parse(jqXHR.responseText);
+          var postId = responseJson["Post Id"];
+          var errorMsg = responseJson.msg;
+          console.log("Post ID:", postId);
+          console.log("Error:", errorMsg);
+          new Toast(textStatus, "now", "Error: " + errorMsg).show();
+        } catch (e) {
+          console.log("Error parsing response JSON:", e);
+          new Toast("Error occurred", "now", e).show();
+        }
       },
     });
   } else {
@@ -73,20 +86,31 @@ $(".btn-delete").click(function () {
             id: post_id,
           },
           function (data, textSuccess) {
-            // console.log(data);
-            // console.log(textSuccess);
             if (textSuccess == "success") {
               console.log("Post Deleted Successfully");
               $(`#post-${post_id}`).remove();
               refreshTotalPostCount();
+              new Toast("Success", "now", "Post Deleted Successfully").show();
             } else {
               console.log("Post Not Deleted, error");
+              new Toast("Error", "now", "Post Not Deleted").show();
             }
             continueAfterTasks();
           }
         ).fail(function (jqXHR, textStatus, errorThrown) {
           console.log("AJAX Request Failed:", textStatus, errorThrown);
-          console.log("Response Text:", jqXHR.responseText); // Add this line
+          console.log("Response Text:", jqXHR.responseText);
+          try {
+            var responseJson = JSON.parse(jqXHR.responseText);
+            var postId = responseJson["Post Id"];
+            var errorMsg = responseJson.msg;
+            console.log("Post ID:", postId);
+            console.log("Error:", errorMsg);
+            new Toast(textStatus, "now", "Error: " + errorMsg).show();
+          } catch (e) {
+            console.log("Error parsing response JSON:", e);
+            new Toast("Error occurred", "now", e).show();
+          }
         });
         $(event.data.modal).modal("hide");
       },
@@ -134,10 +158,22 @@ $(".btn-like").click(function () {
           $($this).html("Like");
           $($this).removeClass("btn-primary").addClass("btn-outline-primary");
         }
+        new Toast("Success", "now", "Post Liked Successfully").show();
       }
     }
   ).fail(function (jqXHR, textStatus, errorThrown) {
     console.log("AJAX Request Failed:", textStatus, errorThrown);
     console.log("Response Text:", jqXHR.responseText);
+    try {
+      var responseJson = JSON.parse(jqXHR.responseText);
+      var postId = responseJson["Post Id"];
+      var errorMsg = responseJson.msg;
+      console.log("Post ID:", postId);
+      console.log("Error:", errorMsg);
+      new Toast(textStatus, "now", "Error: " + errorMsg).show();
+    } catch (e) {
+      console.log("Error parsing response JSON:", e);
+      new Toast("Error occurred", "now", e).show();
+    }
   });
 });
