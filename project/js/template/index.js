@@ -25,7 +25,7 @@ $("#share-memory").click(function () {
       success: function (data) {
         console.log(data);
         console.log("Post Created Successfully");
-        new Toast("Success", "now", "Post Created Successfully, Post not visible? refresh the page !!").show();
+        new Toast("Success", "now", "Post Created Successfully, Post not visible? refresh the page !!palan").show();
         refreshTotalPostCount();
         continueAfterTasks();
       },
