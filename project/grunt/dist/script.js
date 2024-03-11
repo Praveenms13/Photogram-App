@@ -1,4 +1,4 @@
-/* Developed By Praveen on Last Sync: 3/3/2024 @ 5:47:12*/
+/* Developed By Praveen on Last Sync: 11/3/2024 @ 2:20:20*/
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -1053,6 +1053,10 @@ $("#share-memory").click(function () {
   var file = $("#post_image")[0].files[0];
   console.log("File: ", file);
   console.log("Text: ", $("#post_text").val());
+  if ($("#post_text").val().length == 0) {
+    new Toast("Error", "now", "Please enter some text").show();
+    return;
+  }
   if (file) {
     formData.append("post_image", file);
     formData.append("post_text", $("#post_text").val());
@@ -1063,11 +1067,27 @@ $("#share-memory").click(function () {
       processData: false,
       contentType: false,
       success: function (data) {
-        console.log(data);
+        new Toast(
+          "Success",
+          "now",
+          "Post Created Successfully, Post not visible? refresh the page !!palan"
+        ).show();
         console.log("Post Created Successfully");
-        new Toast("Success", "now", "Post Created Successfully, Post not visible? refresh the page !!").show();
+        console.log(data);
+        data = $(data);
+        $grid.prepend(data).masonry("prepended", data).masonry("layout");
+        $grid.imagesLoaded().progress(function () {
+          $grid.masonry("layout");
+        });
+        var inputs = document.querySelectorAll("input");
+        for (var i = 0; i < inputs.length; i++) {
+          inputs[i].value = "";
+        }
+        var textarea = document.querySelectorAll("textarea");
+        for (var i = 0; i < textarea.length; i++) {
+          textarea[i].value = "";
+        }
         refreshTotalPostCount();
-        continueAfterTasks();
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.log("AJAX Request Failed:", textStatus, errorThrown);
@@ -1104,7 +1124,7 @@ function setCookie(name, value, daystoExpire) {
   // console.log(document.cookie);
 }
 
-$(".btn-delete").click(function () {
+$(document).on("click", ".album .btn-delete", function () {
   post_id = $(this).attr("data-id");
   d = new Dialog("Delete Post", "Are you sure you want to delete this post?");
   d.setButtons([
@@ -1128,7 +1148,8 @@ $(".btn-delete").click(function () {
           function (data, textSuccess) {
             if (textSuccess == "success") {
               console.log("Post Deleted Successfully");
-              $(`#post-${post_id}`).remove();
+              var del_element = $(`#post-${post_id}`)[0];
+              $grid.masonry("remove", del_element).masonry("layout");
               refreshTotalPostCount();
               new Toast("Success", "now", "Post Deleted Successfully").show();
             } else {
@@ -1165,7 +1186,6 @@ function refreshTotalPostCount() {
   });
 }
 
-// TODO: To make it more efficient, we can use this function to check if all tasks are completed
 function continueAfterTasks() {
   if (allTasksCompleted()) {
     $grid.masonry("layout");
@@ -1176,12 +1196,13 @@ function allTasksCompleted() {
   return true;
 }
 
-// TODO: TO Fix Console.log error(Not Working)
-$(".btn-like").click(function () {
+$(document).on("click", ".album .btn-like", function () {
   post_id = $(this).parent().attr("data-id");
   $this = $(this);
   $(this).html() === "Like" ? $(this).html("Liked") : $(this).html("Like");
-  $(this).hasClass("btn-outline-primary") ? $(this).removeClass("btn-outline-primary").addClass("btn-primary") : $(this).removeClass("btn-primary").addClass("btn-outline-primary");
+  $(this).hasClass("btn-outline-primary")
+    ? $(this).removeClass("btn-outline-primary").addClass("btn-primary")
+    : $(this).removeClass("btn-primary").addClass("btn-outline-primary");
   $.post(
     "/api/posts/like",
     {
@@ -1217,6 +1238,7 @@ $(".btn-like").click(function () {
     }
   });
 });
+
 $(document).ready(function () {
   // dialog("Notify", "Page finished loading !!");
   $("#exampleModal").on("click", function () {
