@@ -86,4 +86,20 @@ class posts
             return null;
         }
     }
+
+    public static function rateLimiting()
+    {
+        $table = get_config('PostTable');
+        $query = "SELECT * FROM `$table` WHERE `author_id` = ? AND `uploaded_time` > ? ORDER BY `uploaded_time` DESC";
+        $connection = Database::getConnection();
+        $statement = $connection->prepare($query);
+        $statement->bind_param("is", Session::getUser()->getId(), Carbon::now()->subMinutes(5)->toDateTimeString());
+        $statement->execute();
+        $result = $statement->get_result();
+        if ($result->num_rows > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

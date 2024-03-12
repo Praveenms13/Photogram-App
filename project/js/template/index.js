@@ -9,6 +9,7 @@ $grid.imagesLoaded().progress(function () {
 });
 
 $("#share-memory").click(function () {
+  $("#preloader").show();
   var formData = new FormData();
   var file = $("#post_image")[0].files[0];
   console.log("File: ", file);
@@ -30,7 +31,7 @@ $("#share-memory").click(function () {
         new Toast(
           "Success",
           "now",
-          "Post Created Successfully, Post not visible? refresh the page !!palan"
+          "Post Created Successfully, Post not visible? refresh the page !!"
         ).show();
         console.log("Post Created Successfully");
         console.log(data);
@@ -48,6 +49,7 @@ $("#share-memory").click(function () {
           textarea[i].value = "";
         }
         refreshTotalPostCount();
+        $("#preloader").hide();
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.log("AJAX Request Failed:", textStatus, errorThrown);
@@ -69,6 +71,7 @@ $("#share-memory").click(function () {
     console.log("No Image Selected");
     new Toast("Error", "now", "Please select a file to upload").show();
   }
+
 });
 
 $.post("/api/posts/count", function (data) {
