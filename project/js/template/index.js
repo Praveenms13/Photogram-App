@@ -28,7 +28,7 @@ $("#share-memory").click(function () {
       contentType: false,
       success: function (data) {
         console.log("Post Created Successfully");
-        new Toast("Success", "now", "Memory Sharde Successfully").show();
+        new Toast("Success", "now", "Memory Shared Successfully").show();
         console.log(data);
         data = $(data);
         $grid.prepend(data).masonry("prepended", data).masonry("layout");

@@ -88,5 +88,16 @@
         .bd-mode-toggle .dropdown-menu .active .bi {
             display: block !important;
         }
+
+        .jumbotron-heading-custom{
+            font-size: 200%;
+        }
+
+        @media (max-width: 768px) {
+            .jumbotron-heading-custom{
+                font-size: 100%;
+                font-weight: 600;
+            }
+        }
     </style>
 </head>

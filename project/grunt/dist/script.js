@@ -1,4 +1,4 @@
-/* Developed By Praveen on Last Sync: 12/3/2024 @ 13:17:41*/
+/* Developed By Praveen on Last Sync: 12/3/2024 @ 15:59:37*/
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -1068,7 +1068,7 @@ $("#share-memory").click(function () {
       contentType: false,
       success: function (data) {
         console.log("Post Created Successfully");
-        new Toast("Success", "now", "Memory Sharde Successfully").show();
+        new Toast("Success", "now", "Memory Shared Successfully").show();
         console.log(data);
         data = $(data);
         $grid.prepend(data).masonry("prepended", data).masonry("layout");
