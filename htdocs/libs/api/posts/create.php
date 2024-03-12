@@ -13,12 +13,12 @@ ${basename(__FILE__, ".php")} = function () {
                 $this->response($this->json($data), 401);
             }
             if (isset($this->_request['post_text']) and isset($_FILES['post_image'])) {
-                // if (!posts::rateLimiting()) {
-                //     $data = [
-                //         "msg" => "Rate Limiting Error, User Can Upload Only 1 Post in every 5 Minutes"
-                //     ];
-                //     $this->response($this->json($data), 429);
-                // }
+                if (!posts::rateLimiting()) {
+                    $data = [
+                        "msg" => "Rate Limiting Error, User Can Upload Only 1 Post in every 5 Minutes"
+                    ];
+                    $this->response($this->json($data), 429);
+                }
                 $imageTmp = $_FILES['post_image']['tmp_name'];
                 $text = $this->_request['post_text'];
                 $post = posts::registerPost($text, $imageTmp);
