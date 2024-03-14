@@ -1,4 +1,4 @@
-/* Developed By Praveen on Last Sync: 13/3/2024 @ 13:19:46*/
+/* Developed By Praveen on Last Sync: 14/3/2024 @ 15:20:17*/
 /*
 CryptoJS v3.1.2
 code.google.com/p/crypto-js
@@ -1049,61 +1049,86 @@ $grid.imagesLoaded().progress(function () {
 });
 
 $("#share-memory").click(function () {
+  function showLoading(content = "Loading...") {
+    setTimeout(() => {
+      spinner.style.display = "inline-block";
+      statusText.textContent = content;
+    }, 1500);
+  }
+
+  function hideLoading() {
+    setTimeout(() => {
+      spinner.style.display = "none";
+      statusText.textContent = "Share Memory";
+    }, 1500);
+  }
+
+  showLoading("Uploading...");
+
+  if ($("#post_text").val().length == 0) {
+    new Toast("Error", "now", "Please enter some text").show();
+    hideLoading();
+    return;
+  }
+
   var formData = new FormData();
   var file = $("#post_image")[0].files[0];
   console.log("File: ", file);
   console.log("Text: ", $("#post_text").val());
-  if ($("#post_text").val().length == 0) {
-    new Toast("Error", "now", "Please enter some text").show();
-    return;
-  }
+
+
   if (file) {
     formData.append("post_image", file);
     formData.append("post_text", $("#post_text").val());
-    $.ajax({
-      url: "/api/posts/create",
-      type: "POST",
-      data: formData,
-      processData: false,
-      contentType: false,
-      success: function (data) {
-        console.log("Post Created Successfully");
-        new Toast("Success", "now", "Memory Shared Successfully").show();
-        console.log(data);
-        data = $(data);
-        $grid.prepend(data).masonry("prepended", data).masonry("layout");
-        $grid.imagesLoaded().progress(function () {
-          $grid.masonry("layout");
-        });
-        var inputs = document.querySelectorAll("input");
-        for (var i = 0; i < inputs.length; i++) {
-          inputs[i].value = "";
-        }
-        var textarea = document.querySelectorAll("textarea");
-        for (var i = 0; i < textarea.length; i++) {
-          textarea[i].value = "";
-        }
-        refreshTotalPostCount();
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        console.log("AJAX Request Failed:", textStatus, errorThrown);
-        console.log("Response Text:", jqXHR.responseText);
-        try {
-          var responseJson = JSON.parse(jqXHR.responseText);
-          var postId = responseJson["Post Id"];
-          var errorMsg = responseJson.msg;
-          console.log("Post ID:", postId);
-          console.log("Error:", errorMsg);
-          new Toast(textStatus, "now", "Error: " + errorMsg).show();
-        } catch (e) {
-          console.log("Error parsing response JSON:", e);
-          new Toast("Error occurred", "now", e).show();
-        }
-      },
-    });
+    showLoading("Uploading the image..."),
+      $.ajax({
+        url: "/api/posts/create",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+          console.log("Post Created Successfully");
+          new Toast("Success", "now", "Memory Shared Successfully").show();
+          console.log(data);
+          data = $(data);
+          $grid.prepend(data).masonry("prepended", data).masonry("layout");
+          $grid.imagesLoaded().progress(function () {
+            $grid.masonry("layout");
+          });
+          var inputs = document.querySelectorAll("input");
+          for (var i = 0; i < inputs.length; i++) {
+            inputs[i].value = "";
+          }
+          var textarea = document.querySelectorAll("textarea");
+          for (var i = 0; i < textarea.length; i++) {
+            textarea[i].value = "";
+          }
+          refreshTotalPostCount();
+          hideLoading();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.log("AJAX Request Failed:", textStatus, errorThrown);
+          console.log("Response Text:", jqXHR.responseText);
+          try {
+            var responseJson = JSON.parse(jqXHR.responseText);
+            var postId = responseJson["Post Id"];
+            var errorMsg = responseJson.msg;
+            console.log("Post ID:", postId);
+            console.log("Error:", errorMsg);
+            new Toast(textStatus, "now", "Error: " + errorMsg).show();
+            hideLoading();
+          } catch (e) {
+            console.log("Error parsing response JSON:", e);
+            new Toast("Error occurred", "now", e).show();
+            hideLoading();
+          }
+        },
+      });
   } else {
     console.log("No Image Selected");
     new Toast("Error", "now", "Please select a file to upload").show();
+    hideLoading();
   }
 });
 
