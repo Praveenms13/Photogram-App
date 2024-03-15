@@ -147,30 +147,60 @@
         </li>
 
         <div class="topbar-divider d-none d-sm-block"></div>
-        <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo Session::getUser()->getUsername(); ?></span>
-                <img class="img-profile rounded-circle" src="img/undraw_profile.svg" />
-            </a>
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="profile.php">
-                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Profile
+
+        <?php
+        if (Session::isAuthenticated()) {
+        ?>
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-weight: 800;"><?php echo Session::getUser()->getUsername() ?></span>
+                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg" />
                 </a>
-                <a class="dropdown-item" href="settings.php">
-                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Settings
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="profile.php">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Profile
+                    </a>
+                    <a class="dropdown-item" href="settings.php">
+                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Settings
+                    </a>
+                    <a class="dropdown-item" href="activity.php">
+                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Activity Log
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/?logout">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Logout
+                    </a>
+                </div>
+            </li>
+        <?php
+        } else {
+            $actual_link = explode('/', $_SERVER['REQUEST_URI']);
+            $actual_link = end($actual_link);
+            if ($actual_link == 'login.php') {
+                $path = 'signup.php';
+            } else if ($actual_link == 'register.php') {
+                $path = 'login.php';
+            } else {
+                $path = 'login.php';
+            }
+        ?>
+            <li class="nav-item">
+                <a class="nav-link" href="<?= $path ?>">
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small" style="font-weight: 800;">
+                        <?php
+                        echo explode('.', $path)[0];
+                        ?>
+                    </span>
                 </a>
-                <a class="dropdown-item" href="activity.php">
-                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/?logout">
-                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                    Logout
-                </a>
-            </div>
-        </li>
+            </li>
+
+        <?php
+        }
+        ?>
+
     </ul>
 </nav>
