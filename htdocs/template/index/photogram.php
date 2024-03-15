@@ -2,7 +2,6 @@
     <div class="row py-lg-5">
         <div class="col-lg-6 col-md-8 mx-auto">
             <p class="jumbotron-heading jumbotron-heading-custom">Hi, <?php echo Session::getUser()->getUsername(); ?><br> Welcome To Photogram</p>
-            <p class="lead text-body-secondary">Photogram helps you connect and share with the people in your life. <br>You can Post photos here!!, For that you need to join us..</p>
             <hr class="my-3">
             <form action="/" method="post" enctype="multipart/form-data">
                 <label for="formFileLg" class="form-label">

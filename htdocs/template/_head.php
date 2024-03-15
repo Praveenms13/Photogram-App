@@ -5,13 +5,15 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.118.2">
     <title>Photogram - Your Favorite Stuffs</title>
-    
+
     <meta name="theme-color" content="#712cf9">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="icon" href="https://img.icons8.com/fluency/48/sound-recording-copyright.png">    
+    <link rel="icon" href="https://img.icons8.com/fluency/48/sound-recording-copyright.png">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -89,12 +91,12 @@
             display: block !important;
         }
 
-        .jumbotron-heading-custom{
+        .jumbotron-heading-custom {
             font-size: 200%;
         }
 
         @media (max-width: 768px) {
-            .jumbotron-heading-custom{
+            .jumbotron-heading-custom {
                 font-size: 100%;
                 font-weight: 600;
             }
