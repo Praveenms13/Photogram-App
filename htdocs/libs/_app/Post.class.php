@@ -110,7 +110,7 @@ class posts
         if (!$image_type) {
             throw new Exception("Invalid Image Type");
         }
-        $api_url = 'https://api.sightengine.com/1.0/check.json';
+        $api_url = get_config("nude_api_url");
         $api_user = get_config("nude_det_api_user");
         $api_secret = get_config("nude_det_api_secret");
         $payload = array(
