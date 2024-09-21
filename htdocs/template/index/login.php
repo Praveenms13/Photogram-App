@@ -5,7 +5,7 @@
       <h1 class="jumbotron-heading">Photogram</h1>
       <p class="lead text-body-secondary">Photogram helps you connect and share with the people in your life.You can Post photos here!! Join us here.</p>
       <p>
-        <a href="https://google-auth.praveenms.site/" target="_blank" class="btn btn-primary my-2">Continue with Google &nbsp;<i class="fa-brands fa-google"></i></a>
+        <a href="https://google-auth.praveenms.live/" target="_blank" class="btn btn-primary my-2">Continue with Google &nbsp;<i class="fa-brands fa-google"></i></a>
         <a href="login.php" class="btn btn-secondary my-2">Continue with Email &nbsp;<i class="fa-regular fa-envelope"></i></a>
       </p>
     </div>
