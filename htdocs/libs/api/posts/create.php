@@ -2,7 +2,7 @@
 
 use Carbon\Carbon;
 
-// Path: https://photogram.praveenms.site/api/posts/add
+// Path: https://photogram.praveenms.in/api/posts/add
 ${basename(__FILE__, ".php")} = function () {
     if ($this->get_request_method() == "POST") {
         try {

@@ -1,6 +1,6 @@
 <?php
 
-// Path: https://photogram.praveenms.site/api/posts/delete
+// Path: https://photogram.praveenms.in/api/posts/delete
 try {
     ${basename(__FILE__, ".php")} = function () {
         if ($this->get_request_method() == "POST") {

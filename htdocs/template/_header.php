@@ -70,7 +70,7 @@
                         Join us on Photogram and unlock a world of visual inspiration and connection. <br />
                         <br />
                         Developed by,
-                        <a href="https://www.praveenms.site">Praveen</a>
+                        <a href="https://www.praveenms.in">Praveen</a>
                     </p>
                 </div>
                 <div class="col-sm-4 offset-md-1 py-4">

@@ -1,6 +1,6 @@
 <?php
 
-// Path: https://photogram.praveenms.site/api/posts/like
+// Path: https://photogram.praveenms.in/api/posts/like
 ${basename(__FILE__, ".php")} = function () {
     if ($this->get_request_method() == "POST") {
         try {

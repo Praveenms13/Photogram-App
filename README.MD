@@ -1,22 +1,23 @@
-
 # Photogram Web App README
+
 ## Introduction
 
 Photogram is an online social media platform that functions similarly to Pinterest. The platform is built using a combination of PHP, JavaScript, HTML, CSS, jQuery, JSON, and Python. In addition, various databases and services have been utilized to enable several features, including real-time chatting, image posting and liking, and story uploading. Seperate UI for Desktop view and Mobile View.
 
 ## Deployed
 
-At https://photogram.praveenms.site, Subdomain of www.praveenms.site.
+At https://photogram.praveenms.in, Subdomain of www.praveenms.in.
 
-## Developed by, 
+## Developed by,
 
-- [M S Praveen Kumar](https://www.praveenms.site)
-
+- [M S Praveen Kumar](https://www.praveenms.in)
 
 ## TechStack Used
+
 Photogram utilizes the following technologies:
 
 ## Languages
+
 Photogram uses the following Languages:
 
 - HTML
@@ -26,6 +27,7 @@ Photogram uses the following Languages:
 - Python
 
 ## Frameworks and Libraries
+
 Photogram uses the following frameworks and libraries:
 
 - Bootstrap
@@ -34,12 +36,15 @@ Photogram uses the following frameworks and libraries:
 - SCSS to CSS Automation
 
 ## Project Architecture
+
 Photogram's project architecture is designed using:
-- Grunt 
+
+- Grunt
 - Laravel
 - MVC - Model View Controller
 
 ## Databases and Other Services
+
 Photogram uses the following databases and other services:
 
 - MySQL
@@ -48,13 +53,15 @@ Photogram uses the following databases and other services:
 - RabbitMQ
 
 ## Server
+
 Photogram is deployed at:
+
 - Apache
 - Uses Node Server for Grunt
 
 ## skill acquisition
 
-- Jquery usage 
+- Jquery usage
 - Bootstrap 5
 - SCSS to CSS Automation
 - PHP Multiprocessing & PHP Workers
@@ -65,21 +72,21 @@ Photogram is deployed at:
 - Automation of asset Builds
 - Applying API features (Application Interface Programming) and AJAX Techniques
 - Live Notifications
-- Usage of Opache, RabbitMQ, Reddis, Memcached 
+- Usage of Opache, RabbitMQ, Reddis, Memcached
 - Caching with PHP
 - Web Sockets & Web STOMP
-- Devops Automation like CI/CD Pipelines, Git 
+- Devops Automation like CI/CD Pipelines, Git
 - Server Architecture
 - Network Architecture
 - Project Architecture - CI/CD Pipelines
-- Deployement with Dockers 
+- Deployement with Dockers
 - Deployement with Shell
 - Production Deployement Techniques
 - Production Scaling Techniques
 
+## Securing the WebPage
 
-## Securing the WebPage 
 - Defense against JavaScript Debugging
 - Defense against Ddos
 - Defense against OWASP Top 10
-- Defense against Common Attacks 
+- Defense against Common Attacks

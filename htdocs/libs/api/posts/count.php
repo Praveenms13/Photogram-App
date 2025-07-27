@@ -1,6 +1,6 @@
 <?php
 
-// Path: https://photogram.praveenms.site/api/posts/count
+// Path: https://photogram.praveenms.in/api/posts/count
 try {
     ${basename(__FILE__, ".php")} = function () {
         $postObj = new posts($this->$_REQUEST["id"]);

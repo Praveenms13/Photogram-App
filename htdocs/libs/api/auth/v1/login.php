@@ -1,6 +1,6 @@
 <?php
 
-// Path: https://photogram.praveenms.site/api/v1/login
+// Path: https://photogram.praveenms.in/api/v1/login
 
 ${basename(__FILE__, ".php")} = function () {
     if ($this->get_request_method() == "POST") {

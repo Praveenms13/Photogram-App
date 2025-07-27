@@ -104,7 +104,7 @@ module.exports = function (grunt) {
         banner: "// obfuscated with grunt-contrib-obfuscator.\n",
         debugProtection: true,
         debugProtectionInterval: true,
-        domainLock: ["photogram.praveenms.site"],
+        domainLock: ["photogram.praveenms.in"],
       },
       task1: {
         options: {
